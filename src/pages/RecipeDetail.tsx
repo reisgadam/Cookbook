@@ -160,7 +160,7 @@ function RecipeView({ recipe }: { recipe: Recipe }) {
           intro={
             recipe.partial
               ? `Part of this recipe is missing from the original. Do you remember how ${site.name} made it? Share what you know, or any memory of it.`
-              : `Made this? Remember ${site.name} making it? Share a memory, a tip, or how your batch turned out.`
+              : `Made this? Remember ${site.name} making it? Share a memory, a tip, or a photo of how your batch turned out.`
           }
           placeholder={recipe.partial ? "What do you remember about this recipe?" : undefined}
         />

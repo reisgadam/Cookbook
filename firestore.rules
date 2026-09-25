@@ -1,6 +1,7 @@
 rules_version = '2';
 
-// Security rules for the cookbook's hearts, "I made this" marks and notes.
+// Security rules for the cookbook's hearts, "I made this" marks, notes and
+// the photos people add to them.
 // Visitors sign in anonymously (no account), so every browser has a uid.
 // Admins are listed as documents in admins/{uid}, created by hand in the
 // Firebase console. See docs/COMMUNITY_SETUP.md.
@@ -79,18 +80,20 @@ service cloud.firestore {
       allow read: if resource.data.status == 'visible' || isAdmin();
 
       allow create: if signedIn()
-        && request.resource.data.keys().hasOnly(['threadId', 'name', 'body', 'uid', 'createdAt', 'status'])
+        && request.resource.data.keys().hasOnly(['threadId', 'name', 'body', 'uid', 'createdAt', 'status', 'photo'])
         && request.resource.data.threadId is string
         && request.resource.data.threadId.matches('^(guestbook|recipe:[a-z0-9-]{1,80})$')
         && request.resource.data.name is string
         && request.resource.data.name.size() >= 1
         && request.resource.data.name.size() <= 60
         && request.resource.data.body is string
-        && request.resource.data.body.size() >= 1
         && request.resource.data.body.size() <= 2000
+        // A note can be just a photo; otherwise it needs some text.
+        && (request.resource.data.body.size() >= 1 || 'photo' in request.resource.data)
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.createdAt == request.time
         && request.resource.data.status == 'visible'
+        && validPhotoFor(commentId)
         && postedAfterWaiting();
 
       // Admins can hide a note (status 'hidden') or show it again.
@@ -99,6 +102,44 @@ service cloud.firestore {
         && request.resource.data.status in ['visible', 'hidden'];
 
       // Authors can delete their own notes; admins can delete any.
+      allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+    }
+
+    // A note with a photo records its width and height, and the photo itself
+    // must be saved in commentPhotos/{the same id} in the same batch.
+    function validPhotoFor(commentId) {
+      let data = request.resource.data;
+      return !('photo' in data)
+        || (data.photo is map
+          && data.photo.keys().hasOnly(['w', 'h'])
+          && data.photo.w is int && data.photo.w >= 1 && data.photo.w <= 2048
+          && data.photo.h is int && data.photo.h >= 1 && data.photo.h <= 2048
+          && existsAfter(/databases/$(database)/documents/commentPhotos/$(commentId)));
+    }
+
+    function notePath(id) {
+      return /databases/$(database)/documents/comments/$(id);
+    }
+
+    // ---- Photos with notes ----
+    // Kept in the database, because the free plan doesn't include file
+    // storage. One photo per note, under the note's id, written in the same
+    // batch as a brand-new note, so the posting limit covers photos too.
+
+    match /commentPhotos/{photoId} {
+      // Hiding a note hides its photo.
+      allow get: if isAdmin() || get(notePath(photoId)).data.status == 'visible';
+      allow list: if isAdmin();
+
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['uid', 'image'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.image is bytes
+        && request.resource.data.image.size() <= 700000
+        && !exists(notePath(photoId))
+        && getAfter(notePath(photoId)).data.uid == request.auth.uid
+        && 'photo' in getAfter(notePath(photoId)).data;
+
       allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
     }
 

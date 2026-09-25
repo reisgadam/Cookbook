@@ -20,7 +20,8 @@ the link.
   sharing, and related recipes.
 - **Cook mode**: one step at a time in large type, with the screen kept awake.
 - **Hearts, "I made this" and Notes & memories** on every recipe, and a
-  guestbook on the About page. These need a free Firebase project; see
+  guestbook on the About page. Notes can include a photo, like how someone's
+  batch turned out. These need a free Firebase project; see
   [docs/COMMUNITY_SETUP.md](docs/COMMUNITY_SETUP.md). Until then they stay
   hidden.
 - **Her notebook**: her table of contents, and a flip-through of every page.
@@ -102,3 +103,6 @@ Actions**.
 - **Hearts and notes** use Firebase with anonymous sign-in, so visitors only
   type a name. [`firestore.rules`](firestore.rules) allows one heart per
   visitor, keeps counts honest, and limits posting to once every 30 seconds.
+  Photos on notes are resized in the browser, which also drops the location
+  phones hide in them, and are stored in Firestore beside their note, since
+  Firebase's file storage needs a paid plan.

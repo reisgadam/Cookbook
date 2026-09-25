@@ -14,6 +14,7 @@ import {
   type User,
 } from "firebase/auth";
 import {
+  Bytes,
   collection,
   connectFirestoreEmulator,
   deleteDoc,
@@ -34,6 +35,7 @@ import {
   type Unsubscribe,
 } from "firebase/firestore";
 import { appCheckSiteKey, firebaseConfig, useEmulators, type ReactionKind } from "./config";
+import type { PreparedPhoto } from "./photo";
 
 export interface Comment {
   id: string;
@@ -44,6 +46,8 @@ export interface Comment {
   /** null until the server has stamped a just-posted note. */
   createdAt: Date | null;
   status: "visible" | "hidden";
+  /** The shape of the note's photo, if it has one (the photo itself is in commentPhotos). */
+  photo?: { w: number; h: number };
 }
 
 let app: FirebaseApp | undefined;
@@ -148,6 +152,7 @@ function toComment(snapshot: DocumentSnapshot): Comment {
     uid: data.uid,
     createdAt: data.createdAt?.toDate?.() ?? null,
     status: data.status,
+    photo: data.photo ? { w: data.photo.w, h: data.photo.h } : undefined,
   };
 }
 
@@ -169,26 +174,48 @@ export function watchThread(
   );
 }
 
+/** An id for a new note, picked before it's saved so its photo can be shown right away. */
+export function newCommentId(): string {
+  return doc(collection(db, "comments")).id;
+}
+
 export async function postComment(
   uid: string,
+  id: string,
   note: { threadId: string; name: string; body: string },
+  photo?: PreparedPhoto,
 ): Promise<void> {
+  const image = photo && Bytes.fromUint8Array(new Uint8Array(await photo.blob.arrayBuffer()));
   const batch = writeBatch(db);
-  batch.set(doc(collection(db, "comments")), {
+  batch.set(doc(db, "comments", id), {
     threadId: note.threadId,
     name: note.name,
     body: note.body,
     uid,
     createdAt: serverTimestamp(),
     status: "visible",
+    ...(photo && { photo: { w: photo.width, h: photo.height } }),
   });
+  // The photo is kept under the note's id, and saved together with it.
+  if (image) batch.set(doc(db, "commentPhotos", id), { uid, image });
   // Stamps the time so the security rules can enforce the posting cooldown.
   batch.set(doc(db, "users", uid), { lastPostAt: serverTimestamp() });
   await batch.commit();
 }
 
-export function deleteComment(id: string): Promise<void> {
-  return deleteDoc(doc(db, "comments", id));
+/** The photo shared with a note, as a JPEG. */
+export async function getCommentPhoto(id: string): Promise<Blob> {
+  const image: unknown = (await getDoc(doc(db, "commentPhotos", id))).get("image");
+  if (!(image instanceof Bytes)) throw new Error(`No photo for note ${id}`);
+  return new Blob([new Uint8Array(image.toUint8Array())], { type: "image/jpeg" });
+}
+
+export function deleteComment(id: string, hasPhoto = false): Promise<void> {
+  if (!hasPhoto) return deleteDoc(doc(db, "comments", id));
+  const batch = writeBatch(db);
+  batch.delete(doc(db, "comments", id));
+  batch.delete(doc(db, "commentPhotos", id));
+  return batch.commit();
 }
 
 // ---------- Moderation (site owner) ----------

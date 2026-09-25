@@ -75,7 +75,7 @@ export function About() {
       <Comments
         threadId={GUESTBOOK}
         heading={`Memories of ${site.name}`}
-        intro={`Share a memory of her: a meal at her table, a story, something she used to say. Everyone who visits can read it.`}
+        intro={`Share a memory of her: a meal at her table, a story, something she used to say, or a photo of her. Everyone who visits can read it.`}
         placeholder="Share a memory…"
       />
 

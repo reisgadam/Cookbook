@@ -107,7 +107,7 @@ describe("Admin", () => {
     expect(fake.setCommentStatus).toHaveBeenCalledWith("c2", "visible");
 
     await userEvent.click(screen.getAllByRole("button", { name: "Delete" })[1]);
-    await waitFor(() => expect(fake.deleteComment).toHaveBeenCalledWith("c2"));
+    await waitFor(() => expect(fake.deleteComment).toHaveBeenCalledWith("c2", false));
 
     await userEvent.click(screen.getByRole("button", { name: /hidden \(1\)/i }));
     expect(screen.queryByText("Double the cinnamon!")).not.toBeInTheDocument();

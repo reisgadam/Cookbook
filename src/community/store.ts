@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { useOnline } from "../hooks/useOnline";
 import { communityEnabled, LIMITS, type ReactionKind } from "./config";
 import type { Comment } from "./firebase";
+import type { PreparedPhoto } from "./photo";
 
 type Api = typeof import("./firebase");
 
@@ -158,22 +159,61 @@ export function useThread(threadId: string) {
   }, [threadId, online]);
 
   const post = useCallback(
-    async (name: string, body: string) => {
+    async (name: string, body: string, photo?: PreparedPhoto) => {
       const wait = Math.ceil((lastPostAt + LIMITS.cooldownSeconds * 1000 - Date.now()) / 1000);
       if (wait > 0) throw new CooldownError(wait);
       const { api, uid } = await loadCommunity();
-      await api.postComment(uid, { threadId, name: name.trim(), body: body.trim() });
+      const id = api.newCommentId();
+      // Your note shows up before the server has it, so its photo can't be
+      // fetched yet. Show the copy you picked instead.
+      if (photo) showOwnPhoto(id, photo.blob);
+      try {
+        await api.postComment(uid, id, { threadId, name: name.trim(), body: body.trim() }, photo);
+      } catch (error) {
+        forgetCommentPhoto(id);
+        throw error;
+      }
       lastPostAt = Date.now();
     },
     [threadId],
   );
 
-  const remove = useCallback(async (id: string) => {
+  const remove = useCallback(async (id: string, hasPhoto: boolean) => {
     const { api } = await loadCommunity();
-    await api.deleteComment(id);
+    await api.deleteComment(id, hasPhoto);
+    forgetCommentPhoto(id);
   }, []);
 
   return { status, comments, post, remove, uid };
+}
+
+// Photos are fetched once per page visit and shown from memory after that.
+const photoUrls = new Map<string, Promise<string>>();
+
+/** The address of a note's photo, loading it the first time it's asked for. */
+export function loadCommentPhoto(id: string): Promise<string> {
+  let url = photoUrls.get(id);
+  if (!url) {
+    url = loadCommunity()
+      .then(({ api }) => api.getCommentPhoto(id))
+      .then((blob) => URL.createObjectURL(blob));
+    // A failed load (say, while offline) can be tried again later.
+    url.catch(() => photoUrls.delete(id));
+    photoUrls.set(id, url);
+  }
+  return url;
+}
+
+function showOwnPhoto(id: string, blob: Blob) {
+  photoUrls.set(id, Promise.resolve(URL.createObjectURL(blob)));
+}
+
+function forgetCommentPhoto(id: string) {
+  void photoUrls.get(id)?.then(
+    (url) => URL.revokeObjectURL(url),
+    () => {},
+  );
+  photoUrls.delete(id);
 }
 
 export class CooldownError extends Error {

@@ -78,6 +78,62 @@
   overflow: hidden;
 }
 
+/* ---------- Adding a photo ---------- */
+
+.photoRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.addPhoto {
+  cursor: pointer;
+}
+
+/* The file input is hidden, so its label shows the keyboard focus. */
+.addPhoto:has(input:focus-visible) {
+  box-shadow: var(--focus-ring);
+}
+
+.addPhoto[aria-disabled="true"] {
+  opacity: 0.65;
+  cursor: progress;
+}
+
+.preview {
+  position: relative;
+  margin: 0;
+}
+
+.preview img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 9rem;
+  max-height: 9rem;
+  border: 4px solid #fff;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.removePhoto {
+  position: absolute;
+  top: -0.9rem;
+  right: -0.9rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: var(--card);
+  box-shadow:
+    var(--shadow-sm),
+    inset 0 0 0 1px var(--line-strong);
+}
+
+.removePhoto svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
 .formFooter {
   display: flex;
   flex-wrap: wrap;
@@ -180,6 +236,64 @@
   margin-top: 0.2rem;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+}
+
+/* ---------- A photo shared with a note ---------- */
+
+.photo {
+  margin-top: var(--space-3);
+  max-width: 100%;
+  overflow: hidden;
+  border: 4px solid #fff;
+  border-radius: var(--radius-sm);
+  background: var(--paper-2);
+  box-shadow: var(--shadow-sm);
+}
+
+.photoWide {
+  width: 24rem;
+}
+
+.photoTall {
+  width: 17rem;
+}
+
+.photoButton {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.photoButton img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photoMissing {
+  display: grid;
+  place-content: center;
+  gap: var(--space-1);
+  width: 100%;
+  height: 100%;
+  padding: var(--space-3);
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--step--1);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.photoMissing span {
+  color: var(--accent-ink);
+  font-weight: 600;
+  text-decoration: underline;
 }
 
 .delete {

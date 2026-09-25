@@ -10,5 +10,11 @@
       ]
     }
   ],
-  "fieldOverrides": []
+  "fieldOverrides": [
+    {
+      "collectionGroup": "commentPhotos",
+      "fieldPath": "image",
+      "indexes": []
+    }
+  ]
 }

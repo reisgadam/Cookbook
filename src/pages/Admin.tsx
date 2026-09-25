@@ -2,6 +2,7 @@ import { Eye, EyeOff, LogIn, LogOut, Trash2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router";
 import { timeAgo } from "../components/community/Comments";
+import { NotePhoto } from "../components/community/NotePhoto";
 import { useToast } from "../components/Toast";
 import { communityEnabled, GUESTBOOK } from "../community/config";
 import type { Comment } from "../community/firebase";
@@ -189,7 +190,8 @@ function CommentQueue({ api, email }: { api: Api; email: string | null }) {
                 {timeAgo(comment.createdAt)}
                 {hidden && <span className="badge badge-partial">Hidden</span>}
               </p>
-              <p className={styles.body}>{comment.body}</p>
+              {comment.body && <p className={styles.body}>{comment.body}</p>}
+              {comment.photo && <NotePhoto id={comment.id} photo={comment.photo} name={comment.name} />}
               <div className={styles.actions}>
                 <button
                   type="button"
@@ -209,7 +211,7 @@ function CommentQueue({ api, email }: { api: Api; email: string | null }) {
                   className="btn btn-small btn-ghost"
                   onClick={() => {
                     if (window.confirm(`Delete this note from ${comment.name}? This can't be undone.`)) {
-                      void act(api.deleteComment(comment.id), "Note deleted");
+                      void act(api.deleteComment(comment.id, Boolean(comment.photo)), "Note deleted");
                     }
                   }}
                 >

@@ -6,6 +6,7 @@ import {
   type RulesTestEnvironment,
 } from "@firebase/rules-unit-testing";
 import {
+  Bytes,
   collection,
   deleteDoc,
   doc,
@@ -252,5 +253,123 @@ describe("notes and memories", () => {
     await assertSucceeds(getDoc(doc(as("alice"), "admins", "alice")));
     await assertFails(getDoc(doc(as("alice"), "admins", "owner")));
     await assertFails(setDoc(doc(as("alice"), "admins", "alice"), {}));
+  });
+});
+
+const image = (size = 1000) => Bytes.fromUint8Array(new Uint8Array(size));
+
+function postWithPhoto(
+  db: Firestore,
+  uid: string,
+  {
+    id = "note1",
+    size = 1000,
+    note = {},
+    photo = {},
+    savePhoto = true,
+  }: {
+    id?: string;
+    size?: number;
+    note?: Record<string, unknown>;
+    photo?: Record<string, unknown>;
+    savePhoto?: boolean;
+  } = {},
+) {
+  const batch = writeBatch(db);
+  batch.set(doc(db, "comments", id), {
+    threadId: "recipe:apple-pie",
+    name: "Aunt Sue",
+    body: "Made it for Sunday dinner!",
+    uid,
+    createdAt: serverTimestamp(),
+    status: "visible",
+    photo: { w: 1280, h: 960 },
+    ...note,
+  });
+  if (savePhoto) batch.set(doc(db, "commentPhotos", id), { uid, image: image(size), ...photo });
+  batch.set(doc(db, "users", uid), { lastPostAt: serverTimestamp() });
+  return batch.commit();
+}
+
+const noteWithPhoto = (status: string, uid = "alice") => ({
+  threadId: "guestbook",
+  status,
+  name: "A",
+  body: "",
+  uid,
+  photo: { w: 10, h: 10 },
+});
+
+describe("photos with notes", () => {
+  it("lets a visitor post a note with a photo, or just a photo", async () => {
+    await assertSucceeds(postWithPhoto(as("alice"), "alice"));
+    await assertSucceeds(postWithPhoto(as("bob"), "bob", { note: { body: "" }, id: "note2" }));
+  });
+
+  it("counts a photo as a post, so the 30-second wait still applies", async () => {
+    await assertSucceeds(postWithPhoto(as("alice"), "alice"));
+    await assertFails(postWithPhoto(as("alice"), "alice", { id: "note2" }));
+  });
+
+  it("rejects a photo without its note, and a note missing the photo it mentions", async () => {
+    await assertFails(setDoc(doc(as("alice"), "commentPhotos", "loose"), { uid: "alice", image: image() }));
+    await assertFails(postWithPhoto(as("alice"), "alice", { savePhoto: false }));
+  });
+
+  it("rejects adding a photo to a note that already exists", async () => {
+    await seed((db) => setDoc(doc(db, "comments", "old"), noteWithPhoto("visible")));
+    await assertFails(setDoc(doc(as("alice"), "commentPhotos", "old"), { uid: "alice", image: image() }));
+  });
+
+  it("rejects a photo saved in someone else's name", async () => {
+    await assertFails(postWithPhoto(as("alice"), "alice", { photo: { uid: "bob" } }));
+  });
+
+  it("limits photos to 700 KB", async () => {
+    await assertSucceeds(postWithPhoto(as("alice"), "alice", { size: 700_000 }));
+    await assertFails(postWithPhoto(as("bob"), "bob", { id: "note2", size: 700_001 }));
+  });
+
+  it("rejects bad photo details", async () => {
+    await assertFails(postWithPhoto(as("a1"), "a1", { id: "n1", note: { photo: { w: 0, h: 10 } } }));
+    await assertFails(postWithPhoto(as("a2"), "a2", { id: "n2", note: { photo: { w: 5000, h: 10 } } }));
+    await assertFails(postWithPhoto(as("a3"), "a3", { id: "n3", note: { photo: { w: 10 } } }));
+    await assertFails(postWithPhoto(as("a4"), "a4", { id: "n4", note: { photo: "big" } }));
+    await assertFails(postWithPhoto(as("a5"), "a5", { id: "n5", photo: { image: "not a photo" } }));
+    await assertFails(postWithPhoto(as("a6"), "a6", { id: "n6", photo: { caption: "extra" } }));
+  });
+
+  it("hides a hidden note's photo from visitors, but not from admins", async () => {
+    await seed(async (db) => {
+      await setDoc(doc(db, "admins", "owner"), {});
+      await setDoc(doc(db, "comments", "shown"), noteWithPhoto("visible", "x"));
+      await setDoc(doc(db, "commentPhotos", "shown"), { uid: "x", image: image() });
+      await setDoc(doc(db, "comments", "hidden"), noteWithPhoto("hidden", "x"));
+      await setDoc(doc(db, "commentPhotos", "hidden"), { uid: "x", image: image() });
+    });
+    await assertSucceeds(getDoc(doc(anon(), "commentPhotos", "shown")));
+    await assertFails(getDoc(doc(anon(), "commentPhotos", "hidden")));
+    await assertSucceeds(getDoc(doc(as("owner"), "commentPhotos", "hidden")));
+    await assertFails(getDocs(collection(anon(), "commentPhotos")));
+  });
+
+  it("lets authors and admins delete a photo with its note, and nobody change it", async () => {
+    await seed(async (db) => {
+      await setDoc(doc(db, "admins", "owner"), {});
+      for (const id of ["c1", "c2"]) {
+        await setDoc(doc(db, "comments", id), noteWithPhoto("visible"));
+        await setDoc(doc(db, "commentPhotos", id), { uid: "alice", image: image() });
+      }
+    });
+    const remove = (db: Firestore, id: string) => {
+      const batch = writeBatch(db);
+      batch.delete(doc(db, "comments", id));
+      batch.delete(doc(db, "commentPhotos", id));
+      return batch.commit();
+    };
+    await assertFails(remove(as("bob"), "c1"));
+    await assertFails(updateDoc(doc(as("alice"), "commentPhotos", "c1"), { image: image(10) }));
+    await assertSucceeds(remove(as("alice"), "c1"));
+    await assertSucceeds(remove(as("owner"), "c2"));
   });
 });

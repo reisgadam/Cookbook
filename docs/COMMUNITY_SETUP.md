@@ -1,11 +1,15 @@
 # Turning on hearts, "I made this" and notes
 
 The site works without this, but hearts (the upvote), "I made this", the
-"Notes & memories" on each recipe and the guestbook on the About page need a
-small free database. They use **Firebase** (a Google service).
+"Notes & memories" on each recipe and the guestbook on the About page,
+including the photos people share there, need a small free database. They use
+**Firebase** (a Google service).
 
 - **Cost:** free. The free "Spark" plan can't bill you. It allows about 50,000
-  reads and 20,000 writes a day, far more than a family site needs.
+  reads and 20,000 writes a day, far more than a family site needs. Its 1 GiB
+  of storage holds a few thousand shared photos, and it allows about 40,000
+  photo views a month. If the site ever goes past a limit, nothing is charged;
+  hearts, notes and photos just pause until the limit resets.
 - **Visitors don't need an account.** Firebase gives each browser an anonymous
   ID, which is how "one heart per person" works. To post a note, people just
   type their name.
@@ -53,6 +57,10 @@ small free database. They use **Firebase** (a Google service).
 > If you're comfortable with the command line, steps 3.2 and 3.3 are one
 > command: `npx firebase-tools deploy --only firestore:rules,firestore:indexes --project YOUR-PROJECT-ID`
 
+> **Set this up before photos were added (September 2026)?** Photos need the
+> newer rules. Repeat step 3.2 with the latest `firestore.rules`. Until then,
+> notes without a photo still post, but notes with one don't.
+
 ## 4. Tell GitHub about the project
 
 These values identify your Firebase project. They aren't passwords, since the
@@ -83,7 +91,8 @@ rules protect the data, so they go in as ordinary **variables**.
    collection**, and name it `admins`. For the **Document ID**, paste your ID.
    Add any field (for example `name` = your name) and save.
 4. Reload the admin page. You'll see every note, newest first, with **Hide**
-   (keeps it but takes it off the site) and **Delete**.
+   (keeps it but takes it off the site) and **Delete**. Photos appear with
+   their notes, and hiding or deleting a note does the same to its photo.
 
 You can add other family members as moderators the same way.
 
@@ -112,6 +121,11 @@ You can add other family members as moderators the same way.
 - **Notes:** the name and message people type, the time, and the browser's
   anonymous ID, so they can delete their own note. Nothing else is collected;
   there are no emails, no tracking and no analytics.
+- **Photos shared with notes:** before a photo leaves the visitor's phone or
+  computer, it's shrunk to at most 1280 pixels across (usually 150–350 KB).
+  That also strips the hidden details phones save in photos, including where
+  they were taken. Photos are kept in the same database as the notes, because
+  Firebase's separate file storage now needs a paid plan.
 
 ## Testing locally (optional, for developers)
 
