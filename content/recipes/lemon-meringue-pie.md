@@ -1,6 +1,12 @@
 ---
 title: "Lemon Meringue Pie"
 slug: lemon-meringue-pie
+category: pies-tarts
+tags: [lemon]
+source: note
+yield: "One 8- or 9-inch pie"
+oven: "400°F"
+time: "Bake 8–10 min"
 sourceImages: [IMG_5843.JPG, IMG_5844.JPG]
 notes: "Scaled for a 9-inch or 8-inch pie; top with Pie Meringue (see separate recipe)."
 ---

@@ -1,6 +1,12 @@
 ---
 title: "Good Bread"
 slug: good-bread
+category: breads-breakfast
+source: notebook
+notebookPage: 30
+yield: "Makes 2 loaves"
+oven: "400°F"
+time: "Two rises · Bake 35–40 min"
 sourceImages: [IMG_5752.JPG, IMG_5753.JPG]
 ---
 
@@ -30,4 +36,4 @@ sourceImages: [IMG_5752.JPG, IMG_5753.JPG]
 
 Prepare the dough as directed. Divide into 3 parts, roll each into a 10-inch rope, and braid the ropes together; pinch the ends to seal. Place on a greased baking sheet, cover, and let rise until doubled, about 45 minutes. Brush with egg wash and bake at 350°F for 35 minutes, until golden brown.
 
-*Note: this card's instructions were dense and partly hard to decipher — the steps above are a best-effort reconstruction of a standard two-loaf white bread process.*
+> This card's instructions were dense and partly hard to decipher — the steps above are a best-effort reconstruction of a standard two-loaf white bread process.

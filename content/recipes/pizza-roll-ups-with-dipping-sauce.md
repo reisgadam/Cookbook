@@ -1,6 +1,12 @@
 ---
 title: "Pizza Roll-Ups with Dipping Sauce"
 slug: pizza-roll-ups-with-dipping-sauce
+category: appetizers
+tags: [italian, party, kid-friendly]
+source: note
+yield: "Makes 12 slices"
+oven: "400°F"
+time: "Bake 15 min"
 sourceImages: [IMG_5790.JPG]
 ---
 

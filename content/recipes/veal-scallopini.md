@@ -1,6 +1,10 @@
 ---
 title: "Veal Scallopini"
 slug: veal-scallopini
+category: mains
+tags: [veal, italian, quick]
+source: notebook
+notebookPage: 6
 sourceImages: [IMG_5704.JPG, IMG_5705.JPG]
 ---
 

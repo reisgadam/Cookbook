@@ -1,6 +1,9 @@
 ---
 title: "Frozen Banana Daiquiris"
 slug: frozen-banana-daiquiris
+category: drinks
+tags: [spirited, party, frozen, fruit]
+source: note
 sourceImages: [IMG_5783.JPG]
 ---
 
@@ -17,4 +20,4 @@ sourceImages: [IMG_5783.JPG]
 
 Combine all ingredients in a blender and blend until smooth and slushy. Adjust ice and rum to taste.
 
-*Note: the original note also sketches a halved version (for a plain, banana-free daiquiri) in a second column — this transcription follows the full banana version.*
+> The original note also sketches a halved version (for a plain, banana-free daiquiri) in a second column — this transcription follows the full banana version.

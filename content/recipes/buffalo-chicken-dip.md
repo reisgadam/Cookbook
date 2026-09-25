@@ -1,6 +1,12 @@
 ---
 title: "Buffalo Chicken Dip"
 slug: buffalo-chicken-dip
+category: appetizers
+tags: [chicken, party]
+source: clipping
+yield: "Makes 1 pie plate"
+oven: "350°F"
+time: "Prep 5 min · 35 min total"
 sourceImages: [IMG_5798.JPG]
 notes: "Clipped from Recipezaar (recipe #79116), by Barb Witherspoon. Makes 1 pie plate full; 5 min prep, 35 min total."
 ---

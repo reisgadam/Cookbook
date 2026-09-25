@@ -1,6 +1,11 @@
 ---
 title: "Cantaloupe and Blueberries with Pernod"
 slug: cantaloupe-and-blueberries-with-pernod
+category: desserts
+tags: [fruit, spirited, no-bake, quick]
+source: card
+yield: "Makes about 7 cups"
+time: "Stand 30 min"
 sourceImages: [IMG_5808.JPG]
 notes: "30 min. room-temperature stand time; makes about 7 cups."
 ---

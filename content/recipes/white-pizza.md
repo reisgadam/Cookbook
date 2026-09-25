@@ -1,6 +1,11 @@
 ---
 title: "White Pizza"
 slug: white-pizza
+category: mains
+tags: [italian, quick]
+source: note
+oven: "400°F"
+time: "Bake 10–12 min"
 sourceImages: [IMG_5789.JPG]
 ---
 

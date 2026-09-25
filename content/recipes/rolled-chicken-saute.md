@@ -1,6 +1,12 @@
 ---
 title: "Rolled Chicken Saute"
 slug: rolled-chicken-saute
+category: mains
+tags: [chicken, quick]
+source: notebook
+notebookPage: 25
+yield: "Serves 4"
+time: "About 30 min"
 sourceImages: [IMG_5742.JPG, IMG_5743.JPG]
 ---
 

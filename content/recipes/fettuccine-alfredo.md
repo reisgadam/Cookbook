@@ -1,6 +1,10 @@
 ---
 title: "Fettuccine Alfredo"
 slug: fettuccine-alfredo
+category: mains
+tags: [pasta, italian, quick]
+source: notebook
+notebookPage: 3
 sourceImages: [IMG_5698.JPG, IMG_5699.JPG]
 ---
 

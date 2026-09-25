@@ -1,6 +1,11 @@
 ---
 title: "Chocolate Eclair Cake"
 slug: chocolate-eclair-cake
+category: cakes
+tags: [chocolate, no-bake, make-ahead]
+source: notebook
+notebookPage: 1
+time: "Chill at least 24 hours"
 sourceImages: [IMG_5694.JPG, IMG_5695.JPG]
 ---
 

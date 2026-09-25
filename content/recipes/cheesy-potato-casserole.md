@@ -1,6 +1,11 @@
 ---
 title: "Cheesy Potato Casserole"
 slug: cheesy-potato-casserole
+category: sides
+tags: [potatoes, casserole]
+source: notebook
+notebookPage: 4
+time: "Bake 25 min"
 sourceImages: [IMG_5700.JPG, IMG_5701.JPG]
 ---
 

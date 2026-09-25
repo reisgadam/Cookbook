@@ -1,6 +1,10 @@
 ---
 title: "Wedding Soup"
 slug: wedding-soup
+category: soups-salads
+tags: [chicken, italian]
+source: note
+partial: true
 sourceImages: [IMG_5792.JPG]
 notes: "Written on a torn sheet — the top of the page (with the start of the ingredient list) is missing."
 ---
@@ -21,4 +25,4 @@ notes: "Written on a torn sheet — the top of the page (with the start of the i
 
 ## Instructions
 
-*No numbered instructions survive on this torn note. The standard method: simmer the chicken with the onion, celery, and carrots to make a broth; skim and season. Shred the cooked chicken and return to the pot with the spinach, pastina, and baby meatballs; simmer until the pasta is tender. Serve topped with grated Romano cheese.*
+> No numbered instructions survive on this torn note. The standard method: simmer the chicken with the onion, celery, and carrots to make a broth; skim and season. Shred the cooked chicken and return to the pot with the spinach, pastina, and baby meatballs; simmer until the pasta is tender. Serve topped with grated Romano cheese.

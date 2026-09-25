@@ -1,9 +1,8 @@
-import type { RecipeFrontmatter } from "../types/recipe";
-
 /**
  * Minimal YAML-subset frontmatter parser: supports `key: value`, quoted
- * strings, and simple `key: [a, b, c]` arrays. Avoids pulling in a full
- * YAML/gray-matter dependency for a handful of predictable fields.
+ * strings, simple `key: [a, b, c]` arrays, and unquoted numbers and
+ * booleans. Avoids pulling in a full YAML/gray-matter dependency for a
+ * handful of predictable fields.
  */
 export function parseFrontmatter(raw: string): {
   data: Record<string, unknown>;
@@ -20,7 +19,7 @@ export function parseFrontmatter(raw: string): {
     const idx = line.indexOf(":");
     if (idx === -1) continue;
     const key = line.slice(0, idx).trim();
-    let value = line.slice(idx + 1).trim();
+    const value = line.slice(idx + 1).trim();
 
     if (value.startsWith("[") && value.endsWith("]")) {
       data[key] = value
@@ -28,17 +27,16 @@ export function parseFrontmatter(raw: string): {
         .split(",")
         .map((s) => s.trim().replace(/^["']|["']$/g, ""))
         .filter(Boolean);
+    } else if (/^["']/.test(value)) {
+      data[key] = value.replace(/^["']|["']$/g, "");
+    } else if (value === "true" || value === "false") {
+      data[key] = value === "true";
+    } else if (/^-?\d+(\.\d+)?$/.test(value)) {
+      data[key] = Number(value);
     } else {
-      value = value.replace(/^["']|["']$/g, "");
       data[key] = value;
     }
   }
 
   return { data, body: body.trim() };
-}
-
-export function toFrontmatter(
-  data: Record<string, unknown>,
-): Partial<RecipeFrontmatter> {
-  return data as Partial<RecipeFrontmatter>;
 }

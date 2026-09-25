@@ -1,6 +1,11 @@
 ---
 title: "Nut Horns"
 slug: nut-horns
+category: cookies-bars
+tags: [spirited]
+source: note
+oven: "350°F"
+time: "Chill 2 hours · Bake 20 min"
 sourceImages: [IMG_5831.JPG]
 notes: "An old family recipe with a boozy nut filling — 'do not cook' the filling."
 ---

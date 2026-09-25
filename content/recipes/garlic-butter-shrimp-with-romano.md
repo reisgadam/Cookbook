@@ -1,6 +1,10 @@
 ---
 title: "Garlic Butter Shrimp with Romano"
 slug: garlic-butter-shrimp-with-romano
+category: mains
+tags: [seafood, italian, quick]
+source: notebook
+notebookPage: 8
 sourceImages: [IMG_5708.JPG, IMG_5709.JPG]
 ---
 

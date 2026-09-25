@@ -1,6 +1,11 @@
 ---
 title: "Candied Pecans"
 slug: candied-pecans
+category: cookies-bars
+tags: [party]
+source: note
+oven: "250°F"
+time: "Prep 20 min · Cook 40 min"
 sourceImages: [IMG_5796.JPG]
 notes: "Prep 20 min, cook 40 min."
 ---

@@ -1,6 +1,11 @@
 ---
 title: "Fried Potatoes"
 slug: fried-potatoes
+category: sides
+tags: [potatoes]
+source: notebook
+notebookPage: 36
+partial: true
 sourceImages: [IMG_5763.JPG]
 ---
 
@@ -10,4 +15,4 @@ sourceImages: [IMG_5763.JPG]
 
 ## Instructions
 
-*The original card only lists this one ingredient line — no separate instructions were written (the facing page begins the next recipe, Lemon Charlotte Russe). Slice the potatoes and pan-fry in oil or butter over medium heat until golden and tender, seasoning with salt and pepper to taste.*
+> The original card only lists this one ingredient line — no separate instructions were written (the facing page begins the next recipe, Lemon Charlotte Russe). Slice the potatoes and pan-fry in oil or butter over medium heat until golden and tender, seasoning with salt and pepper to taste.

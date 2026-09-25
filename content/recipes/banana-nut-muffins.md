@@ -1,6 +1,12 @@
 ---
 title: "Banana Nut Muffins"
 slug: banana-nut-muffins
+category: breads-breakfast
+tags: [fruit]
+source: note
+yield: "Makes 8 muffins"
+oven: "400°F"
+time: "Bake 20 min"
 sourceImages: [IMG_5791.JPG]
 ---
 

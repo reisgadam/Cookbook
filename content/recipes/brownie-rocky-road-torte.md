@@ -1,6 +1,11 @@
 ---
 title: "Brownie Rocky Road Torte"
 slug: brownie-rocky-road-torte
+category: desserts
+tags: [chocolate, frozen, make-ahead]
+source: notebook
+notebookPage: 20
+oven: "350°F"
 sourceImages: [IMG_5732.JPG, IMG_5733.JPG]
 ---
 
@@ -22,4 +27,4 @@ sourceImages: [IMG_5732.JPG, IMG_5733.JPG]
 6. Spread the remaining marshmallow fluff over the top, smoothing gently to the edges. Freeze until firm.
 7. Just before serving, decorate the top with the toasted almonds.
 
-*Note: this card's instructions were written in very dense cursive and partly hard to decipher — the layering sequence above is a best-effort reconstruction of the steps.*
+> This card's instructions were written in very dense cursive and partly hard to decipher — the layering sequence above is a best-effort reconstruction of the steps.

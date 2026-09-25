@@ -1,6 +1,10 @@
 ---
 title: "Frosty Margaritas"
 slug: frosty-margaritas
+category: drinks
+tags: [spirited, party, frozen]
+source: note
+yield: "Makes 1 quart"
 sourceImages: [IMG_5823.JPG]
 notes: "Makes 1 quart."
 ---

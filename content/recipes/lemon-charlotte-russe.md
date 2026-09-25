@@ -1,8 +1,12 @@
 ---
 title: "Lemon Charlotte Russe"
 slug: lemon-charlotte-russe
+category: desserts
+tags: [lemon, holiday, make-ahead]
+source: notebook
+notebookPage: 37
+time: "Chill until firm or overnight"
 sourceImages: [IMG_5764.JPG, IMG_5765.JPG]
-tags: [holiday]
 ---
 
 ## Ingredients

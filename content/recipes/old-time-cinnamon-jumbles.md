@@ -1,6 +1,11 @@
 ---
 title: "Old-Time Cinnamon Jumbles"
 slug: old-time-cinnamon-jumbles
+category: cookies-bars
+source: note
+yield: "Makes about 4 dozen"
+oven: "400°F"
+time: "Bake 8–10 min"
 sourceImages: [IMG_5833.JPG]
 notes: "Bake at 400°F for 8 to 10 min. Makes about 4 dozen 2-inch cookies."
 ---

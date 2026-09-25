@@ -1,6 +1,10 @@
 ---
 title: "Poppy Seed Pound Cake"
 slug: poppy-seed-pound-cake
+category: cakes
+source: note
+oven: "350°F"
+time: "Bake 1 hour 10 min"
 sourceImages: [IMG_5832.JPG]
 notes: "Note: the temperature/time given is for an electric stove — for a gas stove, use 375°F for 1½ hours."
 ---

@@ -1,6 +1,8 @@
 ---
 title: "Creamy White Icing"
 slug: creamy-white-icing
+category: frostings-sauces
+source: note
 sourceImages: [IMG_5848.JPG]
 ---
 

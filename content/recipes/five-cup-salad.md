@@ -1,6 +1,9 @@
 ---
 title: "5 Cup Salad"
 slug: five-cup-salad
+category: soups-salads
+tags: [fruit, no-bake, quick]
+source: note
 sourceImages: [IMG_5822.JPG, IMG_5825.JPG]
 ---
 

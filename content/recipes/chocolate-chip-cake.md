@@ -1,6 +1,11 @@
 ---
 title: "Chocolate Chip Cake"
 slug: chocolate-chip-cake
+category: cakes
+tags: [chocolate]
+source: note
+oven: "350°F"
+time: "Bake 35–45 min"
 sourceImages: [IMG_5845.JPG]
 notes: "Bake at 350°F (moderate oven): layers 35 to 40 min, oblong pan 40 to 45 min."
 ---

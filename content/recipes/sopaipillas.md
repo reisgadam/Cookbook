@@ -1,6 +1,10 @@
 ---
 title: "Sopaipillas"
 slug: sopaipillas
+category: desserts
+tags: [mexican]
+source: clipping
+yield: "Serves 6"
 sourceImages: [IMG_5819.JPG]
 notes: "Serves 6."
 ---

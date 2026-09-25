@@ -1,6 +1,11 @@
 ---
 title: "Taco-Style Pizza"
 slug: taco-style-pizza
+category: mains
+tags: [beef, mexican, quick]
+source: note
+oven: "400°F"
+time: "Bake 10–15 min"
 sourceImages: [IMG_5789.JPG]
 ---
 

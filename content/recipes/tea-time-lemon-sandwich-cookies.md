@@ -1,6 +1,11 @@
 ---
 title: "Tea-Time Lemon Sandwich Cookies"
 slug: tea-time-lemon-sandwich-cookies
+category: cookies-bars
+tags: [lemon]
+source: card
+oven: "375°F"
+time: "Chill 1 hour · Bake 7–8 min"
 sourceImages: [IMG_5805.JPG, IMG_5806.JPG]
 notes: "From Pillsbury Classic Cookbooks #211, 'Sandwich Cookies,' Sept. 1998, page 40."
 ---

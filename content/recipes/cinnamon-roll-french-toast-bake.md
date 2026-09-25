@@ -1,7 +1,13 @@
 ---
 title: "Cinnamon Roll French Toast Bake"
 slug: cinnamon-roll-french-toast-bake
-sourceImages: [IMG_5775.HEIC]
+category: breads-breakfast
+tags: [quick]
+source: clipping
+yield: "Serves 6"
+oven: "375°F"
+time: "Bake 25 min"
+sourceImages: [IMG_5775.JPG]
 ---
 
 ## Ingredients

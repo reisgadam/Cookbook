@@ -1,6 +1,12 @@
 ---
 title: "Apple Pie (Crust & Filling)"
 slug: classic-apple-pie
+category: pies-tarts
+tags: [apple, fruit]
+source: notebook
+notebookPage: 41
+oven: "400°F"
+time: "Bake 55–60 min"
 sourceImages: [IMG_5772.JPG]
 ---
 

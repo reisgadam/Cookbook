@@ -1,6 +1,11 @@
 ---
 title: "Kosher Style Dill Pickles"
 slug: kosher-style-dill-pickles
+category: sides
+tags: [canning]
+source: note
+yield: "Makes 8 to 9 quarts"
+time: "Ready in 3–4 weeks"
 sourceImages: [IMG_5835.JPG]
 notes: "Makes 8 to 9 quarts. Canning recipe."
 ---

@@ -1,7 +1,13 @@
 ---
 title: "Three-Cheese Chicken Penne Pasta Bake"
 slug: three-cheese-chicken-penne-pasta-bake
-sourceImages: [IMG_5776.HEIC]
+category: mains
+tags: [chicken, pasta, italian, casserole]
+source: clipping
+yield: "Serves 4"
+oven: "375°F"
+time: "Prep 20 min · 43 min total"
+sourceImages: [IMG_5776.JPG]
 notes: "Clipped from a Kraft Foods recipe printout, dated 11/20/2009."
 ---
 

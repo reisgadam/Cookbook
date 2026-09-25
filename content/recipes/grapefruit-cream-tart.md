@@ -1,6 +1,13 @@
 ---
 title: "Grapefruit Cream Tart"
 slug: grapefruit-cream-tart
+category: pies-tarts
+tags: [fruit]
+source: notebook
+notebookPage: 19
+yield: "Serves 10"
+oven: "400°F"
+time: "Bake 20 min"
 sourceImages: [IMG_5730.JPG, IMG_5731.JPG]
 ---
 

@@ -1,6 +1,12 @@
 ---
 title: "Mini-Chip Pound Cake"
 slug: mini-chip-pound-cake
+category: cakes
+tags: [chocolate]
+source: notebook
+notebookPage: 29
+oven: "325°F"
+time: "Bake 65 min"
 sourceImages: [IMG_5750.JPG, IMG_5751.JPG]
 ---
 

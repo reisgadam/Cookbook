@@ -1,6 +1,13 @@
 ---
 title: "Mom's Chicken Pie"
 slug: moms-chicken-pie
+category: mains
+tags: [chicken]
+source: notebook
+notebookPage: 24
+yield: "Serves 6"
+oven: "350°F"
+time: "Bake about 1 hour"
 sourceImages: [IMG_5740.JPG, IMG_5741.JPG]
 ---
 

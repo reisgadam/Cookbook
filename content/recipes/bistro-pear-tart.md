@@ -1,6 +1,11 @@
 ---
 title: "Bistro Pear Tart"
 slug: bistro-pear-tart
+category: pies-tarts
+tags: [fruit, spirited]
+source: notebook
+notebookPage: 40
+yield: "Serves 6"
 sourceImages: [IMG_5770.JPG, IMG_5771.JPG]
 ---
 

@@ -1,6 +1,12 @@
 ---
 title: "Chocolate Mousse"
 slug: chocolate-mousse
+category: desserts
+tags: [chocolate, make-ahead]
+source: notebook
+notebookPage: 16
+yield: "Serves 8"
+time: "Chill at least 2 hours"
 sourceImages: [IMG_5724.JPG, IMG_5725.JPG]
 ---
 
@@ -22,4 +28,4 @@ sourceImages: [IMG_5724.JPG, IMG_5725.JPG]
 5. Spoon into 8 dessert dishes or a 1½-quart serving bowl. Refrigerate at least 2 hours.
 6. Beat the whipping cream in a chilled bowl until stiff peaks form. Top each serving with a dollop of whipped cream and grated chocolate. Makes 8 servings.
 
-*Note: the handwriting on the instructions card was hard to follow in a few spots — the sequence above is the best reconstruction of the steps as written.*
+> The handwriting on the instructions card was hard to follow in a few spots — the sequence above is the best reconstruction of the steps as written.

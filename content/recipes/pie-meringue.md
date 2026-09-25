@@ -1,6 +1,9 @@
 ---
 title: "Pie Meringue"
 slug: pie-meringue
+category: frostings-sauces
+source: note
+yield: "Tops one 8- or 9-inch pie"
 sourceImages: [IMG_5843.JPG]
 notes: "Basic meringue topping formula, scaled for a 9-inch or 8-inch pie."
 ---

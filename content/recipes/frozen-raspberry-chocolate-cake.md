@@ -1,6 +1,12 @@
 ---
 title: "Frozen Raspberry Chocolate Cake"
 slug: frozen-raspberry-chocolate-cake
+category: cakes
+tags: [chocolate, frozen, no-bake, make-ahead]
+source: notebook
+notebookPage: 22
+yield: "Serves 12"
+time: "Freeze at least 1 hour"
 sourceImages: [IMG_5736.JPG, IMG_5737.JPG]
 ---
 
@@ -21,4 +27,4 @@ sourceImages: [IMG_5736.JPG, IMG_5737.JPG]
 4. Spoon the raspberry cream filling into the wafer-lined pan, pressing gently so the wafers stay in place. Freeze until firm, at least 1 hour, or until the wafers have softened just enough to slice through easily.
 5. To serve, remove the side of the pan and transfer the cake to a serving plate. Mound whipped cream on top and garnish with the reserved cream and chopped raspberry candy. Keep frozen until ready to serve. Makes 12 servings.
 
-*Note: this card's instructions were written in very dense cursive and are a best-effort reconstruction of the steps and order.*
+> This card's instructions were written in very dense cursive and are a best-effort reconstruction of the steps and order.

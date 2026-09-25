@@ -1,6 +1,12 @@
 ---
 title: "Lemon Drop Cake Roll"
 slug: lemon-drop-cake-roll
+category: cakes
+tags: [lemon, make-ahead]
+source: notebook
+notebookPage: 21
+oven: "375°F"
+time: "Bake 10–12 min · Chill 2 hours"
 sourceImages: [IMG_5734.JPG, IMG_5735.JPG]
 ---
 
@@ -26,4 +32,4 @@ sourceImages: [IMG_5734.JPG, IMG_5735.JPG]
 7. Wrap in plastic and chill 2 hours, or until firm (no longer than 24 hours).
 8. Frost the cake with the remaining whipped cream. Garnish with reserved crushed candy and a few strawberry candies. Refrigerate leftovers, loosely covered.
 
-*Note: the title and several steps on this card were written in dense cursive and are a best-effort transcription.*
+> The title and several steps on this card were written in dense cursive and are a best-effort transcription.

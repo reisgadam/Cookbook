@@ -1,6 +1,11 @@
 ---
 title: "Apple Pie"
 slug: apple-pie
+category: pies-tarts
+tags: [apple, fruit]
+source: notebook
+notebookPage: 32
+partial: true
 sourceImages: [IMG_5756.JPG]
 ---
 
@@ -22,4 +27,4 @@ sourceImages: [IMG_5756.JPG]
 
 ## Instructions
 
-*The original notebook page has only the ingredient list for this recipe — the facing page begins the next recipe (Braised Lamb Shanks), so no separate instructions were captured. This is a standard two-crust apple pie: make the pastry, roll out a bottom crust, fill with the sweetened, spiced apples, top with a second crust (or lattice), brush with the cream, and bake until golden and bubbling.*
+> The original notebook page has only the ingredient list for this recipe — the facing page begins the next recipe (Braised Lamb Shanks), so no separate instructions were captured. This is a standard two-crust apple pie: make the pastry, roll out a bottom crust, fill with the sweetened, spiced apples, top with a second crust (or lattice), brush with the cream, and bake until golden and bubbling.

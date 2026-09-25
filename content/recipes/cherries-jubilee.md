@@ -1,6 +1,9 @@
 ---
 title: "Cherries Jubilee"
 slug: cherries-jubilee
+category: desserts
+tags: [fruit, spirited, quick]
+source: note
 sourceImages: [IMG_5788.JPG]
 ---
 

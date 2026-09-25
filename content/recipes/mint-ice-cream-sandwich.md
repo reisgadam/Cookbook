@@ -1,6 +1,13 @@
 ---
 title: "Mint Ice-Cream Sandwich"
 slug: mint-ice-cream-sandwich
+category: desserts
+tags: [chocolate, frozen]
+source: notebook
+notebookPage: 27
+yield: "Serves 7"
+oven: "350°F"
+time: "Bake 15 min"
 sourceImages: [IMG_5746.JPG, IMG_5747.JPG]
 ---
 

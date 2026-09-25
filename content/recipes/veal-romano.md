@@ -1,6 +1,10 @@
 ---
 title: "Veal Romano"
 slug: veal-romano
+category: mains
+tags: [veal, italian]
+source: notebook
+notebookPage: 7
 sourceImages: [IMG_5706.JPG, IMG_5707.JPG]
 ---
 

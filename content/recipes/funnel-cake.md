@@ -1,6 +1,9 @@
 ---
 title: "Funnel Cake"
 slug: funnel-cake
+category: desserts
+source: card
+time: "Fry about 2 min per side"
 sourceImages: [IMG_5813.JPG]
 notes: "Cooking time 2 min. on each side."
 ---

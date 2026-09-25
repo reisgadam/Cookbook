@@ -1,6 +1,11 @@
 ---
 title: "Pull-Apart Pizza Bread"
 slug: pull-apart-pizza-bread
+category: breads-breakfast
+tags: [italian, party, quick]
+source: note
+oven: "400°F"
+time: "Bake about 15 min"
 sourceImages: [IMG_5830.JPG]
 ---
 

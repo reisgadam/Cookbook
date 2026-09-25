@@ -1,6 +1,9 @@
 ---
 title: "Pudding & Jello Shots (Party Variations)"
 slug: pudding-and-jello-shots
+category: drinks
+tags: [spirited, party, make-ahead]
+source: note
 sourceImages: [IMG_5778.JPG, IMG_5779.JPG, IMG_5780.JPG, IMG_5781.JPG, IMG_5782.JPG, IMG_5784.JPG]
 notes: "Several scraps of paper with variations on the same party-shot idea — collected here together rather than as separate near-duplicate recipes."
 ---
@@ -57,4 +60,4 @@ Dissolve the jello in the boiling water, stir in the vodka and cold water, pour 
 - ½ cup cream-flavored liqueur (e.g. RumChata)
 - 8 oz. Cool Whip
 
-*Note: this "template" scrap was hard to read in full — it appears to be Mom's own notes-to-self on ratios for inventing new pudding-shot flavors, mixing pudding, gelatin, milk, and a couple of liquors to taste.*
+> This "template" scrap was hard to read in full — it appears to be Mom's own notes-to-self on ratios for inventing new pudding-shot flavors, mixing pudding, gelatin, milk, and a couple of liquors to taste.

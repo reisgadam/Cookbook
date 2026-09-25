@@ -1,6 +1,11 @@
 ---
 title: "Glazed Fruit Cake"
 slug: glazed-fruit-cake
+category: cakes
+tags: [fruit, holiday]
+source: note
+yield: "Serves 4 to 6"
+time: "Bake 40–45 min"
 sourceImages: [IMG_5840.JPG, IMG_5842.JPG]
 notes: "Written in very faint pencil on an old scrap — this transcription is a best-effort reading and some quantities are uncertain. Makes 4 to 6."
 ---

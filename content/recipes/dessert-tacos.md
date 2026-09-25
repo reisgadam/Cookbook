@@ -1,7 +1,13 @@
 ---
 title: "Dessert Tacos"
 slug: dessert-tacos
-sourceImages: [IMG_5816.JPG, IMG_5817.JPG]
+category: desserts
+tags: [chocolate, fruit, party]
+source: card
+yield: "Serves 12"
+oven: "350°F"
+time: "Bake 5–7 min"
+sourceImages: [IMG_5816.JPG, IMG_5817.JPG, IMG_5818.JPG]
 notes: "Cooking time 5-7 min.; serves 12."
 ---
 

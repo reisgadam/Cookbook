@@ -1,6 +1,11 @@
 ---
 title: "Apple Turnovers"
 slug: apple-turnovers
+category: pies-tarts
+tags: [apple, fruit]
+source: card
+oven: "425°F"
+time: "Bake about 25 min"
 sourceImages: [IMG_5814.JPG, IMG_5815.JPG]
 notes: "Cooking time 15 min."
 ---

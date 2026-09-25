@@ -1,6 +1,11 @@
 ---
 title: "Buffalo Chicken Potatoes"
 slug: buffalo-chicken-potatoes
+category: sides
+tags: [potatoes, casserole]
+source: note
+oven: "350°F"
+time: "Bake 45–60 min"
 sourceImages: [IMG_5797.JPG]
 ---
 

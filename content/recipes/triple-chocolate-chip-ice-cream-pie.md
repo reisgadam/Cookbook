@@ -1,6 +1,13 @@
 ---
 title: "Triple Chocolate-Chip Ice-Cream Pie"
 slug: triple-chocolate-chip-ice-cream-pie
+category: pies-tarts
+tags: [chocolate, frozen, make-ahead]
+source: notebook
+notebookPage: 26
+yield: "Serves 10"
+oven: "450°F"
+time: "Freeze 1 hour · Bake 5 min"
 sourceImages: [IMG_5744.JPG, IMG_5745.JPG]
 ---
 

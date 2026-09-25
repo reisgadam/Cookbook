@@ -1,6 +1,11 @@
 ---
 title: "Bay Point Rum Punch"
 slug: bay-point-rum-punch
+category: drinks
+tags: [spirited, party, frozen, make-ahead]
+source: note
+yield: "Makes about 3 quarts"
+time: "Freeze, then thaw 30 min"
 sourceImages: [IMG_5823.JPG]
 notes: "Punch or freeze as a slush; makes about 3 quarts."
 ---

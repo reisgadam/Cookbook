@@ -1,6 +1,11 @@
 ---
 title: "Home-Style Potatoes"
 slug: home-style-potatoes
+category: sides
+tags: [potatoes]
+source: notebook
+notebookPage: 35
+time: "Cook about 40 min"
 sourceImages: [IMG_5761.JPG, IMG_5762.JPG]
 ---
 

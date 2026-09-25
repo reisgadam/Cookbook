@@ -1,6 +1,12 @@
 ---
 title: "Rolled Buñuelos"
 slug: rolled-bunuelos
+category: desserts
+tags: [mexican, kid-friendly, quick]
+source: clipping
+yield: "Serves 6"
+oven: "400°F"
+time: "Bake 15–18 min"
 sourceImages: [IMG_5820.JPG]
 notes: "Clipped from a magazine — 'easy enough for children to help make for after-school and evening snacks.' Serves 6."
 ---

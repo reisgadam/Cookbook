@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import type { Recipe } from "../types/recipe";
 
 export function RecipeCard({ recipe }: { recipe: Recipe }) {

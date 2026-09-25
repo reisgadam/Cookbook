@@ -1,6 +1,9 @@
 ---
 title: "Choc-o-Nut Topping"
 slug: choc-o-nut-topping
+category: frostings-sauces
+tags: [chocolate]
+source: note
 sourceImages: [IMG_5847.JPG]
 notes: "A mix-in topping layered into a cake batter before baking, rather than a frosting applied after."
 ---

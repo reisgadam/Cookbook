@@ -1,6 +1,12 @@
 ---
 title: "Banana Bread"
 slug: banana-bread
+category: breads-breakfast
+tags: [fruit]
+source: note
+yield: "Makes 1 loaf"
+oven: "350°F"
+time: "Bake 50–60 min"
 sourceImages: [IMG_5827.JPG]
 notes: "Makes one loaf."
 ---

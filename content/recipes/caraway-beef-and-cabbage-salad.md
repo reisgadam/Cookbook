@@ -1,6 +1,11 @@
 ---
 title: "Caraway Beef and Cabbage Salad"
 slug: caraway-beef-and-cabbage-salad
+category: soups-salads
+tags: [beef]
+source: notebook
+notebookPage: 28
+yield: "Serves 4 to 6"
 sourceImages: [IMG_5748.JPG, IMG_5749.JPG]
 ---
 

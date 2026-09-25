@@ -1,6 +1,10 @@
 ---
 title: "French Dip Turkey Sandwiches"
 slug: french-dip-turkey-sandwiches
+category: mains
+tags: [turkey, quick]
+source: notebook
+notebookPage: 38
 sourceImages: [IMG_5766.JPG, IMG_5767.JPG]
 ---
 

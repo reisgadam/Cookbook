@@ -1,6 +1,9 @@
 ---
 title: "Brown Beauty Icing"
 slug: brown-beauty-icing
+category: frostings-sauces
+tags: [chocolate]
+source: note
 sourceImages: [IMG_5847.JPG]
 ---
 

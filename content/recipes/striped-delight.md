@@ -1,6 +1,11 @@
 ---
 title: "Striped Delight"
 slug: striped-delight
+category: desserts
+tags: [chocolate, no-bake, make-ahead]
+source: notebook
+notebookPage: 12
+yield: "Serves 12 to 15"
 sourceImages: [IMG_5716.JPG, IMG_5717.JPG]
 ---
 

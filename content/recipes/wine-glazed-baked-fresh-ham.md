@@ -1,8 +1,13 @@
 ---
 title: "Wine-Glazed Baked Fresh Ham with Gravy"
 slug: wine-glazed-baked-fresh-ham
+category: mains
+tags: [pork, holiday]
+source: notebook
+notebookPage: 39
+oven: "325°F"
+time: "Bake about 5½ hours"
 sourceImages: [IMG_5768.JPG, IMG_5769.JPG]
-tags: [holiday]
 ---
 
 ## Ingredients
@@ -31,4 +36,4 @@ tags: [holiday]
 7. Remove the ham from the pan and let rest on a platter, tented, while you make the gravy.
 8. Skim the fat from the pan drippings; discard the vegetables or reserve for another use. Whisk the flour into the pan drippings over low heat to make a roux, then whisk in chicken broth and the apple jelly until smooth and thickened. Season with salt and pepper and strain. Serve the gravy alongside the ham.
 
-*Note: this card's instructions were dense and partly hard to decipher — the steps above are a best-effort reconstruction of a standard glazed baked ham procedure.*
+> This card's instructions were dense and partly hard to decipher — the steps above are a best-effort reconstruction of a standard glazed baked ham procedure.

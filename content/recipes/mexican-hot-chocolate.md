@@ -1,6 +1,10 @@
 ---
 title: "Mexican Hot Chocolate"
 slug: mexican-hot-chocolate
+category: drinks
+tags: [chocolate, mexican]
+source: clipping
+yield: "Serves 6"
 sourceImages: [IMG_5821.JPG]
 notes: "Clipped from a magazine. Serves 6. 'In Mexico, a molinillo (moh-lin-EE-yoh), a carved wooden tool, is used to whip a frothy top on the hot chocolate. If you don't have a molinillo, use a rotary beater instead.'"
 ---

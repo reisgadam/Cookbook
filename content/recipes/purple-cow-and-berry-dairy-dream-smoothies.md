@@ -1,6 +1,10 @@
 ---
 title: "Purple Cow & Berry Dairy Dream Smoothies"
 slug: purple-cow-and-berry-dairy-dream-smoothies
+category: drinks
+tags: [fruit, quick, kid-friendly]
+source: note
+yield: "Serves 2 each"
 sourceImages: [IMG_5830.JPG]
 notes: "Two servings per recipe."
 ---

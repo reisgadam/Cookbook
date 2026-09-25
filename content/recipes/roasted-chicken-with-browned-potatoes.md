@@ -1,6 +1,12 @@
 ---
 title: "Roasted Chicken with Browned Potatoes"
 slug: roasted-chicken-with-browned-potatoes
+category: mains
+tags: [chicken, potatoes]
+source: note
+yield: "Serves 4"
+oven: "400°F"
+time: "Roast 1 hour"
 sourceImages: [IMG_5788.JPG]
 notes: "Roast at 400°F for 1 hour; makes 4 servings."
 ---

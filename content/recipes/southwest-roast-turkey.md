@@ -1,6 +1,11 @@
 ---
 title: "Southwest Roast Turkey"
 slug: southwest-roast-turkey
+category: mains
+tags: [turkey, holiday]
+source: notebook
+notebookPage: 11
+time: "Roast about 4½ hours"
 sourceImages: [IMG_5714.JPG, IMG_5715.JPG]
 ---
 

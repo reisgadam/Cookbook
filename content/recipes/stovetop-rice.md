@@ -1,6 +1,11 @@
 ---
 title: "Stovetop Rice"
 slug: stovetop-rice
+category: sides
+tags: [quick]
+source: note
+yield: "Serves 2 to 12"
+time: "Simmer 20 min"
 sourceImages: [IMG_5826.JPG]
 notes: "A ratio chart for scaling servings, rather than a single fixed recipe."
 ---

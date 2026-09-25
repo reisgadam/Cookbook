@@ -1,7 +1,12 @@
 ---
 title: "Pepperoni Bites"
 slug: pepperoni-bites
-sourceImages: [IMG_5777.HEIC]
+category: appetizers
+tags: [party, italian]
+source: clipping
+oven: "400°F"
+time: "Bake 30 min"
+sourceImages: [IMG_5777.JPG]
 notes: "Printed on Graciano Corporation letterhead."
 ---
 

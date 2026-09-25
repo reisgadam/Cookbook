@@ -1,6 +1,10 @@
 ---
 title: "Milk Chocolate Chip Marshmallow Fudge"
 slug: milk-chocolate-chip-marshmallow-fudge
+category: cookies-bars
+tags: [chocolate]
+source: card
+yield: "Makes 6 dozen squares"
 sourceImages: [IMG_5807.JPG]
 notes: "Makes 6 dozen squares."
 ---

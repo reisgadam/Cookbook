@@ -1,6 +1,12 @@
 ---
 title: "Old-Fashioned Brownies"
 slug: old-fashioned-brownies
+category: cookies-bars
+tags: [chocolate]
+source: note
+yield: "Makes 16 squares"
+oven: "350°F"
+time: "Bake 30–35 min"
 sourceImages: [IMG_5833.JPG, IMG_5834.JPG]
 notes: "Bake at 350°F for 30 to 35 min. Makes 16 2-inch squares."
 ---

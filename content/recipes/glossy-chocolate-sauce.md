@@ -1,6 +1,11 @@
 ---
 title: "Glossy Chocolate Sauce"
 slug: glossy-chocolate-sauce
+category: frostings-sauces
+tags: [chocolate, quick]
+source: notebook
+notebookPage: 18
+yield: "Makes 1½ cups"
 sourceImages: [IMG_5728.JPG, IMG_5729.JPG]
 ---
 

@@ -1,6 +1,10 @@
 ---
 title: "Lovelight Yellow Chiffon Cake"
 slug: lovelight-yellow-chiffon-cake
+category: cakes
+source: note
+oven: "350°F"
+time: "Bake 25–45 min, by pan"
 sourceImages: [IMG_5845.JPG, IMG_5846.JPG]
 notes: "Bake at 350°F: 8-inch layers 30 to 35 min, 9-inch layers 25 to 30 min, oblong 40 to 45 min."
 ---

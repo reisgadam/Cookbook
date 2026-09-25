@@ -1,6 +1,9 @@
 ---
 title: "Brownies Jubilee"
 slug: brownies-jubilee
+category: desserts
+tags: [chocolate, fruit, quick]
+source: note
 sourceImages: [IMG_5803.JPG]
 notes: "Jotted on the back of an envelope postmarked Pittsburgh, PA, Aug 20 '82."
 ---

@@ -1,6 +1,11 @@
 ---
 title: "Broccoli-Stuffed Chicken Breasts"
 slug: broccoli-stuffed-chicken-breasts
+category: mains
+tags: [chicken]
+source: notebook
+notebookPage: 13
+partial: true
 sourceImages: [IMG_5718.JPG, IMG_5719.JPG]
 ---
 
@@ -26,4 +31,4 @@ sourceImages: [IMG_5718.JPG, IMG_5719.JPG]
 2. Mix broccoli, bread crumbs, cheese, and pepper; set aside.
 3. Cut chicken horizontally, not all the way through, and pound chicken evenly...
 
-*Note: the instructions on the original card appear to end mid-recipe — the remaining steps (stuffing and cooking the chicken, and preparing the potatoes and pear) weren't written out, or that portion of the card wasn't captured.*
+> The instructions on the original card appear to end mid-recipe — the remaining steps (stuffing and cooking the chicken, and preparing the potatoes and pear) weren't written out, or that portion of the card wasn't captured.

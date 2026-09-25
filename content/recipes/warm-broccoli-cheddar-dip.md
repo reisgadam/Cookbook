@@ -1,6 +1,11 @@
 ---
 title: "Warm Broccoli Cheddar Dip"
 slug: warm-broccoli-cheddar-dip
+category: appetizers
+tags: [party]
+source: card
+oven: "350°F"
+time: "Bake 30 min"
 sourceImages: [IMG_5829.JPG]
 notes: "Written on a 'Here's What's Cooking From the Kitchen Of' card, labeled 'warm broccoli, cheddar chip.'"
 ---

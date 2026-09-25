@@ -1,6 +1,13 @@
 ---
 title: "Hot Fruit Compote"
 slug: hot-fruit-compote
+category: desserts
+tags: [fruit]
+source: notebook
+notebookPage: 23
+yield: "Serves 8 to 10"
+oven: "300°F"
+time: "Bake about 1 hour"
 sourceImages: [IMG_5738.JPG, IMG_5739.JPG]
 ---
 

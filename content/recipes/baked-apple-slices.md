@@ -1,6 +1,13 @@
 ---
 title: "Baked Apple Slices"
 slug: baked-apple-slices
+category: desserts
+tags: [apple, fruit]
+source: notebook
+notebookPage: 10
+yield: "Serves 6 to 8"
+oven: "350°F"
+time: "Bake 35 min"
 sourceImages: [IMG_5712.JPG, IMG_5713.JPG]
 ---
 
@@ -22,4 +29,4 @@ sourceImages: [IMG_5712.JPG, IMG_5713.JPG]
 4. Melt the butter and mix with the apple juice. Pour over the top and toss to combine. Cover with aluminum foil.
 5. Bake for 20 minutes. Uncover and bake for another 15 minutes. Serve warm. Makes 6 to 8 servings.
 
-*Note: a couple of ingredient lines on the original card were hard to make out — quantities for the ginger and second cinnamon measure are best-guess.*
+> A couple of ingredient lines on the original card were hard to make out — quantities for the ginger and second cinnamon measure are best-guess.

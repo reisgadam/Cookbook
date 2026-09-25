@@ -1,6 +1,12 @@
 ---
 title: "Fried Custard (Leche Frita)"
 slug: fried-custard-leche-frita
+category: desserts
+tags: [mexican, make-ahead]
+source: notebook
+notebookPage: 15
+yield: "Serves 16"
+time: "Chill 8 hours · Fry 1–2 min"
 sourceImages: [IMG_5722.JPG, IMG_5723.JPG]
 ---
 

@@ -1,6 +1,11 @@
 ---
 title: "Coconut Fruit Squares"
 slug: coconut-fruit-squares
+category: desserts
+tags: [fruit, no-bake, make-ahead]
+source: note
+yield: "Serves 9"
+time: "Chill at least 2 hours"
 sourceImages: [IMG_5795.JPG]
 notes: "Makes 9 servings."
 ---

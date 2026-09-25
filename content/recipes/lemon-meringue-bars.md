@@ -1,6 +1,12 @@
 ---
 title: "Lemon Meringue Bars"
 slug: lemon-meringue-bars
+category: cookies-bars
+tags: [lemon]
+source: note
+yield: "Makes 32 bars"
+oven: "350°F"
+time: "Bake 30 min"
 sourceImages: [IMG_5787.JPG, IMG_5788.JPG]
 notes: "Makes 32 bars; card notes a cost of $1.57 to make."
 ---

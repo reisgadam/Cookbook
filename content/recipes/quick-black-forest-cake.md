@@ -1,6 +1,12 @@
 ---
 title: "Quick Black Forest Cake"
 slug: quick-black-forest-cake
+category: cakes
+tags: [chocolate, fruit, make-ahead]
+source: notebook
+notebookPage: 9
+oven: "350°F"
+time: "Bake 25 min · Chill 6–8 hours"
 sourceImages: [IMG_5710.JPG, IMG_5711.JPG]
 ---
 

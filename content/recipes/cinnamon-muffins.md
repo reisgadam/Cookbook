@@ -1,6 +1,10 @@
 ---
 title: "Cinnamon Muffins"
 slug: cinnamon-muffins
+category: breads-breakfast
+source: card
+oven: "400°F"
+time: "Bake 20–25 min"
 sourceImages: [IMG_5811.JPG, IMG_5812.JPG]
 notes: "Cooking time 20 to 25 min."
 ---

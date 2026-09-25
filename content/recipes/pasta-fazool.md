@@ -1,6 +1,10 @@
 ---
 title: "Pasta Fazool"
 slug: pasta-fazool
+category: soups-salads
+tags: [pasta, italian]
+source: note
+time: "About 1½ hours"
 sourceImages: [IMG_5793.JPG]
 ---
 

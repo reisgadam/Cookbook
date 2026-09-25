@@ -1,6 +1,9 @@
 ---
 title: "Quick Parfait Desserts: Lemon Cream, Black Forest & Apple Streusel"
 slug: quick-parfait-desserts
+category: desserts
+tags: [quick, lemon, chocolate, fruit]
+source: note
 sourceImages: [IMG_5841.JPG]
 notes: "Three quick dessert ideas jotted together in faint pencil — a best-effort transcription."
 ---

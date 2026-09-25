@@ -1,6 +1,13 @@
 ---
 title: "Fudgy Meringue Mallow"
 slug: fudgy-meringue-mallow
+category: desserts
+tags: [chocolate, make-ahead]
+source: notebook
+notebookPage: 17
+yield: "Serves 10 to 12"
+oven: "275°F"
+time: "Bake 1 hour · Allow 24 hours"
 sourceImages: [IMG_5726.JPG, IMG_5727.JPG]
 ---
 
@@ -30,4 +37,4 @@ sourceImages: [IMG_5726.JPG, IMG_5727.JPG]
 7. Spread over the meringue and refrigerate at least 12 hours.
 8. Cut into serving pieces; serve drizzled with Glossy Chocolate Sauce. Makes 10 to 12 servings.
 
-*Note: this card was written in dense cursive and a few phrases were hard to make out — quantities and step order are a best-effort reconstruction.*
+> This card was written in dense cursive and a few phrases were hard to make out — quantities and step order are a best-effort reconstruction.

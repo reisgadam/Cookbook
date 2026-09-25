@@ -1,6 +1,10 @@
 ---
 title: "Peanut Butter Cookies"
 slug: peanut-butter-cookies
+category: cookies-bars
+source: note
+oven: "375°F"
+time: "Bake 10–12 min"
 sourceImages: [IMG_5834.JPG]
 notes: "Bake at 375°F for 10 to 12 min. (the amount baked was cut off on this stained old card)."
 ---

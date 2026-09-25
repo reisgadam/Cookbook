@@ -1,6 +1,12 @@
 ---
 title: "Name Tag Cut-Outs"
 slug: name-tag-cut-out-cookies
+category: cookies-bars
+tags: [holiday, kid-friendly]
+source: note
+yield: "Makes 4 dozen"
+oven: "350°F"
+time: "Chill 1 hour · Bake 12–14 min"
 sourceImages: [IMG_5799.JPG, IMG_5800.JPG]
 notes: "Makes 4 dozen."
 ---

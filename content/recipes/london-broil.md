@@ -1,6 +1,11 @@
 ---
 title: "London Broil"
 slug: london-broil
+category: mains
+tags: [beef, quick]
+source: notebook
+notebookPage: 34
+time: "Cook 20–25 min"
 sourceImages: [IMG_5759.JPG, IMG_5760.JPG]
 ---
 

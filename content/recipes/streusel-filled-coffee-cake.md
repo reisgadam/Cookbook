@@ -1,6 +1,10 @@
 ---
 title: "Streusel-Filled Coffee Cake"
 slug: streusel-filled-coffee-cake
+category: breads-breakfast
+source: card
+oven: "375°F"
+time: "Bake 25–30 min"
 sourceImages: [IMG_5809.JPG, IMG_5810.JPG]
 notes: "Cooking time 25 to 30 min."
 ---

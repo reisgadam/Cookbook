@@ -1,6 +1,9 @@
 ---
 title: "Braised Lamb Shanks"
 slug: braised-lamb-shanks
+category: mains
+source: notebook
+notebookPage: 33
 sourceImages: [IMG_5757.JPG, IMG_5758.JPG]
 ---
 
@@ -24,4 +27,4 @@ sourceImages: [IMG_5757.JPG, IMG_5758.JPG]
 4. Transfer the shanks and vegetables to a hot serving platter; keep warm.
 5. Skim the fat from the skillet and boil the liquid to reduce and thicken slightly into a sauce. Season with salt and pepper. Spoon the sauce and vegetables over the shanks to serve.
 
-*Note: this card's instructions were dense cursive and partly hard to follow — the steps above are a best-effort reconstruction.*
+> This card's instructions were dense cursive and partly hard to follow — the steps above are a best-effort reconstruction.

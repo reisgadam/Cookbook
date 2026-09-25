@@ -1,6 +1,10 @@
 ---
 title: "Shrimp Scampi"
 slug: shrimp-scampi
+category: mains
+tags: [seafood, italian, quick]
+source: notebook
+notebookPage: 5
 sourceImages: [IMG_5702.JPG, IMG_5703.JPG]
 ---
 

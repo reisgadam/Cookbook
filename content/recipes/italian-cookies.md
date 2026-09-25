@@ -1,6 +1,9 @@
 ---
 title: "Italian Cookies"
 slug: italian-cookies
+category: cookies-bars
+tags: [italian]
+source: note
 sourceImages: [IMG_5785.JPG]
 notes: "Labeled '¼ recipe' on the card — quantities below are for that quarter batch."
 ---

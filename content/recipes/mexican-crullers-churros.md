@@ -1,6 +1,11 @@
 ---
 title: "Mexican Crullers (Churros)"
 slug: mexican-crullers-churros
+category: desserts
+tags: [mexican]
+source: notebook
+notebookPage: 14
+yield: "Makes about 16"
 sourceImages: [IMG_5720.JPG, IMG_5721.JPG]
 ---
 

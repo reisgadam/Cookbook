@@ -1,6 +1,11 @@
 ---
 title: "Strawberry Pretzel Salad"
 slug: strawberry-pretzel-salad
+category: desserts
+tags: [fruit, make-ahead, party]
+source: note
+oven: "400°F"
+time: "Bake 8 min · Chill 2 hours"
 sourceImages: [IMG_5801.JPG, IMG_5802.JPG]
 ---
 

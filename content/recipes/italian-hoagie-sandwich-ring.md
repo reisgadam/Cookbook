@@ -1,6 +1,9 @@
 ---
 title: "Italian Hoagie Sandwich Ring"
 slug: italian-hoagie-sandwich-ring
+category: mains
+tags: [italian, party, pork, make-ahead]
+source: note
 sourceImages: [IMG_5804.JPG]
 notes: "A planning note for a son's wedding dinner (Nov 11th) — make the sandwich ring the night before, for Nov 9th prep."
 ---
@@ -15,4 +18,4 @@ notes: "A planning note for a son's wedding dinner (Nov 11th) — make the sandw
 
 ## Instructions
 
-*Assembly only, no cooking: layer the sliced meats and cheese into the hollowed sandwich ring loaf to make one large party hoagie ring. Made the night before serving.*
+> Assembly only, no cooking: layer the sliced meats and cheese into the hollowed sandwich ring loaf to make one large party hoagie ring. Made the night before serving.
