@@ -73,7 +73,10 @@ function Explorer({ categorySlug }: { categorySlug?: string }) {
   const sortParam = params.get("sort") as Sort | null;
   const sort: Sort = sortParam ?? (searching ? "relevance" : "az");
 
-  const hits = useMemo(() => (searching ? searchRecipes(getSearchIndex(recipes), query) : null), [query, searching]);
+  const hits = useMemo(
+    () => (searching ? searchRecipes(getSearchIndex(recipes), query) : null),
+    [query, searching],
+  );
 
   // Everything except the category filter, so the tabs can show counts.
   const base = useMemo<Row[]>(() => {
@@ -94,7 +97,9 @@ function Explorer({ categorySlug }: { categorySlug?: string }) {
     if (sort === "za") return [...filtered].sort((a, b) => collate(b.recipe.title, a.recipe.title));
     if (sort === "loved") {
       const hearts = (slug: string) => counts[`love:${slug}`] ?? 0;
-      return [...filtered].sort((a, b) => hearts(b.recipe.slug) - hearts(a.recipe.slug) || collate(a.recipe.title, b.recipe.title));
+      return [...filtered].sort(
+        (a, b) => hearts(b.recipe.slug) - hearts(a.recipe.slug) || collate(a.recipe.title, b.recipe.title),
+      );
     }
     return filtered;
   }, [base, category, sort, counts]);
@@ -107,7 +112,8 @@ function Explorer({ categorySlug }: { categorySlug?: string }) {
 
   const tagCounts = useMemo(() => {
     const counts = new Map<TagSlug, number>();
-    for (const { recipe } of rows) for (const tag of recipe.tags) if (isTagSlug(tag)) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+    for (const { recipe } of rows)
+      for (const tag of recipe.tags) if (isTagSlug(tag)) counts.set(tag, (counts.get(tag) ?? 0) + 1);
     return counts;
   }, [rows]);
 
@@ -145,7 +151,9 @@ function Explorer({ categorySlug }: { categorySlug?: string }) {
 
   const [showAllTags, setShowAllTags] = useState(false);
   const availableTags = TAG_SLUGS.filter((tag) => tags.includes(tag) || (tagCounts.get(tag) ?? 0) > 0).sort(
-    (a, b) => Number(tags.includes(b)) - Number(tags.includes(a)) || (tagCounts.get(b) ?? 0) - (tagCounts.get(a) ?? 0),
+    (a, b) =>
+      Number(tags.includes(b)) - Number(tags.includes(a)) ||
+      (tagCounts.get(b) ?? 0) - (tagCounts.get(a) ?? 0),
   );
   const visibleTags = showAllTags ? availableTags : availableTags.slice(0, Math.max(TAGS_SHOWN, tags.length));
   const hiddenTagCount = availableTags.length - visibleTags.length;
@@ -192,7 +200,12 @@ function Explorer({ categorySlug }: { categorySlug?: string }) {
           enterKeyHint="search"
         />
         {input && (
-          <button type="button" className={`icon-btn ${styles.clear}`} onClick={() => setInput("")} aria-label="Clear search">
+          <button
+            type="button"
+            className={`icon-btn ${styles.clear}`}
+            onClick={() => setInput("")}
+            aria-label="Clear search"
+          >
             <X aria-hidden="true" />
           </button>
         )}
@@ -239,7 +252,12 @@ function Explorer({ categorySlug }: { categorySlug?: string }) {
             );
           })}
           {(hiddenTagCount > 0 || showAllTags) && (
-            <button type="button" className={styles.moreTags} onClick={() => setShowAllTags((all) => !all)} aria-expanded={showAllTags}>
+            <button
+              type="button"
+              className={styles.moreTags}
+              onClick={() => setShowAllTags((all) => !all)}
+              aria-expanded={showAllTags}
+            >
               {showAllTags ? "Fewer tags" : `+${hiddenTagCount} more`}
             </button>
           )}
@@ -255,7 +273,11 @@ function Explorer({ categorySlug }: { categorySlug?: string }) {
         <div className={styles.controls}>
           <label className={styles.control}>
             <span className="visually-hidden">Written on</span>
-            <select className={styles.select} value={source} onChange={(event) => updateParam("from", event.target.value || null)}>
+            <select
+              className={styles.select}
+              value={source}
+              onChange={(event) => updateParam("from", event.target.value || null)}
+            >
               <option value="">From anywhere</option>
               {(Object.keys(SOURCES) as SourceKind[]).map((kind) => (
                 <option key={kind} value={kind}>
@@ -270,7 +292,12 @@ function Explorer({ categorySlug }: { categorySlug?: string }) {
             <select
               className={styles.select}
               value={sort}
-              onChange={(event) => updateParam("sort", event.target.value === (searching ? "relevance" : "az") ? null : event.target.value)}
+              onChange={(event) =>
+                updateParam(
+                  "sort",
+                  event.target.value === (searching ? "relevance" : "az") ? null : event.target.value,
+                )
+              }
             >
               {searching && <option value="relevance">Best match</option>}
               <option value="az">A to Z</option>
@@ -398,7 +425,9 @@ function RecipeIndex({ rows, query, showCategory }: { rows: Row[]; query: string
                   <Link to={`/recipes/${recipe.slug}`} viewTransition>
                     <Highlight text={recipe.title} query={query} />
                   </Link>
-                  {showCategory && <span className={styles.indexMeta}>{getCategory(recipe.category)?.label}</span>}
+                  {showCategory && (
+                    <span className={styles.indexMeta}>{getCategory(recipe.category)?.label}</span>
+                  )}
                 </li>
               ))}
             </ul>

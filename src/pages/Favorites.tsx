@@ -26,8 +26,8 @@ export function Favorites() {
         <p className="eyebrow">Saved on this device</p>
         <h1>My Recipe Box</h1>
         <p className={styles.lede}>
-          Tap the bookmark on any recipe to keep it here. Your box is saved in this browser, so it will be waiting next
-          time you visit on this device.
+          Tap the bookmark on any recipe to keep it here. Your box is saved in this browser, so it will be
+          waiting next time you visit on this device.
         </p>
       </header>
 

@@ -24,7 +24,12 @@ export function SaveButton({ slug, title, variant = "icon", className = "" }: Pr
 
   if (variant === "button") {
     return (
-      <button type="button" className={`btn btn-secondary ${className}`} aria-pressed={saved} onClick={onClick}>
+      <button
+        type="button"
+        className={`btn btn-secondary ${className}`}
+        aria-pressed={saved}
+        onClick={onClick}
+      >
         <Icon aria-hidden="true" />
         {saved ? "Saved" : "Save"}
       </button>

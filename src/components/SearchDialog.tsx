@@ -8,12 +8,7 @@ import { getRecipeBySlug, recipes } from "../data/recipes";
 import { categoryCounts } from "../data/stats";
 import { useRecentlyViewed } from "../hooks/useRecipeBox";
 import { useSurprise } from "../hooks/useSurprise";
-import {
-  FIELD_LABELS,
-  foldCase,
-  getSearchIndex,
-  searchRecipes,
-} from "../lib/search";
+import { FIELD_LABELS, foldCase, getSearchIndex, searchRecipes } from "../lib/search";
 import type { Recipe } from "../types/recipe";
 import { CategoryIcon } from "./CategoryIcon";
 import { Highlight } from "./Highlight";
@@ -34,17 +29,9 @@ export default function SearchDialog({ open, onOpenChange }: Props) {
   const { recent } = useRecentlyViewed();
   const trimmed = query.trim();
 
-  const hits = useMemo(
-    () => searchRecipes(getSearchIndex(recipes), trimmed),
-    [trimmed],
-  );
+  const hits = useMemo(() => searchRecipes(getSearchIndex(recipes), trimmed), [trimmed]);
   const categories = useMemo(
-    () =>
-      trimmed
-        ? CATEGORIES.filter((c) =>
-            foldCase(c.label).includes(foldCase(trimmed)),
-          )
-        : CATEGORIES,
+    () => (trimmed ? CATEGORIES.filter((c) => foldCase(c.label).includes(foldCase(trimmed))) : CATEGORIES),
     [trimmed],
   );
   const recentRecipes = recent
@@ -62,15 +49,8 @@ export default function SearchDialog({ open, onOpenChange }: Props) {
       <Dialog.Portal>
         <Dialog.Overlay className={styles.overlay} />
         <Dialog.Content className={styles.dialog} aria-describedby={undefined}>
-          <Dialog.Title className="visually-hidden">
-            Search recipes
-          </Dialog.Title>
-          <Command
-            label="Search recipes"
-            shouldFilter={false}
-            loop
-            className={styles.command}
-          >
+          <Dialog.Title className="visually-hidden">Search recipes</Dialog.Title>
+          <Command label="Search recipes" shouldFilter={false} loop className={styles.command}>
             <div className={styles.inputRow}>
               <Search aria-hidden="true" className={styles.searchIcon} />
               <Command.Input
@@ -85,16 +65,12 @@ export default function SearchDialog({ open, onOpenChange }: Props) {
             <Command.List className={styles.list}>
               {trimmed && (
                 <Command.Empty className={styles.empty}>
-                  No recipes match “{trimmed}”. Try an ingredient, like “lemon”
-                  or “chicken”.
+                  No recipes match “{trimmed}”. Try an ingredient, like “lemon” or “chicken”.
                 </Command.Empty>
               )}
 
               {trimmed && hits.length > 0 && (
-                <Command.Group
-                  heading={`Recipes (${hits.length})`}
-                  className={styles.group}
-                >
+                <Command.Group heading={`Recipes (${hits.length})`} className={styles.group}>
                   {hits.slice(0, MAX_RESULTS).map((hit) => {
                     const recipe = getRecipeBySlug(hit.slug);
                     if (!recipe) return null;
@@ -109,10 +85,7 @@ export default function SearchDialog({ open, onOpenChange }: Props) {
                         onSelect={() => go(`/recipes/${recipe.slug}`)}
                         className={styles.item}
                       >
-                        <CategoryIcon
-                          category={recipe.category}
-                          className={styles.itemIcon}
-                        />
+                        <CategoryIcon category={recipe.category} className={styles.itemIcon} />
                         <span className={styles.itemText}>
                           <span className={styles.itemTitle}>
                             <Highlight text={recipe.title} query={trimmed} />
@@ -128,28 +101,18 @@ export default function SearchDialog({ open, onOpenChange }: Props) {
                   {hits.length > MAX_RESULTS && (
                     <Command.Item
                       value="all-results"
-                      onSelect={() =>
-                        go(`/recipes?q=${encodeURIComponent(trimmed)}`)
-                      }
+                      onSelect={() => go(`/recipes?q=${encodeURIComponent(trimmed)}`)}
                       className={styles.item}
                     >
-                      <ArrowRight
-                        aria-hidden="true"
-                        className={styles.itemIcon}
-                      />
-                      <span className={styles.itemTitle}>
-                        See all {hits.length} results
-                      </span>
+                      <ArrowRight aria-hidden="true" className={styles.itemIcon} />
+                      <span className={styles.itemTitle}>See all {hits.length} results</span>
                     </Command.Item>
                   )}
                 </Command.Group>
               )}
 
               {!trimmed && recentRecipes.length > 0 && (
-                <Command.Group
-                  heading="Recently viewed"
-                  className={styles.group}
-                >
+                <Command.Group heading="Recently viewed" className={styles.group}>
                   {recentRecipes.map((recipe) => (
                     <Command.Item
                       key={recipe.slug}
@@ -157,10 +120,7 @@ export default function SearchDialog({ open, onOpenChange }: Props) {
                       onSelect={() => go(`/recipes/${recipe.slug}`)}
                       className={styles.item}
                     >
-                      <CategoryIcon
-                        category={recipe.category}
-                        className={styles.itemIcon}
-                      />
+                      <CategoryIcon category={recipe.category} className={styles.itemIcon} />
                       <span className={styles.itemTitle}>{recipe.title}</span>
                     </Command.Item>
                   ))}
@@ -176,14 +136,9 @@ export default function SearchDialog({ open, onOpenChange }: Props) {
                       onSelect={() => go(`/category/${category.slug}`)}
                       className={styles.item}
                     >
-                      <CategoryIcon
-                        category={category.slug}
-                        className={styles.itemIcon}
-                      />
+                      <CategoryIcon category={category.slug} className={styles.itemIcon} />
                       <span className={styles.itemTitle}>{category.label}</span>
-                      <span className={styles.count}>
-                        {categoryCounts[category.slug]}
-                      </span>
+                      <span className={styles.count}>{categoryCounts[category.slug]}</span>
                     </Command.Item>
                   ))}
                 </Command.Group>
@@ -200,9 +155,7 @@ export default function SearchDialog({ open, onOpenChange }: Props) {
                     className={styles.item}
                   >
                     <Dices aria-hidden="true" className={styles.itemIcon} />
-                    <span className={styles.itemTitle}>
-                      Surprise me with a random recipe
-                    </span>
+                    <span className={styles.itemTitle}>Surprise me with a random recipe</span>
                   </Command.Item>
                 </Command.Group>
               )}

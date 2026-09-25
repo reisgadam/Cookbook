@@ -38,7 +38,10 @@ export function RecipeTile({ recipe, query, hint, loves, headingLevel = 3 }: Pro
         {getCategory(recipe.category)?.label}
       </p>
 
-      <Heading className={styles.title} style={transitioning ? { viewTransitionName: "recipe-title" } : undefined}>
+      <Heading
+        className={styles.title}
+        style={transitioning ? { viewTransitionName: "recipe-title" } : undefined}
+      >
         <Link to={to} className={styles.link} viewTransition>
           <Highlight text={recipe.title} query={query} />
         </Link>

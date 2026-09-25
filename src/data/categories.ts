@@ -23,16 +23,51 @@ export interface CategoryInfo {
 
 /** In menu order: savory first, then sweets, then drinks. */
 export const CATEGORIES: CategoryInfo[] = [
-  { slug: "appetizers", label: "Appetizers & Snacks", blurb: "Dips, bites and party platters", icon: "platter" },
-  { slug: "soups-salads", label: "Soups & Salads", blurb: "Wedding soup, pasta fazool and more", icon: "soup" },
+  {
+    slug: "appetizers",
+    label: "Appetizers & Snacks",
+    blurb: "Dips, bites and party platters",
+    icon: "platter",
+  },
+  {
+    slug: "soups-salads",
+    label: "Soups & Salads",
+    blurb: "Wedding soup, pasta fazool and more",
+    icon: "soup",
+  },
   { slug: "mains", label: "Main Dishes", blurb: "Sunday dinners and weeknight suppers", icon: "pot" },
   { slug: "sides", label: "Sides", blurb: "Potatoes, rice and homemade pickles", icon: "carrot" },
-  { slug: "breads-breakfast", label: "Breads & Breakfast", blurb: "Muffins, loaves and coffee cake", icon: "croissant" },
+  {
+    slug: "breads-breakfast",
+    label: "Breads & Breakfast",
+    blurb: "Muffins, loaves and coffee cake",
+    icon: "croissant",
+  },
   { slug: "cakes", label: "Cakes", blurb: "Pound cakes, layer cakes and icebox cakes", icon: "cake" },
-  { slug: "pies-tarts", label: "Pies & Tarts", blurb: "Apple pie, meringue pie and fruit tarts", icon: "slice" },
-  { slug: "cookies-bars", label: "Cookies, Bars & Candy", blurb: "Brownies, cookies and fudge", icon: "cookie" },
-  { slug: "desserts", label: "Desserts & Treats", blurb: "Mousse, churros, frozen treats and more", icon: "dessert" },
-  { slug: "frostings-sauces", label: "Frostings & Sauces", blurb: "Icings, toppings and chocolate sauce", icon: "candy" },
+  {
+    slug: "pies-tarts",
+    label: "Pies & Tarts",
+    blurb: "Apple pie, meringue pie and fruit tarts",
+    icon: "slice",
+  },
+  {
+    slug: "cookies-bars",
+    label: "Cookies, Bars & Candy",
+    blurb: "Brownies, cookies and fudge",
+    icon: "cookie",
+  },
+  {
+    slug: "desserts",
+    label: "Desserts & Treats",
+    blurb: "Mousse, churros, frozen treats and more",
+    icon: "dessert",
+  },
+  {
+    slug: "frostings-sauces",
+    label: "Frostings & Sauces",
+    blurb: "Icings, toppings and chocolate sauce",
+    icon: "candy",
+  },
   { slug: "drinks", label: "Drinks", blurb: "Punch, cocktails, shakes and hot chocolate", icon: "drink" },
 ];
 

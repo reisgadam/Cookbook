@@ -96,7 +96,11 @@ function RecipeView({ recipe }: { recipe: Recipe }) {
             {recipe.title}
           </h1>
           <p className={styles.provenance}>
-            {recipe.source === "notebook" ? <BookOpen aria-hidden="true" /> : <StickyNote aria-hidden="true" />}
+            {recipe.source === "notebook" ? (
+              <BookOpen aria-hidden="true" />
+            ) : (
+              <StickyNote aria-hidden="true" />
+            )}
             {SOURCES[recipe.source].description}
             {recipe.notebookPage ? (
               <>
@@ -114,7 +118,11 @@ function RecipeView({ recipe }: { recipe: Recipe }) {
             </button>
             <ReactionButtons slug={recipe.slug} />
             <SaveButton slug={recipe.slug} title={recipe.title} variant="button" />
-            <ShareButton path={`recipes/${recipe.slug}`} title={recipe.title} text={`${recipe.title}, from ${site.title}`} />
+            <ShareButton
+              path={`recipes/${recipe.slug}`}
+              title={recipe.title}
+              text={`${recipe.title}, from ${site.title}`}
+            />
             <button type="button" className="btn btn-secondary" onClick={() => window.print()}>
               <Printer aria-hidden="true" />
               Print
@@ -139,7 +147,11 @@ function RecipeView({ recipe }: { recipe: Recipe }) {
           </div>
 
           <aside className={styles.aside} aria-label="The original recipe">
-            <OriginalCard photos={photos} onOpen={setZoomIndex} transitionName={arriving ? "recipe-photo" : undefined} />
+            <OriginalCard
+              photos={photos}
+              onOpen={setZoomIndex}
+              transitionName={arriving ? "recipe-photo" : undefined}
+            />
           </aside>
         </div>
 
@@ -164,7 +176,12 @@ function RecipeView({ recipe }: { recipe: Recipe }) {
 
       {zoomIndex !== null && (
         <Suspense fallback={null}>
-          <CardLightbox photos={photos} index={zoomIndex} downloadName={recipe.slug} onClose={() => setZoomIndex(null)} />
+          <CardLightbox
+            photos={photos}
+            index={zoomIndex}
+            downloadName={recipe.slug}
+            onClose={() => setZoomIndex(null)}
+          />
         </Suspense>
       )}
     </article>
@@ -199,8 +216,8 @@ function AboutCard({ recipe }: { recipe: Recipe }) {
       {recipe.notes && <p>{recipe.notes}</p>}
       {recipe.partial && (
         <p className={styles.partial}>
-          <span className="badge badge-partial">Partial recipe</span> Part of this recipe is missing from the original.
-          If you remember how {site.name} made it, please add a note below.
+          <span className="badge badge-partial">Partial recipe</span> Part of this recipe is missing from the
+          original. If you remember how {site.name} made it, please add a note below.
         </p>
       )}
     </aside>
@@ -260,7 +277,12 @@ function Related({ recipe }: { recipe: Recipe }) {
             <span />
           )}
           {next && (
-            <Link to={`/recipes/${next.slug}`} className={`${styles.pagerLink} ${styles.pagerNext}`} rel="next" viewTransition>
+            <Link
+              to={`/recipes/${next.slug}`}
+              className={`${styles.pagerLink} ${styles.pagerNext}`}
+              rel="next"
+              viewTransition
+            >
               <span>
                 <span className={styles.pagerLabel}>Next in {category?.label}</span>
                 <span className={styles.pagerTitle}>{next.title}</span>

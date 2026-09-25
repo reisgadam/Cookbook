@@ -49,7 +49,12 @@ export function Header({ onOpenSearch }: { onOpenSearch: () => void }) {
         </nav>
 
         <div className={styles.actions}>
-          <button type="button" className={styles.search} onClick={onOpenSearch} aria-keyshortcuts="/ Control+K Meta+K">
+          <button
+            type="button"
+            className={styles.search}
+            onClick={onOpenSearch}
+            aria-keyshortcuts="/ Control+K Meta+K"
+          >
             <Search aria-hidden="true" />
             <span className={styles.searchLabel}>Search recipes</span>
             <kbd className={styles.kbd} aria-hidden="true">

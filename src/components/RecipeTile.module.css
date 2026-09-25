@@ -46,9 +46,7 @@
 }
 
 .tile:focus-within:has(.link:focus-visible) {
-  box-shadow:
-    var(--focus-ring),
-    var(--shadow-md);
+  box-shadow: var(--focus-ring), var(--shadow-md);
 }
 
 .eyebrow {

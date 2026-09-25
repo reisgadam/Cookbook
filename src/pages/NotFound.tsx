@@ -10,8 +10,8 @@ export function NotFound({ title = "We couldn’t find that page" }: { title?: s
       <p className={`hand ${styles.kicker}`}>Hmm, that page isn’t in the recipe box.</p>
       <h1>{title}</h1>
       <p className={styles.text}>
-        The link may be mistyped, or the recipe may have a new name. Try searching, or let the dice pick something
-        good.
+        The link may be mistyped, or the recipe may have a new name. Try searching, or let the dice pick
+        something good.
       </p>
       <div className={styles.actions}>
         <Link to="/recipes" className="btn btn-primary">

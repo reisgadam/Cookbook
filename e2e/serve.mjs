@@ -5,6 +5,7 @@
 //   - a folder is served from its index.html, and a folder address without the
 //     trailing slash redirects to the one with it
 //   - there is no single-page-app fallback: unknown addresses get 404.html
+//   - text files are gzipped, and browsers may reuse any file for 10 minutes
 //
 // Usage: node e2e/serve.mjs [port]   (default 4173)
 
@@ -13,6 +14,7 @@ import { stat } from "node:fs/promises";
 import { createServer } from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createGzip } from "node:zlib";
 
 const BASE = "/Cookbook/";
 const ROOT = fileURLToPath(new URL("../dist/", import.meta.url));
@@ -46,13 +48,19 @@ const isDir = (file) =>
     () => false,
   );
 
-function send(res, status, file, method) {
+const COMPRESSIBLE = /^(text\/|application\/(json|manifest\+json|xml)|image\/svg\+xml)/;
+
+function send(req, res, status, file) {
+  const type = TYPES[path.extname(file)] ?? "application/octet-stream";
+  const gzip = COMPRESSIBLE.test(type) && /\bgzip\b/.test(req.headers["accept-encoding"] ?? "");
   res.writeHead(status, {
-    "Content-Type": TYPES[path.extname(file)] ?? "application/octet-stream",
-    "Cache-Control": "no-cache",
+    "Content-Type": type,
+    "Cache-Control": "max-age=600",
+    ...(gzip ? { "Content-Encoding": "gzip", Vary: "Accept-Encoding" } : {}),
   });
-  if (method === "HEAD") res.end();
-  else createReadStream(file).pipe(res);
+  if (req.method === "HEAD") return res.end();
+  const body = createReadStream(file);
+  (gzip ? body.pipe(createGzip()) : body).pipe(res);
 }
 
 const server = createServer(async (req, res) => {
@@ -72,15 +80,16 @@ const server = createServer(async (req, res) => {
       return;
     }
     if (pathname.endsWith("/")) {
-      if (await isFile(path.join(file, "index.html"))) return send(res, 200, path.join(file, "index.html"), req.method);
+      if (await isFile(path.join(file, "index.html")))
+        return send(req, res, 200, path.join(file, "index.html"));
     } else if (await isFile(file)) {
-      return send(res, 200, file, req.method);
+      return send(req, res, 200, file);
     } else if (await isDir(file)) {
       res.writeHead(301, { Location: `${pathname}/${url.search}` }).end();
       return;
     }
   }
-  send(res, 404, path.join(ROOT, "404.html"), req.method);
+  send(req, res, 404, path.join(ROOT, "404.html"));
 });
 
 server.listen(PORT, "127.0.0.1", () => {

@@ -7,6 +7,7 @@ import { SurpriseButton } from "../components/SurpriseButton";
 import { useCommunity } from "../community/store";
 import { CATEGORIES, getCategory } from "../data/categories";
 import { NOTEBOOK_INDEX_PHOTO } from "../data/keepsakes";
+import { LEAD_PHOTO_SIZES, NOTEBOOK_TEASER_SIZES } from "../data/photoPaths";
 import { familyPhoto, photoInfo, photoSrcSet, photoUrl } from "../data/photos";
 import { byTitle, getRecipeBySlug, notebookRecipes, recipes } from "../data/recipes";
 import { categoryCounts, popularTags, totals } from "../data/stats";
@@ -60,7 +61,10 @@ export function Home() {
                   <span className={styles.categoryName}>{category.label}</span>
                   <span className={styles.categoryBlurb}>{category.blurb}</span>
                 </span>
-                <span className={styles.categoryCount} aria-label={`${categoryCounts[category.slug]} recipes`}>
+                <span
+                  className={styles.categoryCount}
+                  aria-label={`${categoryCounts[category.slug]} recipes`}
+                >
                   {categoryCounts[category.slug]}
                 </span>
               </Link>
@@ -202,7 +206,7 @@ function Hero() {
             <img
               src={photo.src}
               srcSet={photo.srcSet}
-              sizes="(max-width: 860px) 70vw, 30rem"
+              sizes={LEAD_PHOTO_SIZES.homePortrait}
               width={photo.info.w}
               height={photo.info.h}
               alt={site.heroPhotoAlt}
@@ -276,6 +280,8 @@ function NotebookTeaser() {
           <div className={styles.notebookPhoto}>
             <img
               src={photoUrl(index, "md")}
+              srcSet={photoSrcSet(index)}
+              sizes={NOTEBOOK_TEASER_SIZES}
               width={info.w}
               height={info.h}
               alt={`The handwritten index page of ${site.name}'s spiral recipe notebook, listing ${notebookRecipes.length} recipes`}
@@ -288,9 +294,9 @@ function NotebookTeaser() {
           <p className="eyebrow">In her own hand</p>
           <h2 id="notebook-heading">{site.name}’s spiral notebook</h2>
           <p>
-            {notebookRecipes.length} recipes, written out in the order she kept them. It starts with {first.title} on
-            page 1 and ends with {last.title} on page {last.notebookPage}, and her handwritten index is still at the
-            front.
+            {notebookRecipes.length} recipes, written out in the order she kept them. It starts with{" "}
+            {first.title} on page 1 and ends with {last.title} on page {last.notebookPage}, and her
+            handwritten index is still at the front.
           </p>
           <Link to="/notebook" className="btn btn-primary">
             <BookOpen aria-hidden="true" />

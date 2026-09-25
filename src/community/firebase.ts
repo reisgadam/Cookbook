@@ -54,7 +54,10 @@ function init() {
   if (app) return;
   app = initializeApp(firebaseConfig);
   if (appCheckSiteKey && !useEmulators) {
-    initializeAppCheck(app, { provider: new ReCaptchaV3Provider(appCheckSiteKey), isTokenAutoRefreshEnabled: true });
+    initializeAppCheck(app, {
+      provider: new ReCaptchaV3Provider(appCheckSiteKey),
+      isTokenAutoRefreshEnabled: true,
+    });
   }
   db = getFirestore(app);
   auth = getAuth(app);
@@ -93,7 +96,10 @@ export function watchUser(callback: (user: User | null) => void): Unsubscribe {
 
 // ---------- Hearts and "I made this" ----------
 
-export function watchCounts(callback: (counts: Record<string, number>) => void, onError: () => void): Unsubscribe {
+export function watchCounts(
+  callback: (counts: Record<string, number>) => void,
+  onError: () => void,
+): Unsubscribe {
   return onSnapshot(
     doc(db, "counters", "reactions"),
     (snapshot) => {
@@ -107,7 +113,11 @@ export function watchCounts(callback: (counts: Record<string, number>) => void, 
   );
 }
 
-export function watchMyReactions(uid: string, callback: (keys: string[]) => void, onError: () => void): Unsubscribe {
+export function watchMyReactions(
+  uid: string,
+  callback: (keys: string[]) => void,
+  onError: () => void,
+): Unsubscribe {
   return onSnapshot(
     query(collection(db, "reactions"), where("uid", "==", uid)),
     (snapshot) => callback(snapshot.docs.map((d) => `${d.get("kind")}:${d.get("slug")}`)),
@@ -141,7 +151,11 @@ function toComment(snapshot: DocumentSnapshot): Comment {
   };
 }
 
-export function watchThread(threadId: string, callback: (comments: Comment[]) => void, onError: () => void): Unsubscribe {
+export function watchThread(
+  threadId: string,
+  callback: (comments: Comment[]) => void,
+  onError: () => void,
+): Unsubscribe {
   return onSnapshot(
     query(
       collection(db, "comments"),
@@ -155,7 +169,10 @@ export function watchThread(threadId: string, callback: (comments: Comment[]) =>
   );
 }
 
-export async function postComment(uid: string, note: { threadId: string; name: string; body: string }): Promise<void> {
+export async function postComment(
+  uid: string,
+  note: { threadId: string; name: string; body: string },
+): Promise<void> {
   const batch = writeBatch(db);
   batch.set(doc(collection(db, "comments")), {
     threadId: note.threadId,

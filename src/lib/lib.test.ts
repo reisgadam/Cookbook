@@ -5,11 +5,18 @@ import { pickRandom, resetRandomHistory } from "./random";
 import { createSearchIndex, highlightParts, normalizeTerm, searchRecipes } from "./search";
 
 const index = createSearchIndex(recipes);
-const top = (query: string, n = 3) => searchRecipes(index, query).slice(0, n).map((hit) => hit.slug);
+const top = (query: string, n = 3) =>
+  searchRecipes(index, query)
+    .slice(0, n)
+    .map((hit) => hit.slug);
 
 describe("search", () => {
   it("ranks title matches first", () => {
-    expect(top("banana", 3).sort()).toEqual(["banana-bread", "banana-nut-muffins", "frozen-banana-daiquiris"]);
+    expect(top("banana", 3).sort()).toEqual([
+      "banana-bread",
+      "banana-nut-muffins",
+      "frozen-banana-daiquiris",
+    ]);
   });
 
   it("matches word prefixes as you type", () => {
@@ -88,7 +95,8 @@ describe("daily picks", () => {
   });
 
   it("never picks an incomplete recipe", () => {
-    for (let d = 0; d < 120; d++) expect(recipeOfTheDay(recipes, new Date(2026, 0, 1 + d))?.partial).toBe(false);
+    for (let d = 0; d < 120; d++)
+      expect(recipeOfTheDay(recipes, new Date(2026, 0, 1 + d))?.partial).toBe(false);
   });
 
   it("gives distinct weekly picks", () => {

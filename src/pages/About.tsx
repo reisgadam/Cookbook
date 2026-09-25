@@ -6,6 +6,7 @@ import { Comments } from "../components/community/Comments";
 import { GUESTBOOK } from "../community/config";
 import { KEEPSAKES, NOTEBOOK_INDEX_PHOTO } from "../data/keepsakes";
 import { parseFrontmatter } from "../data/parseFrontmatter";
+import { LEAD_PHOTO_SIZES, NOTEBOOK_TEASER_SIZES } from "../data/photoPaths";
 import { familyPhoto, photoInfo, photoSrcSet, photoUrl } from "../data/photos";
 import { notebookRecipes, recipes } from "../data/recipes";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
@@ -31,7 +32,7 @@ export function About() {
             <img
               src={photo.src}
               srcSet={photo.srcSet}
-              sizes="(max-width: 860px) 70vw, 24rem"
+              sizes={LEAD_PHOTO_SIZES.aboutPortrait}
               width={photo.info.w}
               height={photo.info.h}
               alt={site.heroPhotoAlt}
@@ -78,8 +79,8 @@ export function About() {
           <p className="eyebrow">In her own hand</p>
           <h2 id="about-notebook">Her spiral notebook</h2>
           <p>
-            {notebookRecipes.length} recipes written out one page at a time, from {notebookRecipes[0]?.title} to{" "}
-            {notebookRecipes[notebookRecipes.length - 1]?.title}, with her own index at the front.
+            {notebookRecipes.length} recipes written out one page at a time, from {notebookRecipes[0]?.title}{" "}
+            to {notebookRecipes[notebookRecipes.length - 1]?.title}, with her own index at the front.
           </p>
           <Link to="/notebook" className="btn btn-primary">
             <BookOpen aria-hidden="true" />
@@ -144,6 +145,8 @@ function NotebookPreview() {
     <Link to="/notebook" className={styles.notebookPhoto} tabIndex={-1} aria-hidden="true">
       <img
         src={photoUrl(NOTEBOOK_INDEX_PHOTO, "md")}
+        srcSet={photoSrcSet(NOTEBOOK_INDEX_PHOTO)}
+        sizes={NOTEBOOK_TEASER_SIZES}
         width={info.w}
         height={info.h}
         alt=""

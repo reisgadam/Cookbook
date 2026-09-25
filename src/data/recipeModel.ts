@@ -1,10 +1,4 @@
-import type {
-  CategorySlug,
-  Recipe,
-  RecipeSection,
-  SectionKind,
-  SourceKind,
-} from "../types/recipe";
+import type { CategorySlug, Recipe, RecipeSection, SectionKind, SourceKind } from "../types/recipe";
 import { parseFrontmatter } from "./parseFrontmatter";
 
 // Pure helpers shared by the app and the build (vite-plugins/), so nothing
@@ -61,7 +55,11 @@ export function toPlainText(markdown: string): string {
 /** Bullet and numbered list items in a Markdown block, as plain text. */
 export function listItems(markdown: string, kind: "bullet" | "numbered" | "any" = "any"): string[] {
   const pattern =
-    kind === "bullet" ? /^\s*[-*+]\s+(.*)$/ : kind === "numbered" ? /^\s*\d+\.\s+(.*)$/ : /^\s*(?:[-*+]|\d+\.)\s+(.*)$/;
+    kind === "bullet"
+      ? /^\s*[-*+]\s+(.*)$/
+      : kind === "numbered"
+        ? /^\s*\d+\.\s+(.*)$/
+        : /^\s*(?:[-*+]|\d+\.)\s+(.*)$/;
   return markdown
     .split(/\r?\n/)
     .map((line) => pattern.exec(line)?.[1])

@@ -25,19 +25,19 @@ export default function CardLightbox({ photos, index, downloadName, onClose }: P
     const info = photoInfo(file);
     const scale = (width: number) => (info ? Math.round((width * info.h) / info.w) : undefined);
     return {
-      src: photoUrl(file, "lg"),
+      src: photoUrl(file, "xl"),
       alt,
-      width: info?.widths.lg,
-      height: info ? scale(info.widths.lg) : undefined,
+      width: info?.widths.xl,
+      height: info ? scale(info.widths.xl) : undefined,
       srcSet: info
-        ? (["md", "lg"] as const).map((size) => ({
+        ? (["md", "lg", "xl"] as const).map((size) => ({
             src: photoUrl(file, size),
             width: info.widths[size],
             height: scale(info.widths[size])!,
           }))
         : undefined,
       download: {
-        url: photoUrl(file, "lg"),
+        url: photoUrl(file, "xl"),
         filename: photos.length > 1 ? `${downloadName}-${i + 1}.webp` : `${downloadName}.webp`,
       },
     };

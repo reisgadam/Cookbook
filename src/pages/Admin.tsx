@@ -28,8 +28,8 @@ export function Admin() {
         <Moderation />
       ) : (
         <p className={styles.lede}>
-          Notes and hearts aren’t switched on yet. Follow <code>docs/COMMUNITY_SETUP.md</code> in the repository to connect
-          Firebase, and this page will let you manage what people post.
+          Notes and hearts aren’t switched on yet. Follow <code>docs/COMMUNITY_SETUP.md</code> in the
+          repository to connect Firebase, and this page will let you manage what people post.
         </p>
       )}
     </div>
@@ -80,9 +80,9 @@ function Moderation() {
     return (
       <div className={styles.card}>
         <p>
-          You’re signed in as <strong>{viewer.email}</strong>, but this account isn’t an admin yet. In the Firebase
-          console, open <strong>Firestore Database</strong>, start a collection called <code>admins</code>, and add a
-          document whose ID is:
+          You’re signed in as <strong>{viewer.email}</strong>, but this account isn’t an admin yet. In the
+          Firebase console, open <strong>Firestore Database</strong>, start a collection called{" "}
+          <code>admins</code>, and add a document whose ID is:
         </p>
         <p className={styles.uid}>
           <code>{viewer.uid}</code>
@@ -157,13 +157,25 @@ function CommentQueue({ api, email }: { api: Api; email: string | null }) {
 
       <div className={styles.filters} role="group" aria-label="Show">
         {(["all", "visible", "hidden"] as Filter[]).map((value) => (
-          <button key={value} type="button" className="chip" aria-pressed={filter === value} onClick={() => setFilter(value)}>
-            {value === "all" ? `All (${comments?.length ?? 0})` : value === "visible" ? "Shown" : `Hidden (${hiddenCount})`}
+          <button
+            key={value}
+            type="button"
+            className="chip"
+            aria-pressed={filter === value}
+            onClick={() => setFilter(value)}
+          >
+            {value === "all"
+              ? `All (${comments?.length ?? 0})`
+              : value === "visible"
+                ? "Shown"
+                : `Hidden (${hiddenCount})`}
           </button>
         ))}
       </div>
 
-      {failed && <p role="alert">Couldn’t load notes. Check that your account is in the admins collection.</p>}
+      {failed && (
+        <p role="alert">Couldn’t load notes. Check that your account is in the admins collection.</p>
+      )}
       {comments && shown.length === 0 && <p className={styles.lede}>Nothing here.</p>}
 
       <ul className={styles.list}>
@@ -173,7 +185,8 @@ function CommentQueue({ api, email }: { api: Api; email: string | null }) {
           return (
             <li key={comment.id} className={`${styles.item} ${hidden ? styles.hidden : ""}`}>
               <p className={styles.meta}>
-                <strong>{comment.name}</strong> on <Link to={thread.to}>{thread.label}</Link> · {timeAgo(comment.createdAt)}
+                <strong>{comment.name}</strong> on <Link to={thread.to}>{thread.label}</Link> ·{" "}
+                {timeAgo(comment.createdAt)}
                 {hidden && <span className="badge badge-partial">Hidden</span>}
               </p>
               <p className={styles.body}>{comment.body}</p>
@@ -182,7 +195,10 @@ function CommentQueue({ api, email }: { api: Api; email: string | null }) {
                   type="button"
                   className="btn btn-small btn-secondary"
                   onClick={() =>
-                    act(api.setCommentStatus(comment.id, hidden ? "visible" : "hidden"), hidden ? "Note shown" : "Note hidden")
+                    act(
+                      api.setCommentStatus(comment.id, hidden ? "visible" : "hidden"),
+                      hidden ? "Note shown" : "Note hidden",
+                    )
                   }
                 >
                   {hidden ? <Eye aria-hidden="true" /> : <EyeOff aria-hidden="true" />}

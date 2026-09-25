@@ -12,7 +12,9 @@ export const tagCounts: Record<TagSlug, number> = Object.fromEntries(
 ) as Record<TagSlug, number>;
 
 /** Tags ordered by how many recipes use them. */
-export const popularTags: TagSlug[] = [...TAG_SLUGS].filter((t) => tagCounts[t] > 0).sort((a, b) => tagCounts[b] - tagCounts[a]);
+export const popularTags: TagSlug[] = [...TAG_SLUGS]
+  .filter((t) => tagCounts[t] > 0)
+  .sort((a, b) => tagCounts[b] - tagCounts[a]);
 
 export const totals = {
   recipes: recipes.length,

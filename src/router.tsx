@@ -24,7 +24,10 @@ export const router = createBrowserRouter(
         },
         { path: "about", lazy: () => import("./pages/About").then((m) => ({ Component: m.About })) },
         { path: "notebook", lazy: () => import("./pages/Notebook").then((m) => ({ Component: m.Notebook })) },
-        { path: "favorites", lazy: () => import("./pages/Favorites").then((m) => ({ Component: m.Favorites })) },
+        {
+          path: "favorites",
+          lazy: () => import("./pages/Favorites").then((m) => ({ Component: m.Favorites })),
+        },
         { path: "admin", lazy: () => import("./pages/Admin").then((m) => ({ Component: m.Admin })) },
         { path: "*", Component: NotFound },
       ],

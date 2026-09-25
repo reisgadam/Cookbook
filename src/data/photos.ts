@@ -1,5 +1,5 @@
 import manifest from "../generated/photos.json";
-import { familyPhotoPath, photoPath, type PhotoSize } from "./photoPaths";
+import { familyPhotoPath, familySrcSetFor, photoPath, photoSrcSetFor, type PhotoSize } from "./photoPaths";
 
 export interface PhotoInfo {
   /** Upright dimensions of the original photo. */
@@ -32,13 +32,14 @@ export function photoUrl(file: string, size: PhotoSize): string {
 /** `srcset` for the detail-page and zoom sizes. */
 export function photoSrcSet(file: string): string | undefined {
   const info = photos[file];
-  if (!info) return undefined;
-  return (["md", "lg"] as const).map((size) => `${photoUrl(file, size)} ${info.widths[size]}w`).join(", ");
+  return info && photoSrcSetFor(base, file, info.widths);
 }
 
-export function familyPhoto(file: string): { src: string; srcSet: string; info: FamilyPhotoInfo } | undefined {
+export function familyPhoto(
+  file: string,
+): { src: string; srcSet: string; info: FamilyPhotoInfo } | undefined {
   const info = family[file];
   if (!info) return undefined;
-  const srcSet = info.widths.map((w) => `${base}${familyPhotoPath(file, w)} ${w}w`).join(", ");
+  const srcSet = familySrcSetFor(base, file, info.widths);
   return { src: base + familyPhotoPath(file, info.widths[1] ?? info.widths[0]), srcSet, info };
 }

@@ -41,12 +41,18 @@ describe("splitSections", () => {
   });
 
   it("classifies ingredient and method variants", () => {
-    const sections = splitSections("## Ingredients (partial)\n- x\n\n## Basic method\nDo it\n\n## Purple Cow\nMix");
+    const sections = splitSections(
+      "## Ingredients (partial)\n- x\n\n## Basic method\nDo it\n\n## Purple Cow\nMix",
+    );
     expect(sections.map((s) => s.kind)).toEqual(["ingredients", "instructions", "other"]);
   });
 
   it("keeps text that comes before the first heading", () => {
-    expect(splitSections("Intro\n\n## Ingredients\n- a")[0]).toMatchObject({ heading: "", kind: "other", markdown: "Intro" });
+    expect(splitSections("Intro\n\n## Ingredients\n- a")[0]).toMatchObject({
+      heading: "",
+      kind: "other",
+      markdown: "Intro",
+    });
   });
 });
 
@@ -56,7 +62,9 @@ describe("toPlainText", () => {
   });
 
   it("strips markdown syntax", () => {
-    expect(toPlainText("> **Note:** use *fresh* dill\n\n| a | b |\n| --- | --- |\n| 1 | 2 |")).toBe("Note: use fresh dill a b 1 2");
+    expect(toPlainText("> **Note:** use *fresh* dill\n\n| a | b |\n| --- | --- |\n| 1 | 2 |")).toBe(
+      "Note: use fresh dill a b 1 2",
+    );
   });
 });
 
@@ -87,7 +95,10 @@ describe("buildRecipe", () => {
   });
 
   it("falls back to paragraphs when instructions have no numbered steps", () => {
-    const recipe = buildRecipe("---\ntitle: X\n---\n## Instructions\n\nMix it all.\n\n> Transcriber aside", "x");
+    const recipe = buildRecipe(
+      "---\ntitle: X\n---\n## Instructions\n\nMix it all.\n\n> Transcriber aside",
+      "x",
+    );
     expect(recipe.steps).toEqual(["Mix it all."]);
   });
 

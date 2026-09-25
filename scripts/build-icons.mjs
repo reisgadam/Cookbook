@@ -25,7 +25,10 @@ const svg = ({ rounded = false, scale = 1 } = {}) =>
 </svg>`);
 
 async function render(source, size, file) {
-  await sharp(source, { density: 600 }).resize(size, size).png({ compressionLevel: 9 }).toFile(path.join(PUBLIC, file));
+  await sharp(source, { density: 600 })
+    .resize(size, size)
+    .png({ compressionLevel: 9 })
+    .toFile(path.join(PUBLIC, file));
   console.log("wrote", file);
 }
 

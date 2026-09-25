@@ -7,7 +7,7 @@
 //   content/photos/photos.json      per-photo rotation so the writing reads upright
 //
 // Outputs:
-//   public/photos/{sm,md,lg}/<name>.webp   three sizes for tiles, pages and zoom (gitignored)
+//   public/photos/{sm,md,lg,xl}/<name>.webp  sizes for tiles, pages (phone and desktop) and zoom (gitignored)
 //   public/photos/og/<name>.jpg            1200x630 link-preview images (gitignored)
 //   public/photos/family/...               responsive family photo sizes (gitignored)
 //   src/generated/photos.json              dimensions + placeholder colours (committed)
@@ -35,8 +35,9 @@ const PIPELINE_VERSION = 1;
 const PAPER = "#FBF6EE";
 const RECIPE_SIZES = {
   sm: { max: 360, quality: 72 },
-  md: { max: 1200, quality: 78 },
-  lg: { max: 2400, quality: 80 },
+  md: { max: 720, quality: 76 },
+  lg: { max: 1200, quality: 78 },
+  xl: { max: 2400, quality: 80 },
 };
 const FAMILY_WIDTHS = [640, 1200, 1800];
 const OG = { width: 1200, height: 630 };
@@ -54,10 +55,13 @@ async function readJson(file, fallback) {
 }
 
 function hashOf(buffer, settings) {
-  return createHash("sha1")
-    .update(buffer)
-    .update(JSON.stringify({ settings, PIPELINE_VERSION }))
-    .digest("hex");
+  return (
+    createHash("sha1")
+      .update(buffer)
+      // Changing any output size re-processes every photo, too.
+      .update(JSON.stringify({ settings, PIPELINE_VERSION, RECIPE_SIZES, FAMILY_WIDTHS, OG }))
+      .digest("hex")
+  );
 }
 
 function toHex({ r, g, b }) {
@@ -152,11 +156,15 @@ async function runPool(items, worker) {
 
 function outputsExist(kind, name) {
   if (kind === "family") {
-    return FAMILY_WIDTHS.every((w) => existsSync(path.join(OUT_DIR, "family", `${name}-${w}.webp`)))
-      && existsSync(path.join(OUT_DIR, "og", `${name}.jpg`));
+    return (
+      FAMILY_WIDTHS.every((w) => existsSync(path.join(OUT_DIR, "family", `${name}-${w}.webp`))) &&
+      existsSync(path.join(OUT_DIR, "og", `${name}.jpg`))
+    );
   }
-  return Object.keys(RECIPE_SIZES).every((s) => existsSync(path.join(OUT_DIR, s, `${name}.webp`)))
-    && existsSync(path.join(OUT_DIR, "og", `${name}.jpg`));
+  return (
+    Object.keys(RECIPE_SIZES).every((s) => existsSync(path.join(OUT_DIR, s, `${name}.webp`))) &&
+    existsSync(path.join(OUT_DIR, "og", `${name}.jpg`))
+  );
 }
 
 async function pruneStale(expected) {
@@ -203,11 +211,10 @@ async function main() {
     const key = `${kind}:${file}`;
     const hash = hashOf(await readFile(path.join(dir, file)), opts);
 
-    let entry = cache.entries[key]?.hash === hash && outputsExist(kind, name) ? cache.entries[key].data : null;
+    let entry =
+      cache.entries[key]?.hash === hash && outputsExist(kind, name) ? cache.entries[key].data : null;
     if (!entry) {
-      entry = kind === "family"
-        ? await processFamilyPhoto(file, opts)
-        : await processRecipePhoto(file, opts);
+      entry = kind === "family" ? await processFamilyPhoto(file, opts) : await processRecipePhoto(file, opts);
       built++;
     }
     nextCache.entries[key] = { hash, data: entry };
@@ -225,7 +232,8 @@ async function main() {
 
   // Stable key order keeps the committed manifest diff-friendly.
   const sorted = (obj) => Object.fromEntries(Object.entries(obj).sort(([a], [b]) => a.localeCompare(b)));
-  const json = JSON.stringify({ photos: sorted(manifest.photos), family: sorted(manifest.family) }, null, 2) + "\n";
+  const json =
+    JSON.stringify({ photos: sorted(manifest.photos), family: sorted(manifest.family) }, null, 2) + "\n";
   const previous = existsSync(MANIFEST_FILE) ? await readFile(MANIFEST_FILE, "utf8") : "";
   if (json !== previous) await writeFile(MANIFEST_FILE, json);
   await writeFile(CACHE_FILE, JSON.stringify(nextCache));

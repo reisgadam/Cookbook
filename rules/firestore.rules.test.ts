@@ -49,7 +49,11 @@ function reactionBatch(db: Firestore, uid: string, slug: string, { on = true, ki
   const reaction = doc(db, "reactions", `${key}:${uid}`);
   if (on) batch.set(reaction, { kind, slug, uid, createdAt: serverTimestamp() });
   else batch.delete(reaction);
-  batch.set(doc(db, "counters", "reactions"), { [key]: increment(on ? by : -by), last: key }, { merge: true });
+  batch.set(
+    doc(db, "counters", "reactions"),
+    { [key]: increment(on ? by : -by), last: key },
+    { merge: true },
+  );
   return batch;
 }
 
@@ -82,7 +86,11 @@ describe("hearts and 'I made this'", () => {
   it("rejects bumping a counter without a reaction", async () => {
     const db = as("mallory");
     await assertFails(
-      setDoc(doc(db, "counters", "reactions"), { "love:apple-pie": increment(1), last: "love:apple-pie" }, { merge: true }),
+      setDoc(
+        doc(db, "counters", "reactions"),
+        { "love:apple-pie": increment(1), last: "love:apple-pie" },
+        { merge: true },
+      ),
     );
   });
 
@@ -107,7 +115,11 @@ describe("hearts and 'I made this'", () => {
     const db = as("mallory");
     const batch = writeBatch(db);
     batch.delete(doc(db, "reactions", "love:apple-pie:alice"));
-    batch.set(doc(db, "counters", "reactions"), { "love:apple-pie": increment(-1), last: "love:apple-pie" }, { merge: true });
+    batch.set(
+      doc(db, "counters", "reactions"),
+      { "love:apple-pie": increment(-1), last: "love:apple-pie" },
+      { merge: true },
+    );
     await assertFails(batch.commit());
   });
 
@@ -146,7 +158,9 @@ describe("notes and memories", () => {
   });
 
   it("allows posting again once 30 seconds have passed", async () => {
-    await seed((db) => setDoc(doc(db, "users", "alice"), { lastPostAt: Timestamp.fromMillis(Date.now() - 60_000) }));
+    await seed((db) =>
+      setDoc(doc(db, "users", "alice"), { lastPostAt: Timestamp.fromMillis(Date.now() - 60_000) }),
+    );
     await assertSucceeds(post(as("alice"), "alice"));
   });
 
@@ -171,17 +185,45 @@ describe("notes and memories", () => {
 
   it("shows visitors only visible notes", async () => {
     await seed(async (db) => {
-      await setDoc(doc(db, "comments", "shown"), { threadId: "guestbook", status: "visible", name: "A", body: "B", uid: "x" });
-      await setDoc(doc(db, "comments", "hidden"), { threadId: "guestbook", status: "hidden", name: "A", body: "B", uid: "x" });
+      await setDoc(doc(db, "comments", "shown"), {
+        threadId: "guestbook",
+        status: "visible",
+        name: "A",
+        body: "B",
+        uid: "x",
+      });
+      await setDoc(doc(db, "comments", "hidden"), {
+        threadId: "guestbook",
+        status: "hidden",
+        name: "A",
+        body: "B",
+        uid: "x",
+      });
     });
     const db = anon();
-    await assertSucceeds(getDocs(query(collection(db, "comments"), where("threadId", "==", "guestbook"), where("status", "==", "visible"))));
+    await assertSucceeds(
+      getDocs(
+        query(
+          collection(db, "comments"),
+          where("threadId", "==", "guestbook"),
+          where("status", "==", "visible"),
+        ),
+      ),
+    );
     await assertFails(getDocs(query(collection(db, "comments"), where("threadId", "==", "guestbook"))));
     await assertFails(getDoc(doc(db, "comments", "hidden")));
   });
 
   it("lets authors delete their own notes but not other people's", async () => {
-    await seed((db) => setDoc(doc(db, "comments", "c1"), { threadId: "guestbook", status: "visible", name: "A", body: "B", uid: "alice" }));
+    await seed((db) =>
+      setDoc(doc(db, "comments", "c1"), {
+        threadId: "guestbook",
+        status: "visible",
+        name: "A",
+        body: "B",
+        uid: "alice",
+      }),
+    );
     await assertFails(deleteDoc(doc(as("bob"), "comments", "c1")));
     await assertSucceeds(deleteDoc(doc(as("alice"), "comments", "c1")));
   });
@@ -189,7 +231,13 @@ describe("notes and memories", () => {
   it("lets admins hide, show and delete notes", async () => {
     await seed(async (db) => {
       await setDoc(doc(db, "admins", "owner"), {});
-      await setDoc(doc(db, "comments", "c1"), { threadId: "guestbook", status: "visible", name: "A", body: "B", uid: "alice" });
+      await setDoc(doc(db, "comments", "c1"), {
+        threadId: "guestbook",
+        status: "visible",
+        name: "A",
+        body: "B",
+        uid: "alice",
+      });
     });
     await assertFails(updateDoc(doc(as("alice"), "comments", "c1"), { status: "hidden" }));
     await assertSucceeds(updateDoc(doc(as("owner"), "comments", "c1"), { status: "hidden" }));

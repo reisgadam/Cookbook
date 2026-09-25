@@ -4,8 +4,16 @@
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(60rem 30rem at 85% 10%, color-mix(in srgb, var(--accent-soft) 70%, transparent), transparent 70%),
-    radial-gradient(40rem 26rem at 0% 100%, color-mix(in srgb, var(--sage-soft) 55%, transparent), transparent 70%);
+    radial-gradient(
+      60rem 30rem at 85% 10%,
+      color-mix(in srgb, var(--accent-soft) 70%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      40rem 26rem at 0% 100%,
+      color-mix(in srgb, var(--sage-soft) 55%, transparent),
+      transparent 70%
+    );
 }
 
 .heroInner {
@@ -207,7 +215,11 @@
   place-items: center;
   padding: var(--space-6);
   background:
-    radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--accent-soft) 60%, transparent), transparent 60%),
+    radial-gradient(
+      circle at 30% 20%,
+      color-mix(in srgb, var(--accent-soft) 60%, transparent),
+      transparent 60%
+    ),
     var(--paper-2);
 }
 

@@ -1,4 +1,5 @@
 import { ZoomIn } from "lucide-react";
+import { LEAD_PHOTO_SIZES } from "../../data/photoPaths";
 import { photoInfo, photoSrcSet, photoUrl } from "../../data/photos";
 import type { CardPhoto } from "./CardLightbox";
 import styles from "./OriginalCard.module.css";
@@ -36,7 +37,7 @@ export function OriginalCard({ photos, onOpen, transitionName }: Props) {
                 <img
                   src={photoUrl(photo.file, "md")}
                   srcSet={photoSrcSet(photo.file)}
-                  sizes="(max-width: 1023px) 80vw, 30rem"
+                  sizes={LEAD_PHOTO_SIZES.original}
                   width={info?.w}
                   height={info?.h}
                   alt={photo.alt}

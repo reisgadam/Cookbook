@@ -89,7 +89,11 @@ export default function CookMode({ recipe, onClose }: Props) {
                   {done ? (
                     <Dialog.Close className="btn btn-primary">Close</Dialog.Close>
                   ) : (
-                    <button type="button" className="btn btn-primary" onClick={() => setCurrent((step) => step + 1)}>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={() => setCurrent((step) => step + 1)}
+                    >
                       {current === last ? "Finish" : "Next step"}
                       <ArrowRight aria-hidden="true" />
                     </button>

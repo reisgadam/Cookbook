@@ -74,8 +74,24 @@ describe("Admin", () => {
     fake.user = { uid: "owner", email: "owner@example.com", isAnonymous: false };
     fake.admin = true;
     fake.comments = [
-      { id: "c1", threadId: "recipe:apple-pie", name: "Aunt Sue", body: "Double the cinnamon!", uid: "x", createdAt: new Date(), status: "visible" },
-      { id: "c2", threadId: "guestbook", name: "Spammer", body: "Buy now", uid: "y", createdAt: new Date(), status: "hidden" },
+      {
+        id: "c1",
+        threadId: "recipe:apple-pie",
+        name: "Aunt Sue",
+        body: "Double the cinnamon!",
+        uid: "x",
+        createdAt: new Date(),
+        status: "visible",
+      },
+      {
+        id: "c2",
+        threadId: "guestbook",
+        name: "Spammer",
+        body: "Buy now",
+        uid: "y",
+        createdAt: new Date(),
+        status: "hidden",
+      },
     ];
     vi.spyOn(window, "confirm").mockReturnValue(true);
     renderAdmin();

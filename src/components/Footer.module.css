@@ -12,8 +12,8 @@
   left: 0;
   right: 0;
   height: 16px;
-  background:
-    radial-gradient(circle at 12px 16px, var(--paper-2) 11.5px, transparent 12px) 0 0 / 24px 16px repeat-x;
+  background: radial-gradient(circle at 12px 16px, var(--paper-2) 11.5px, transparent 12px) 0 0 / 24px 16px
+    repeat-x;
 }
 
 .lace::after {

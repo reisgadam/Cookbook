@@ -3,6 +3,7 @@ import { lazy, Suspense, useMemo, useState } from "react";
 import { Link } from "react-router";
 import type { CardPhoto } from "../components/recipe/CardLightbox";
 import { NOTEBOOK_INDEX_PHOTO } from "../data/keepsakes";
+import { LEAD_PHOTO_SIZES } from "../data/photoPaths";
 import { photoInfo, photoSrcSet, photoUrl } from "../data/photos";
 import { notebookRecipes } from "../data/recipes";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
@@ -17,7 +18,9 @@ export function Notebook() {
 
   // Every page in order: the index, then each recipe's photos.
   const { pages, firstPageOf } = useMemo(() => {
-    const pages: CardPhoto[] = [{ file: NOTEBOOK_INDEX_PHOTO, alt: `The handwritten index of ${site.name}'s notebook` }];
+    const pages: CardPhoto[] = [
+      { file: NOTEBOOK_INDEX_PHOTO, alt: `The handwritten index of ${site.name}'s notebook` },
+    ];
     const firstPageOf = new Map<string, number>();
     for (const recipe of notebookRecipes) {
       firstPageOf.set(recipe.slug, pages.length);
@@ -39,8 +42,8 @@ export function Notebook() {
         <p className="eyebrow">In her own hand</p>
         <h1>{site.name}’s Notebook</h1>
         <p className={styles.lede}>
-          {notebookRecipes.length} recipes in a spiral notebook, each written out on its own page, with her handwritten
-          index at the front. Open any page to read it in her handwriting.
+          {notebookRecipes.length} recipes in a spiral notebook, each written out on its own page, with her
+          handwritten index at the front. Open any page to read it in her handwriting.
         </p>
         <button type="button" className="btn btn-primary" onClick={() => setZoomIndex(0)}>
           <BookOpen aria-hidden="true" />
@@ -55,7 +58,7 @@ export function Notebook() {
               <img
                 src={photoUrl(NOTEBOOK_INDEX_PHOTO, "md")}
                 srcSet={photoSrcSet(NOTEBOOK_INDEX_PHOTO)}
-                sizes="(max-width: 900px) 92vw, 36rem"
+                sizes={LEAD_PHOTO_SIZES.notebookIndex}
                 width={info.w}
                 height={info.h}
                 alt={`The handwritten index page of ${site.name}'s notebook. Select to zoom in.`}
@@ -93,7 +96,12 @@ export function Notebook() {
 
       {zoomIndex !== null && (
         <Suspense fallback={null}>
-          <CardLightbox photos={pages} index={zoomIndex} downloadName="notebook-page" onClose={() => setZoomIndex(null)} />
+          <CardLightbox
+            photos={pages}
+            index={zoomIndex}
+            downloadName="notebook-page"
+            onClose={() => setZoomIndex(null)}
+          />
         </Suspense>
       )}
     </div>

@@ -35,7 +35,11 @@ export function loadCommunity(): Promise<{ api: Api; uid: string }> {
     const user = await api.ensureUser();
     const fail = () => update({ status: "error" });
     api.watchCounts((counts) => update({ counts }), fail);
-    api.watchMyReactions(user.uid, (keys) => update({ mine: new Set(keys) }), () => {});
+    api.watchMyReactions(
+      user.uid,
+      (keys) => update({ mine: new Set(keys) }),
+      () => {},
+    );
     update({ status: "ready", uid: user.uid });
     retries = 0;
     return { api, uid: user.uid };
@@ -83,7 +87,11 @@ function subscribe(listener: () => void) {
 
 /** Counts and this browser's reactions; starts Firebase after the page settles. */
 export function useCommunity(): CommunityState {
-  return useSyncExternalStore(subscribe, () => state, () => state);
+  return useSyncExternalStore(
+    subscribe,
+    () => state,
+    () => state,
+  );
 }
 
 export const reactionKey = (kind: ReactionKind, slug: string) => `${kind}:${slug}`;

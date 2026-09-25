@@ -42,7 +42,11 @@ export function Comments({ threadId, heading = "Notes & memories", intro, placeh
           <div className={styles.status} role="alert">
             <p>Notes can’t load right now.</p>
             {/* A reload also fetches any page code a dropped connection interrupted. */}
-            <button type="button" className="btn btn-secondary btn-small" onClick={() => window.location.reload()}>
+            <button
+              type="button"
+              className="btn btn-secondary btn-small"
+              onClick={() => window.location.reload()}
+            >
               Try again
             </button>
           </div>
@@ -55,7 +59,12 @@ export function Comments({ threadId, heading = "Notes & memories", intro, placeh
       {comments.length > 0 && (
         <ol className={styles.list}>
           {comments.map((comment) => (
-            <CommentItem key={comment.id} comment={comment} mine={comment.uid === uid} onDelete={() => remove(comment.id)} />
+            <CommentItem
+              key={comment.id}
+              comment={comment}
+              mine={comment.uid === uid}
+              onDelete={() => remove(comment.id)}
+            />
           ))}
         </ol>
       )}
@@ -140,7 +149,13 @@ function CommentForm({
       </div>
       <div className={styles.trap} aria-hidden="true">
         <label htmlFor={`${id}-website`}>Website</label>
-        <input id={`${id}-website`} tabIndex={-1} autoComplete="off" value={trap} onChange={(event) => setTrap(event.target.value)} />
+        <input
+          id={`${id}-website`}
+          tabIndex={-1}
+          autoComplete="off"
+          value={trap}
+          onChange={(event) => setTrap(event.target.value)}
+        />
       </div>
       <div className={styles.formFooter}>
         <p id={`${id}-help`} className={styles.help}>
@@ -204,7 +219,15 @@ export function timeAgo(date: Date | null, now = Date.now()): string {
   return "just now";
 }
 
-function CommentItem({ comment, mine, onDelete }: { comment: Comment; mine: boolean; onDelete: () => Promise<void> }) {
+function CommentItem({
+  comment,
+  mine,
+  onDelete,
+}: {
+  comment: Comment;
+  mine: boolean;
+  onDelete: () => Promise<void>;
+}) {
   const toast = useToast();
   const remove = async () => {
     if (!window.confirm("Delete your note? This can't be undone.")) return;
@@ -218,13 +241,20 @@ function CommentItem({ comment, mine, onDelete }: { comment: Comment; mine: bool
 
   return (
     <li className={styles.comment}>
-      <span className={styles.avatar} style={{ backgroundColor: avatarColor(comment.name) }} aria-hidden="true">
+      <span
+        className={styles.avatar}
+        style={{ backgroundColor: avatarColor(comment.name) }}
+        aria-hidden="true"
+      >
         {initials(comment.name)}
       </span>
       <div className={styles.commentBody}>
         <p className={styles.meta}>
           <strong>{comment.name}</strong>
-          <time dateTime={comment.createdAt?.toISOString()} title={comment.createdAt ? fullDate.format(comment.createdAt) : undefined}>
+          <time
+            dateTime={comment.createdAt?.toISOString()}
+            title={comment.createdAt ? fullDate.format(comment.createdAt) : undefined}
+          >
             {timeAgo(comment.createdAt)}
           </time>
         </p>

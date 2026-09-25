@@ -10,6 +10,11 @@ const base = "/Cookbook/";
 
 export default defineConfig({
   base,
+  build: {
+    // Firebase (about 700 kB) is the one big file. It only loads once comments
+    // are set up, after the page has appeared, so there's no need to warn about it.
+    chunkSizeWarningLimit: 750,
+  },
   plugins: [
     react(),
     staticRoutes(),
@@ -47,10 +52,11 @@ export default defineConfig({
         // (other alphabets load on demand). Photos are cached as they're viewed.
         // Firebase is left out: it needs a connection anyway, and it's only
         // downloaded once comments are set up.
-        globPatterns: ["index.html", "assets/*.{js,css}", "assets/*-latin-*.woff2"],
+        globPatterns: ["shell.html", "assets/*.{js,css}", "assets/*-latin-*.woff2"],
         globIgnores: ["**/*-latin-ext-*", "**/firebase-*.js"],
-        // Every page is the same app, so any address opens from the saved copy.
-        navigateFallback: "index.html",
+        // Every page is the same app, so any address opens from the saved copy
+        // (a plain version of the page that vite-plugins/staticRoutes.ts writes).
+        navigateFallback: "shell.html",
         // ...except files opened directly, like a photo in its own tab.
         navigateFallbackDenylist: [/\/photos\//, /\/[^/]+\.[a-z0-9]+$/i],
         // A new version takes over as soon as it's downloaded; the next link

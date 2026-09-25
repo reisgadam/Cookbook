@@ -44,9 +44,7 @@ export function relatedRecipes(recipe: Recipe, limit = 4): Recipe[] {
     .filter((other) => other.slug !== recipe.slug)
     .map((other) => ({
       other,
-      score:
-        (other.category === recipe.category ? 3 : 0) +
-        other.tags.filter((tag) => tags.has(tag)).length,
+      score: (other.category === recipe.category ? 3 : 0) + other.tags.filter((tag) => tags.has(tag)).length,
     }))
     .filter(({ score }) => score > 0)
     .sort((a, b) => b.score - a.score || byTitle(a.other, b.other))

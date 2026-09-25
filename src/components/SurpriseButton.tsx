@@ -13,7 +13,13 @@ interface Props {
 }
 
 /** Opens a random recipe, with a little roll of the dice. */
-export function SurpriseButton({ pool, exclude, label = "Surprise me", variant = "secondary", className = "" }: Props) {
+export function SurpriseButton({
+  pool,
+  exclude,
+  label = "Surprise me",
+  variant = "secondary",
+  className = "",
+}: Props) {
   const surprise = useSurprise();
   const [rolling, setRolling] = useState(false);
 
@@ -27,7 +33,13 @@ export function SurpriseButton({ pool, exclude, label = "Surprise me", variant =
 
   if (variant === "icon") {
     return (
-      <button type="button" className={`icon-btn ${className}`} onClick={onClick} aria-label={`${label}: open a random recipe`} title={label}>
+      <button
+        type="button"
+        className={`icon-btn ${className}`}
+        onClick={onClick}
+        aria-label={`${label}: open a random recipe`}
+        title={label}
+      >
         {icon}
       </button>
     );

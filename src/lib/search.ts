@@ -5,7 +5,22 @@ import type { Recipe } from "../types/recipe";
 
 // Instant search over every recipe, run entirely in the browser.
 
-const STOP_WORDS = new Set(["a", "an", "and", "the", "of", "with", "in", "on", "to", "for", "or", "my", "mom", "moms"]);
+const STOP_WORDS = new Set([
+  "a",
+  "an",
+  "and",
+  "the",
+  "of",
+  "with",
+  "in",
+  "on",
+  "to",
+  "for",
+  "or",
+  "my",
+  "mom",
+  "moms",
+]);
 
 /** Lowercase and strip accents, so "Buñuelos" matches "bunuelos". */
 export function foldCase(text: string): string {

@@ -12,7 +12,10 @@ const PHOTO_DIR = "content/photos";
 
 const recipeFiles = readdirSync("content/recipes").filter((f) => f.endsWith(".md"));
 const photoFiles = readdirSync(PHOTO_DIR).filter((f) => /\.(jpe?g|png)$/i.test(f));
-const rotations = JSON.parse(readFileSync(`${PHOTO_DIR}/photos.json`, "utf8")).rotations as Record<string, number>;
+const rotations = JSON.parse(readFileSync(`${PHOTO_DIR}/photos.json`, "utf8")).rotations as Record<
+  string,
+  number
+>;
 
 describe("recipe content", () => {
   it("loads every recipe file", () => {
@@ -27,18 +30,26 @@ describe("recipe content", () => {
     for (const tag of recipe.tags) expect(isTagSlug(tag), `unknown tag "${tag}"`).toBe(true);
     expect(new Set(recipe.tags).size, "duplicate tags").toBe(recipe.tags.length);
     expect(Object.keys(SOURCES)).toContain(recipe.source);
-    expect(recipe.source === "notebook", "notebookPage is only for notebook recipes").toBe(recipe.notebookPage !== undefined);
+    expect(recipe.source === "notebook", "notebookPage is only for notebook recipes").toBe(
+      recipe.notebookPage !== undefined,
+    );
     expect(recipe.sections.length, "recipe has no content").toBeGreaterThan(0);
   });
 
-  it.each(recipes.map((r) => [r.slug, r.sourceImages] as const))("%s has photos that exist", (_slug, images) => {
-    expect(images.length).toBeGreaterThan(0);
-    for (const image of images) {
-      expect(image, "use the .JPG copy — HEIC only displays in Safari").toMatch(/\.JPG$/);
-      expect(photoFiles, `content/photos/${image} is missing`).toContain(image);
-      expect(manifest.photos, `run "npm run images" to process ${image}`).toHaveProperty([image]);
-    }
-  });
+  it.each(recipes.map((r) => [r.slug, r.sourceImages] as const))(
+    "%s has photos that exist",
+    (_slug, images) => {
+      expect(images.length).toBeGreaterThan(0);
+      for (const image of images) {
+        expect(image, "HEIC photos only display in Safari: use a JPG copy").not.toMatch(/\.heic$/i);
+        expect(image, "rename the photo using only letters, numbers, dashes and underscores").toMatch(
+          /^[\w-]+\.(jpe?g|png)$/i,
+        );
+        expect(photoFiles, `content/photos/${image} is missing`).toContain(image);
+        expect(manifest.photos, `run "npm run images" to process ${image}`).toHaveProperty([image]);
+      }
+    },
+  );
 
   it("has unique slugs and titles", () => {
     expect(new Set(recipes.map((r) => r.slug)).size).toBe(recipes.length);

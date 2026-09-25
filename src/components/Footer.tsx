@@ -24,8 +24,8 @@ export function Footer({ onShowShortcuts }: { onShowShortcuts: () => void }) {
         </nav>
         <div className={styles.small}>
           <p>
-            {totals.recipes} recipes, transcribed from her spiral notebook, recipe cards and clippings. Each one links
-            back to a photo of the original.
+            {totals.recipes} recipes, transcribed from her spiral notebook, recipe cards and clippings. Each
+            one links back to a photo of the original.
           </p>
           <button type="button" className={styles.shortcuts} onClick={onShowShortcuts}>
             Keyboard shortcuts
