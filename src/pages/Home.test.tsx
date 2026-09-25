@@ -26,12 +26,12 @@ describe("home page", () => {
     community.counts = {};
   });
 
-  it("shows Family favorites first, once three recipes have hearts", async () => {
+  it("shows Family favorites after the categories, once three recipes have hearts", async () => {
     community.counts = { "love:apple-pie": 3, "love:moms-chicken-pie": 2, "love:bistro-pear-tart": 1 };
     await renderHome();
     expect(sectionHeadings()).toEqual([
-      "Family favorites",
       "Browse by category",
+      "Family favorites",
       "This week’s picks",
       "Mom’s spiral notebook",
       "Looking for something in particular?",
@@ -39,7 +39,7 @@ describe("home page", () => {
     expect(screen.queryByText(/Today from/)).toBeNull();
   });
 
-  it("starts with the categories until three recipes have hearts", async () => {
+  it("leaves out Family favorites until three recipes have hearts", async () => {
     community.counts = { "love:apple-pie": 1 };
     await renderHome();
     expect(sectionHeadings()[0]).toBe("Browse by category");

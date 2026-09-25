@@ -38,27 +38,6 @@ export function Home() {
     <>
       <Hero />
 
-      {favorites.length >= 3 && (
-        <section className={`page ${styles.section}`} aria-labelledby="favorites-heading">
-          <div className={styles.sectionHead}>
-            <div>
-              <h2 id="favorites-heading">Family favorites</h2>
-              <p className={styles.sectionNote}>The recipes with the most hearts.</p>
-            </div>
-            <Link to="/recipes?sort=loved" className={styles.more}>
-              See them all <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
-          <RecipeGrid>
-            {favorites.map((recipe) => (
-              <li key={recipe.slug}>
-                <RecipeTile recipe={recipe} loves={loves(recipe.slug)} />
-              </li>
-            ))}
-          </RecipeGrid>
-        </section>
-      )}
-
       <section className={`page ${styles.section}`} aria-labelledby="categories-heading">
         <div className={styles.sectionHead}>
           <h2 id="categories-heading">Browse by category</h2>
@@ -88,6 +67,27 @@ export function Home() {
           ))}
         </ul>
       </section>
+
+      {favorites.length >= 3 && (
+        <section className={`page ${styles.section}`} aria-labelledby="favorites-heading">
+          <div className={styles.sectionHead}>
+            <div>
+              <h2 id="favorites-heading">Family favorites</h2>
+              <p className={styles.sectionNote}>The recipes with the most hearts.</p>
+            </div>
+            <Link to="/recipes?sort=loved" className={styles.more}>
+              See them all <ArrowRight aria-hidden="true" />
+            </Link>
+          </div>
+          <RecipeGrid>
+            {favorites.map((recipe) => (
+              <li key={recipe.slug}>
+                <RecipeTile recipe={recipe} loves={loves(recipe.slug)} />
+              </li>
+            ))}
+          </RecipeGrid>
+        </section>
+      )}
 
       {recentRecipes.length > 0 && (
         <section className={`page ${styles.section}`} aria-labelledby="recent-heading">
