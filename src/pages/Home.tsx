@@ -5,27 +5,23 @@ import { CategoryIcon } from "../components/CategoryIcon";
 import { RecipeGrid, RecipeTile } from "../components/RecipeTile";
 import { SurpriseButton } from "../components/SurpriseButton";
 import { useCommunity } from "../community/store";
-import { CATEGORIES, getCategory } from "../data/categories";
+import { CATEGORIES } from "../data/categories";
 import { NOTEBOOK_INDEX_PHOTO } from "../data/keepsakes";
 import { LEAD_PHOTO_SIZES, NOTEBOOK_TEASER_SIZES } from "../data/photoPaths";
 import { familyPhoto, photoInfo, photoSrcSet, photoUrl } from "../data/photos";
 import { byTitle, getRecipeBySlug, notebookRecipes, recipes } from "../data/recipes";
 import { categoryCounts, popularTags, totals } from "../data/stats";
-import { sourceLabel, TAGS } from "../data/taxonomy";
+import { TAGS } from "../data/taxonomy";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import { useRecentlyViewed } from "../hooks/useRecipeBox";
-import { picksOfTheWeek, recipeOfTheDay } from "../lib/daily";
+import { picksOfTheWeek } from "../lib/daily";
 import { site } from "../site.config";
 import type { Recipe } from "../types/recipe";
 import styles from "./Home.module.css";
 
 export function Home() {
   useDocumentTitle();
-  const today = recipeOfTheDay(recipes);
-  const picks = picksOfTheWeek(
-    recipes.filter((r) => r.slug !== today?.slug),
-    8,
-  );
+  const picks = picksOfTheWeek(recipes, 8);
   const { counts } = useCommunity();
   const loves = (slug: string) => counts[`love:${slug}`] ?? 0;
   const favorites = recipes
@@ -41,7 +37,27 @@ export function Home() {
   return (
     <>
       <Hero />
-      {today && <TodayCard recipe={today} />}
+
+      {favorites.length >= 3 && (
+        <section className={`page ${styles.section}`} aria-labelledby="favorites-heading">
+          <div className={styles.sectionHead}>
+            <div>
+              <h2 id="favorites-heading">Family favorites</h2>
+              <p className={styles.sectionNote}>The recipes with the most hearts.</p>
+            </div>
+            <Link to="/recipes?sort=loved" className={styles.more}>
+              See them all <ArrowRight aria-hidden="true" />
+            </Link>
+          </div>
+          <RecipeGrid>
+            {favorites.map((recipe) => (
+              <li key={recipe.slug}>
+                <RecipeTile recipe={recipe} loves={loves(recipe.slug)} />
+              </li>
+            ))}
+          </RecipeGrid>
+        </section>
+      )}
 
       <section className={`page ${styles.section}`} aria-labelledby="categories-heading">
         <div className={styles.sectionHead}>
@@ -72,27 +88,6 @@ export function Home() {
           ))}
         </ul>
       </section>
-
-      {favorites.length >= 3 && (
-        <section className={`page ${styles.section}`} aria-labelledby="favorites-heading">
-          <div className={styles.sectionHead}>
-            <div>
-              <h2 id="favorites-heading">Family favorites</h2>
-              <p className={styles.sectionNote}>The recipes with the most hearts.</p>
-            </div>
-            <Link to="/recipes?sort=loved" className={styles.more}>
-              See them all <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
-          <RecipeGrid>
-            {favorites.map((recipe) => (
-              <li key={recipe.slug}>
-                <RecipeTile recipe={recipe} loves={loves(recipe.slug)} />
-              </li>
-            ))}
-          </RecipeGrid>
-        </section>
-      )}
 
       {recentRecipes.length > 0 && (
         <section className={`page ${styles.section}`} aria-labelledby="recent-heading">
@@ -217,51 +212,6 @@ function Hero() {
           </figure>
         )}
       </div>
-    </section>
-  );
-}
-
-function TodayCard({ recipe }: { recipe: Recipe }) {
-  const photo = recipe.sourceImages[0];
-  const info = photoInfo(photo);
-  const facts = [getCategory(recipe.category)?.label, recipe.time, recipe.yield].filter(Boolean);
-
-  return (
-    <section className={`page ${styles.section}`} aria-labelledby="today-heading">
-      <article className={styles.today}>
-        {info && (
-          <Link to={`/recipes/${recipe.slug}`} className={styles.todayPhoto} tabIndex={-1} aria-hidden="true">
-            <img
-              src={photoUrl(photo, "md")}
-              srcSet={photoSrcSet(photo)}
-              sizes="(max-width: 760px) 90vw, 28rem"
-              width={info.w}
-              height={info.h}
-              alt=""
-              loading="lazy"
-              style={{ backgroundColor: info.color }}
-            />
-          </Link>
-        )}
-        <div className={styles.todayText}>
-          <p id="today-heading" className={`hand ${styles.todayKicker}`}>
-            Today from {site.name}’s kitchen
-          </p>
-          <h2 className={styles.todayTitle}>
-            <Link to={`/recipes/${recipe.slug}`} viewTransition>
-              {recipe.title}
-            </Link>
-          </h2>
-          <p className={styles.todayFacts}>{facts.join(" · ")}</p>
-          <p className={styles.todaySource}>{sourceLabel(recipe.source, recipe.notebookPage)}</p>
-          <div className={styles.todayActions}>
-            <Link to={`/recipes/${recipe.slug}`} className="btn btn-primary" viewTransition>
-              Open the recipe <ArrowRight aria-hidden="true" />
-            </Link>
-            <SurpriseButton variant="secondary" label="Show me another" exclude={recipe.slug} />
-          </div>
-        </div>
-      </article>
     </section>
   );
 }

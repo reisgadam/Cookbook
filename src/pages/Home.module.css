@@ -197,94 +197,6 @@
   margin-bottom: var(--space-4);
 }
 
-/* ---------- Recipe of the day ---------- */
-
-.today {
-  display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  background: var(--card);
-  box-shadow:
-    var(--shadow-md),
-    inset 0 0 0 1px var(--line);
-}
-
-.todayPhoto {
-  display: grid;
-  place-items: center;
-  padding: var(--space-6);
-  background:
-    radial-gradient(
-      circle at 30% 20%,
-      color-mix(in srgb, var(--accent-soft) 60%, transparent),
-      transparent 60%
-    ),
-    var(--paper-2);
-}
-
-.todayPhoto img {
-  width: 100%;
-  max-height: 22rem;
-  object-fit: contain;
-  border: 6px solid #fff;
-  border-radius: 3px;
-  box-shadow: var(--shadow-md);
-  transform: rotate(-2deg);
-  transition: transform var(--slow) var(--ease);
-}
-
-.todayPhoto:hover img {
-  transform: rotate(0) scale(1.02);
-}
-
-.todayText {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: var(--space-7) var(--space-7) var(--space-7) var(--space-6);
-}
-
-.todayKicker {
-  font-size: 1.8rem;
-  line-height: 1.1;
-  color: var(--accent-ink);
-}
-
-.todayTitle {
-  margin-top: var(--space-2);
-  font-size: var(--step-4);
-}
-
-.todayTitle a {
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.todayTitle a:hover {
-  text-decoration: underline;
-  text-decoration-color: var(--accent);
-}
-
-.todayFacts {
-  margin-top: var(--space-3);
-  color: var(--ink-2);
-  font-weight: 600;
-}
-
-.todaySource {
-  margin-top: var(--space-1);
-  font-size: var(--step--1);
-  color: var(--muted);
-}
-
-.todayActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-top: var(--space-6);
-}
-
 /* ---------- Categories ---------- */
 
 .categories {
@@ -424,16 +336,8 @@
     transform: rotate(2deg);
   }
 
-  .today,
   .notebook {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .todayText {
-    padding: var(--space-5);
-  }
-
-  .notebook {
     padding: var(--space-5);
     gap: var(--space-5);
   }

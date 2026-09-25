@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { recipes } from "../data/recipes";
-import { picksOfTheWeek, recipeOfTheDay } from "./daily";
+import { picksOfTheWeek } from "./daily";
 import { pickRandom, resetRandomHistory } from "./random";
 import { createSearchIndex, highlightParts, normalizeTerm, searchRecipes } from "./search";
 
@@ -86,17 +86,20 @@ describe("pickRandom", () => {
   });
 });
 
-describe("daily picks", () => {
-  it("is stable for a date and changes the next day", () => {
+describe("this week's picks", () => {
+  it("stay the same all day and change the next week", () => {
     const day = new Date(2026, 8, 25);
-    const next = new Date(2026, 8, 26);
-    expect(recipeOfTheDay(recipes, day)).toBe(recipeOfTheDay(recipes, new Date(2026, 8, 25, 21)));
-    expect(recipeOfTheDay(recipes, day)).not.toBe(recipeOfTheDay(recipes, next));
+    const picks = picksOfTheWeek(recipes, 8, day);
+    expect(picksOfTheWeek(recipes, 8, new Date(2026, 8, 25, 21))).toEqual(picks);
+    expect(picksOfTheWeek(recipes, 8, new Date(2026, 9, 2))).not.toEqual(picks);
   });
 
-  it("never picks an incomplete recipe", () => {
-    for (let d = 0; d < 120; d++)
-      expect(recipeOfTheDay(recipes, new Date(2026, 0, 1 + d))?.partial).toBe(false);
+  it("never include an incomplete recipe", () => {
+    for (let week = 0; week < 20; week++) {
+      for (const recipe of picksOfTheWeek(recipes, 8, new Date(2026, 0, 1 + week * 7))) {
+        expect(recipe.partial, recipe.slug).toBe(false);
+      }
+    }
   });
 
   it("gives distinct weekly picks", () => {

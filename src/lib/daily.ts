@@ -1,7 +1,7 @@
 import type { Recipe } from "../types/recipe";
 
-// The "recipe of the day" is the same for everyone on a given date, and the
-// days walk through every complete recipe before any repeats.
+// "This week's picks" are the same for everyone in a given week, and the
+// weeks work through every complete recipe before any repeats.
 
 const STEPS = [37, 41, 43, 47, 53, 59, 61];
 
@@ -20,11 +20,6 @@ function rotation(pool: Recipe[]): Recipe[] {
 function pick(list: Recipe[], position: number): Recipe {
   const step = STEPS.find((s) => gcd(s, list.length) === 1) ?? 1;
   return list[(((position * step) % list.length) + list.length) % list.length];
-}
-
-export function recipeOfTheDay(pool: Recipe[], date = new Date()): Recipe | undefined {
-  const list = rotation(pool);
-  return list.length ? pick(list, dayNumber(date)) : undefined;
 }
 
 /** A handful of picks that change once a week, working through the collection. */

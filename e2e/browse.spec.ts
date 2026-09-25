@@ -5,7 +5,7 @@ test.describe("finding a recipe", () => {
     await page.goto("./");
     await expect(page.getByRole("heading", { level: 1, name: "Mom's Recipes" })).toBeVisible();
     await expect(page.getByRole("img", { name: "Mom and Dad, smiling together" })).toBeVisible();
-    await expect(page.getByText("Today from Mom’s kitchen")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "This week’s picks" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Browse by category" })).toBeVisible();
   });
 
