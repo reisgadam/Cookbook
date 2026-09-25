@@ -1,0 +1,143 @@
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
+import { communityEnabled, LIMITS, type ReactionKind } from "./config";
+import type { Comment } from "./firebase";
+
+type Api = typeof import("./firebase");
+
+export type CommunityStatus = "off" | "idle" | "loading" | "ready" | "error";
+
+export interface CommunityState {
+  status: CommunityStatus;
+  /** "love:apple-pie" → number of hearts. */
+  counts: Record<string, number>;
+  /** Reactions made from this browser, as "kind:slug" keys. */
+  mine: ReadonlySet<string>;
+  uid?: string;
+}
+
+let state: CommunityState = { status: communityEnabled ? "idle" : "off", counts: {}, mine: new Set() };
+const listeners = new Set<() => void>();
+
+function update(patch: Partial<CommunityState>) {
+  state = { ...state, ...patch };
+  listeners.forEach((listener) => listener());
+}
+
+let loading: Promise<{ api: Api; uid: string }> | undefined;
+
+/** Loads Firebase, signs the visitor in anonymously, and starts listening. */
+export function loadCommunity(): Promise<{ api: Api; uid: string }> {
+  if (!communityEnabled) return Promise.reject(new Error("Community features are not configured"));
+  loading ??= (async () => {
+    update({ status: "loading" });
+    const api = await import("./firebase");
+    const user = await api.ensureUser();
+    const fail = () => update({ status: "error" });
+    api.watchCounts((counts) => update({ counts }), fail);
+    api.watchMyReactions(user.uid, (keys) => update({ mine: new Set(keys) }), () => {});
+    update({ status: "ready", uid: user.uid });
+    return { api, uid: user.uid };
+  })().catch((error) => {
+    loading = undefined;
+    update({ status: "error" });
+    throw error;
+  });
+  return loading;
+}
+
+function whenIdle(callback: () => void) {
+  if ("requestIdleCallback" in window) window.requestIdleCallback(callback, { timeout: 2500 });
+  else setTimeout(callback, 800);
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  if (state.status === "idle") whenIdle(() => void loadCommunity().catch(() => {}));
+  return () => {
+    listeners.delete(listener);
+  };
+}
+
+/** Counts and this browser's reactions; starts Firebase after the page settles. */
+export function useCommunity(): CommunityState {
+  return useSyncExternalStore(subscribe, () => state, () => state);
+}
+
+export const reactionKey = (kind: ReactionKind, slug: string) => `${kind}:${slug}`;
+
+/** Flips a heart or "I made this", updating the screen right away. */
+export async function toggleReaction(kind: ReactionKind, slug: string): Promise<boolean> {
+  const key = reactionKey(kind, slug);
+  const { api, uid } = await loadCommunity();
+  const on = !state.mine.has(key);
+  const before = { mine: state.mine, counts: state.counts };
+  const mine = new Set(state.mine);
+  if (on) mine.add(key);
+  else mine.delete(key);
+  update({ mine, counts: { ...state.counts, [key]: Math.max(0, (state.counts[key] ?? 0) + (on ? 1 : -1)) } });
+  try {
+    await api.setReaction(uid, kind, slug, on);
+    return on;
+  } catch (error) {
+    update(before);
+    throw error;
+  }
+}
+
+export type ThreadStatus = "off" | "loading" | "ready" | "error";
+
+let lastPostAt = 0;
+
+/** Live notes for one thread (a recipe, or the guestbook). */
+export function useThread(threadId: string) {
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [status, setStatus] = useState<ThreadStatus>(communityEnabled ? "loading" : "off");
+  const { uid } = useCommunity();
+
+  useEffect(() => {
+    if (!communityEnabled) return;
+    let stop: (() => void) | undefined;
+    let cancelled = false;
+    loadCommunity()
+      .then(({ api }) => {
+        if (cancelled) return;
+        stop = api.watchThread(
+          threadId,
+          (list) => {
+            setComments(list);
+            setStatus("ready");
+          },
+          () => setStatus("error"),
+        );
+      })
+      .catch(() => setStatus("error"));
+    return () => {
+      cancelled = true;
+      stop?.();
+    };
+  }, [threadId]);
+
+  const post = useCallback(
+    async (name: string, body: string) => {
+      const wait = Math.ceil((lastPostAt + LIMITS.cooldownSeconds * 1000 - Date.now()) / 1000);
+      if (wait > 0) throw new CooldownError(wait);
+      const { api, uid } = await loadCommunity();
+      await api.postComment(uid, { threadId, name: name.trim(), body: body.trim() });
+      lastPostAt = Date.now();
+    },
+    [threadId],
+  );
+
+  const remove = useCallback(async (id: string) => {
+    const { api } = await loadCommunity();
+    await api.deleteComment(id);
+  }, []);
+
+  return { status, comments, post, remove, uid };
+}
+
+export class CooldownError extends Error {
+  constructor(readonly seconds: number) {
+    super(`Please wait ${seconds} seconds before posting again.`);
+  }
+}

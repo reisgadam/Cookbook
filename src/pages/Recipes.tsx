@@ -5,6 +5,7 @@ import { CategoryIcon } from "../components/CategoryIcon";
 import { Highlight } from "../components/Highlight";
 import { RecipeGrid, RecipeTile } from "../components/RecipeTile";
 import { SurpriseButton } from "../components/SurpriseButton";
+import { useCommunity } from "../community/store";
 import { CATEGORIES, getCategory } from "../data/categories";
 import { getRecipeBySlug, recipes } from "../data/recipes";
 import { isTagSlug, SOURCES, TAGS, TAG_SLUGS, type TagSlug } from "../data/taxonomy";
@@ -14,7 +15,7 @@ import type { Recipe, SourceKind } from "../types/recipe";
 import { NotFound } from "./NotFound";
 import styles from "./Recipes.module.css";
 
-type Sort = "relevance" | "az" | "za";
+type Sort = "relevance" | "az" | "za" | "loved";
 interface Row {
   recipe: Recipe;
   hit?: RecipeHit;
@@ -65,6 +66,8 @@ function Explorer({ categorySlug }: { categorySlug?: string }) {
     return () => window.clearTimeout(timer);
   }, [input, q, setParams]);
 
+  const { status: communityStatus, counts } = useCommunity();
+  const loves = (slug: string) => counts[`love:${slug}`] ?? 0;
   const query = input.trim();
   const searching = query.length > 0;
   const sortParam = params.get("sort") as Sort | null;
@@ -89,8 +92,12 @@ function Explorer({ categorySlug }: { categorySlug?: string }) {
     const filtered = category ? base.filter(({ recipe }) => recipe.category === category.slug) : base;
     if (sort === "az") return [...filtered].sort((a, b) => collate(a.recipe.title, b.recipe.title));
     if (sort === "za") return [...filtered].sort((a, b) => collate(b.recipe.title, a.recipe.title));
+    if (sort === "loved") {
+      const hearts = (slug: string) => counts[`love:${slug}`] ?? 0;
+      return [...filtered].sort((a, b) => hearts(b.recipe.slug) - hearts(a.recipe.slug) || collate(a.recipe.title, b.recipe.title));
+    }
     return filtered;
-  }, [base, category, sort]);
+  }, [base, category, sort, counts]);
 
   const categoryCounts = useMemo(() => {
     const counts = new Map<string, number>();
@@ -268,6 +275,7 @@ function Explorer({ categorySlug }: { categorySlug?: string }) {
               {searching && <option value="relevance">Best match</option>}
               <option value="az">A to Z</option>
               <option value="za">Z to A</option>
+              {communityStatus !== "off" && <option value="loved">Most loved</option>}
             </select>
           </label>
 
@@ -325,7 +333,7 @@ function Explorer({ categorySlug }: { categorySlug?: string }) {
         <RecipeGrid label="Recipes">
           {rows.map(({ recipe, hit }) => (
             <li key={recipe.slug}>
-              <RecipeTile recipe={recipe} query={query} hint={matchHint(hit)} />
+              <RecipeTile recipe={recipe} query={query} hint={matchHint(hit)} loves={loves(recipe.slug)} />
             </li>
           ))}
         </RecipeGrid>

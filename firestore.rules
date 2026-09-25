@@ -1,0 +1,125 @@
+rules_version = '2';
+
+// Security rules for the cookbook's hearts, "I made this" marks and notes.
+// Visitors sign in anonymously (no account), so every browser has a uid.
+// Admins are listed as documents in admins/{uid}, created by hand in the
+// Firebase console. See docs/COMMUNITY_SETUP.md.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function countersPath() {
+      return /databases/$(database)/documents/counters/reactions;
+    }
+
+    function reactionPath(key) {
+      return /databases/$(database)/documents/reactions/$(key + ':' + request.auth.uid);
+    }
+
+    // How much the counter for `key` changes in this batch.
+    function counterDelta(key) {
+      let before = exists(countersPath()) ? get(countersPath()).data.get(key, 0) : 0;
+      return getAfter(countersPath()).data.get(key, 0) - before;
+    }
+
+    // ---- Hearts and "I made this" ----
+    // One reaction per browser per recipe, always written together with a
+    // +1/-1 on the shared counter, so counts can't be inflated.
+
+    match /reactions/{reactionId} {
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['kind', 'slug', 'uid', 'createdAt'])
+        && request.resource.data.kind in ['love', 'made']
+        && request.resource.data.slug is string
+        && request.resource.data.slug.matches('^[a-z0-9-]{1,80}$')
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.createdAt == request.time
+        && reactionId == request.resource.data.kind + ':' + request.resource.data.slug + ':' + request.auth.uid
+        && counterDelta(request.resource.data.kind + ':' + request.resource.data.slug) == 1;
+
+      allow delete: if signedIn()
+        && resource.data.uid == request.auth.uid
+        && counterDelta(resource.data.kind + ':' + resource.data.slug) == -1;
+    }
+
+    // Every recipe's counts in one document, so a page view is one read.
+    // `last` names the counter changed by the most recent write.
+    match /counters/reactions {
+      allow read: if true;
+
+      allow create, update: if signedIn() && validCounterWrite();
+    }
+
+    function validCounterWrite() {
+      let data = request.resource.data;
+      let before = resource == null ? {} : resource.data;
+      let key = data.last;
+      let old = before.get(key, 0);
+      return key is string
+        && key.matches('^(love|made):[a-z0-9-]{1,80}$')
+        && data.diff(before).affectedKeys().hasOnly([key, 'last'])
+        && ((data[key] == old + 1 && !exists(reactionPath(key)) && existsAfter(reactionPath(key)))
+          || (data[key] == old - 1 && exists(reactionPath(key)) && !existsAfter(reactionPath(key))));
+    }
+
+    // ---- Notes & memories ----
+    // Posts appear straight away; admins can hide or delete them.
+
+    match /comments/{commentId} {
+      allow read: if resource.data.status == 'visible' || isAdmin();
+
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['threadId', 'name', 'body', 'uid', 'createdAt', 'status'])
+        && request.resource.data.threadId is string
+        && request.resource.data.threadId.matches('^(guestbook|recipe:[a-z0-9-]{1,80})$')
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 1
+        && request.resource.data.name.size() <= 60
+        && request.resource.data.body is string
+        && request.resource.data.body.size() >= 1
+        && request.resource.data.body.size() <= 2000
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.status == 'visible'
+        && postedAfterWaiting();
+
+      // Admins can hide a note (status 'hidden') or show it again.
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status'])
+        && request.resource.data.status in ['visible', 'hidden'];
+
+      // Authors can delete their own notes; admins can delete any.
+      allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+    }
+
+    // One note per 30 seconds per browser: each post also stamps users/{uid}.
+    function postedAfterWaiting() {
+      let user = /databases/$(database)/documents/users/$(request.auth.uid);
+      return getAfter(user).data.lastPostAt == request.time
+        && (!exists(user) || request.time > get(user).data.lastPostAt + duration.value(30, 's'));
+    }
+
+    match /users/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow create, update: if signedIn()
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['lastPostAt'])
+        && request.resource.data.lastPostAt == request.time;
+    }
+
+    // Created by hand in the console; readable only by that person.
+    match /admins/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+    }
+  }
+}

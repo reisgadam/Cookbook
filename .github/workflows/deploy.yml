@@ -24,7 +24,34 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+
+      # Resizing all the photos takes about a minute, so reuse the results
+      # until a photo or the script changes.
+      - name: Restore processed photos
+        uses: actions/cache@v4
+        with:
+          path: |
+            public/photos
+            .cache
+          key: photos-${{ hashFiles('content/photos/**', 'scripts/build-images.mjs') }}
+          restore-keys: photos-
+      - run: npm run images
+
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+
       - run: npm run build
+        env:
+          # Repository variables (Settings -> Secrets and variables -> Actions ->
+          # Variables). Without them the site builds with hearts and notes off.
+          # See docs/COMMUNITY_SETUP.md.
+          VITE_FIREBASE_API_KEY: ${{ vars.VITE_FIREBASE_API_KEY }}
+          VITE_FIREBASE_AUTH_DOMAIN: ${{ vars.VITE_FIREBASE_AUTH_DOMAIN }}
+          VITE_FIREBASE_PROJECT_ID: ${{ vars.VITE_FIREBASE_PROJECT_ID }}
+          VITE_FIREBASE_APP_ID: ${{ vars.VITE_FIREBASE_APP_ID }}
+          VITE_FIREBASE_APPCHECK_SITE_KEY: ${{ vars.VITE_FIREBASE_APPCHECK_SITE_KEY }}
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

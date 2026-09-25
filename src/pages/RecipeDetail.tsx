@@ -2,12 +2,15 @@ import { ArrowLeft, ArrowRight, BookOpen, Clock, Dices, Printer, StickyNote, The
 import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { Link, useLocation, useParams, useViewTransitionState } from "react-router";
 import { CategoryIcon } from "../components/CategoryIcon";
+import { Comments } from "../components/community/Comments";
+import { ReactionButtons } from "../components/community/ReactionButtons";
 import type { CardPhoto } from "../components/recipe/CardLightbox";
 import { OriginalCard } from "../components/recipe/OriginalCard";
 import { RecipeBody } from "../components/recipe/RecipeBody";
 import { RecipeGrid, RecipeTile } from "../components/RecipeTile";
 import { SaveButton } from "../components/SaveButton";
 import { ShareButton } from "../components/ShareButton";
+import { threadFor } from "../community/config";
 import { getCategory } from "../data/categories";
 import { getRecipeBySlug, neighbors, recipes, relatedRecipes } from "../data/recipes";
 import { SOURCES, TAGS, isTagSlug } from "../data/taxonomy";
@@ -92,6 +95,7 @@ function RecipeView({ recipe }: { recipe: Recipe }) {
           <Facts recipe={recipe} />
 
           <div className={styles.actions} data-print="hide">
+            <ReactionButtons slug={recipe.slug} />
             <SaveButton slug={recipe.slug} title={recipe.title} variant="button" />
             <ShareButton path={`recipes/${recipe.slug}`} title={recipe.title} text={`${recipe.title}, from ${site.title}`} />
             <button type="button" className="btn btn-secondary" onClick={() => window.print()}>
@@ -121,6 +125,16 @@ function RecipeView({ recipe }: { recipe: Recipe }) {
             <OriginalCard photos={photos} onOpen={setZoomIndex} transitionName={arriving ? "recipe-photo" : undefined} />
           </aside>
         </div>
+
+        <Comments
+          threadId={threadFor(recipe.slug)}
+          intro={
+            recipe.partial
+              ? `Part of this recipe is missing from the original. Do you remember how ${site.name} made it? Share what you know, or any memory of it.`
+              : `Made this? Remember ${site.name} making it? Share a memory, a tip, or how your batch turned out.`
+          }
+          placeholder={recipe.partial ? "What do you remember about this recipe?" : undefined}
+        />
 
         <Related recipe={recipe} />
       </div>
@@ -163,7 +177,7 @@ function AboutCard({ recipe }: { recipe: Recipe }) {
       {recipe.partial && (
         <p className={styles.partial}>
           <span className="badge badge-partial">Partial recipe</span> Part of this recipe is missing from the original.
-          If you remember how {site.name} made it, please add a note on this page.
+          If you remember how {site.name} made it, please add a note below.
         </p>
       )}
     </aside>

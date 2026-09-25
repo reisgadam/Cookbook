@@ -4,9 +4,10 @@ import { Link, useNavigate } from "react-router";
 import { CategoryIcon } from "../components/CategoryIcon";
 import { RecipeGrid, RecipeTile } from "../components/RecipeTile";
 import { SurpriseButton } from "../components/SurpriseButton";
+import { useCommunity } from "../community/store";
 import { CATEGORIES, getCategory } from "../data/categories";
 import { familyPhoto, photoInfo, photoSrcSet, photoUrl } from "../data/photos";
-import { getRecipeBySlug, notebookRecipes, recipes } from "../data/recipes";
+import { byTitle, getRecipeBySlug, notebookRecipes, recipes } from "../data/recipes";
 import { categoryCounts, popularTags, totals } from "../data/stats";
 import { sourceLabel, TAGS } from "../data/taxonomy";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
@@ -23,6 +24,12 @@ export function Home() {
     recipes.filter((r) => r.slug !== today?.slug),
     8,
   );
+  const { counts } = useCommunity();
+  const loves = (slug: string) => counts[`love:${slug}`] ?? 0;
+  const favorites = recipes
+    .filter((r) => loves(r.slug) > 0)
+    .sort((a, b) => loves(b.slug) - loves(a.slug) || byTitle(a, b))
+    .slice(0, 8);
   const { recent } = useRecentlyViewed();
   const recentRecipes = recent
     .map(getRecipeBySlug)
@@ -60,6 +67,27 @@ export function Home() {
           ))}
         </ul>
       </section>
+
+      {favorites.length >= 3 && (
+        <section className={`page ${styles.section}`} aria-labelledby="favorites-heading">
+          <div className={styles.sectionHead}>
+            <div>
+              <h2 id="favorites-heading">Family favorites</h2>
+              <p className={styles.sectionNote}>The recipes with the most hearts.</p>
+            </div>
+            <Link to="/recipes?sort=loved" className={styles.more}>
+              See them all <ArrowRight aria-hidden="true" />
+            </Link>
+          </div>
+          <RecipeGrid>
+            {favorites.map((recipe) => (
+              <li key={recipe.slug}>
+                <RecipeTile recipe={recipe} loves={loves(recipe.slug)} />
+              </li>
+            ))}
+          </RecipeGrid>
+        </section>
+      )}
 
       {recentRecipes.length > 0 && (
         <section className={`page ${styles.section}`} aria-labelledby="recent-heading">

@@ -1,0 +1,53 @@
+.group {
+  display: contents;
+}
+
+.count {
+  min-width: 1.5rem;
+  margin-left: 0.1rem;
+  padding: 0.05rem 0.45rem;
+  border-radius: var(--radius-pill);
+  background: var(--paper-2);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+}
+
+.love.on {
+  border-color: var(--heart);
+  background: color-mix(in srgb, var(--heart) 10%, var(--card));
+  color: var(--heart);
+}
+
+.love.on .icon {
+  fill: currentColor;
+  animation: pop 420ms var(--ease);
+}
+
+.made.on {
+  border-color: var(--sage);
+  background: var(--sage-soft);
+  color: var(--sage-ink);
+}
+
+.made.on .icon {
+  animation: pop 420ms var(--ease);
+}
+
+.on .count {
+  background: var(--card);
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.45) rotate(-8deg);
+  }
+  70% {
+    transform: scale(0.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
