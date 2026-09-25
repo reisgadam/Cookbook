@@ -3,6 +3,7 @@ import { useId, useState, type FormEvent } from "react";
 import { LIMITS } from "../../community/config";
 import type { Comment } from "../../community/firebase";
 import { CooldownError, useThread } from "../../community/store";
+import { useOnline } from "../../hooks/useOnline";
 import { useStoredState } from "../../hooks/useStoredState";
 import { useToast } from "../Toast";
 import styles from "./Comments.module.css";
@@ -18,6 +19,7 @@ interface Props {
 export function Comments({ threadId, heading = "Notes & memories", intro, placeholder }: Props) {
   const { status, comments, post, remove, uid } = useThread(threadId);
   const headingId = useId();
+  const online = useOnline();
   if (status === "off") return null;
 
   return (
@@ -31,11 +33,20 @@ export function Comments({ threadId, heading = "Notes & memories", intro, placeh
 
       <CommentForm onPost={post} placeholder={placeholder} disabled={status === "error"} />
 
-      {status === "loading" && <p className={styles.status}>Loading notes…</p>}
-      {status === "error" && (
-        <p className={styles.status} role="alert">
-          Notes can’t load right now. Please try again a little later.
-        </p>
+      {status !== "ready" && !online ? (
+        <p className={styles.status}>Notes will show up here when you’re back online.</p>
+      ) : status === "loading" ? (
+        <p className={styles.status}>Loading notes…</p>
+      ) : (
+        status === "error" && (
+          <div className={styles.status} role="alert">
+            <p>Notes can’t load right now.</p>
+            {/* A reload also fetches any page code a dropped connection interrupted. */}
+            <button type="button" className="btn btn-secondary btn-small" onClick={() => window.location.reload()}>
+              Try again
+            </button>
+          </div>
+        )
       )}
       {status === "ready" && comments.length === 0 && (
         <p className={styles.status}>No notes yet. Yours could be the first.</p>
@@ -68,6 +79,7 @@ function CommentForm({
   const [error, setError] = useState("");
   const toast = useToast();
   const id = useId();
+  const online = useOnline();
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -135,10 +147,15 @@ function CommentForm({
           Your name and note will be visible to anyone with the link.
           {remaining < 200 && <span className={styles.remaining}> {remaining} characters left.</span>}
         </p>
-        <button type="submit" className="btn btn-primary" disabled={sending || disabled}>
+        <button type="submit" className="btn btn-primary" disabled={sending || disabled || !online}>
           {sending ? "Posting…" : "Post note"}
         </button>
       </div>
+      {!online && (
+        <p className={styles.offline} role="status">
+          You’re offline right now. Your note will stay here until you’re back online to post it.
+        </p>
+      )}
       {error && (
         <p className={styles.error} role="alert">
           {error}

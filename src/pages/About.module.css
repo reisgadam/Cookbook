@@ -1,0 +1,220 @@
+.page {
+  padding-top: var(--space-7);
+}
+
+/* ---------- Tribute header ---------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.photo {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 23rem);
+  margin: 0;
+  padding: 0.8rem 0.8rem 0;
+  border-radius: 3px;
+  background: #fffdf8;
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-2deg);
+}
+
+.photo::before {
+  content: "";
+  position: absolute;
+  top: -0.9rem;
+  left: 50%;
+  width: 7rem;
+  height: 1.8rem;
+  background: color-mix(in srgb, #e9dcc3 80%, transparent);
+  transform: translateX(-50%) rotate(2deg);
+}
+
+.photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+.photo figcaption {
+  padding: 0.5rem 0 0.75rem;
+  font-size: 1.8rem;
+  text-align: center;
+  color: #3a2c20;
+}
+
+.kicker {
+  font-size: 2rem;
+  line-height: 1.1;
+  color: var(--accent-ink);
+}
+
+.title {
+  margin-top: var(--space-2);
+  font-size: calc(clamp(2.6rem, 1.8rem + 3.4vw, 4.4rem) * var(--text-scale));
+}
+
+.dedication {
+  max-width: 38rem;
+  margin-top: var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+  padding: 0;
+  list-style: none;
+}
+
+.facts li {
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+
+.facts strong {
+  color: var(--accent-ink);
+}
+
+/* ---------- Story ---------- */
+
+.story {
+  max-width: var(--text-width);
+  margin: var(--space-8) auto 0;
+  font-size: var(--step-1);
+  line-height: 1.7;
+}
+
+.story h2 {
+  margin: var(--space-6) 0 var(--space-3);
+}
+
+.story p + p {
+  margin-top: var(--space-4);
+}
+
+.story > p:first-child::first-letter {
+  float: left;
+  margin: 0.1rem 0.5rem 0 0;
+  font-family: var(--font-display);
+  font-size: 3.6em;
+  font-weight: 650;
+  line-height: 0.8;
+  color: var(--accent);
+}
+
+/* ---------- Notebook ---------- */
+
+.notebook {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-7);
+  margin-top: var(--space-8);
+  padding: var(--space-7);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 70%, transparent), transparent 60%),
+    var(--paper-2);
+}
+
+.notebookPhoto img {
+  width: 100%;
+  border: 6px solid #fff;
+  border-radius: 3px;
+  box-shadow: var(--shadow-lg);
+  transform: rotate(1.5deg);
+}
+
+.notebookText {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.notebookText p:not(:global(.eyebrow)) {
+  color: var(--ink-2);
+}
+
+/* ---------- Keepsakes ---------- */
+
+.keepsakes {
+  margin-top: var(--space-8);
+}
+
+.keepsakes h2 {
+  margin-bottom: var(--space-5);
+}
+
+.keepsake {
+  display: grid;
+  grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-6);
+  margin: 0;
+}
+
+.keepsake img {
+  width: 100%;
+  border: 6px solid #fff;
+  border-radius: 3px;
+  box-shadow: var(--shadow-md);
+  transform: rotate(-2deg);
+}
+
+.keepsakeCaption {
+  color: var(--ink-2);
+}
+
+.transcript {
+  display: grid;
+  gap: 0.1rem;
+  margin-top: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-left: 3px solid var(--rule-blue);
+  font-size: 1.55rem;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.browse {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-7);
+}
+
+@media (max-width: 860px) {
+  .hero,
+  .notebook,
+  .keepsake {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+
+  .photo {
+    width: min(70%, 17rem);
+  }
+
+  .notebook {
+    padding: var(--space-5);
+  }
+
+  .keepsake img {
+    max-width: 16rem;
+  }
+}

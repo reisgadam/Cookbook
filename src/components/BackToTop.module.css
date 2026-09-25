@@ -1,0 +1,41 @@
+.button {
+  position: fixed;
+  z-index: 50;
+  right: max(var(--space-4), env(safe-area-inset-right));
+  bottom: max(var(--space-5), env(safe-area-inset-bottom));
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--ink-2);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  /* Hidden (and out of the tab order) until you've scrolled down. */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5rem);
+  transition:
+    opacity var(--fast) var(--ease),
+    transform var(--fast) var(--ease),
+    visibility 0s linear var(--fast);
+}
+
+.button[data-shown="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.button:hover {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.button svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}

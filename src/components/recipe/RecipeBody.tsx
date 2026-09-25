@@ -1,18 +1,20 @@
 import { Info } from "lucide-react";
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import { Link } from "react-router";
 import remarkGfm from "remark-gfm";
 import { useStoredState } from "../../hooks/useStoredState";
-import type { Recipe, RecipeSection } from "../../types/recipe";
+import type { Recipe, RecipeSection, SectionKind } from "../../types/recipe";
 import styles from "./RecipeBody.module.css";
 
 type Checks = Record<string, boolean>;
 
 interface Props {
   recipe: Recipe;
-  /** Larger type and step highlighting for cooking. */
+  /** Larger type for cook mode. */
   cooking?: boolean;
+  /** Show only these kinds of section. */
+  only?: SectionKind | SectionKind[];
 }
 
 /**
@@ -20,22 +22,26 @@ interface Props {
  * cooking (remembered on this device), and transcriber's notes are set
  * apart from her own words.
  */
-export function RecipeBody({ recipe, cooking = false }: Props) {
+export function RecipeBody({ recipe, cooking = false, only }: Props) {
   const [checks, setChecks] = useStoredState<Checks>(`checks:${recipe.slug}`, {});
+  const kinds = only ? ([] as SectionKind[]).concat(only) : undefined;
+  const prefix = useId();
   const checkedCount = Object.values(checks).filter(Boolean).length;
   const toggle = (id: string) => setChecks((current) => ({ ...current, [id]: !current[id] }));
 
   return (
     <div className={`${styles.body} ${cooking ? styles.cooking : ""}`}>
-      {recipe.sections.map((section, index) => (
-        <Section
-          key={`${section.heading}-${index}`}
-          section={section}
-          id={`section-${index}`}
-          checks={checks}
-          onToggle={toggle}
-        />
-      ))}
+      {recipe.sections.map((section, index) =>
+        kinds && !kinds.includes(section.kind) ? null : (
+          <Section
+            key={`${section.heading}-${index}`}
+            section={section}
+            id={`${prefix}section-${index}`}
+            checks={checks}
+            onToggle={toggle}
+          />
+        ),
+      )}
       {checkedCount > 0 && (
         <p className={styles.reset} data-print="hide">
           <button type="button" className="btn btn-ghost btn-small" onClick={() => setChecks({})}>
@@ -113,7 +119,10 @@ function Section({
   };
 
   return (
-    <section className={`${styles.section} ${styles[section.kind]}`} aria-labelledby={section.heading ? headingId : undefined}>
+    <section
+      className={`${styles.section} ${styles[section.kind]}`}
+      aria-labelledby={section.heading ? headingId : undefined}
+    >
       {section.heading && (
         <h2 id={headingId} className={styles.heading}>
           {section.heading}

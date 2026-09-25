@@ -1,0 +1,56 @@
+.page {
+  padding-top: var(--space-6);
+}
+
+.header {
+  max-width: 46rem;
+  margin-bottom: var(--space-6);
+}
+
+.header h1 {
+  margin-top: var(--space-2);
+}
+
+.lede {
+  margin-top: var(--space-3);
+  font-size: var(--step-1);
+  color: var(--ink-2);
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.count {
+  font-size: var(--step-2);
+}
+
+.empty {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-4);
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.empty > svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--accent);
+}
+
+.empty p {
+  max-width: 30rem;
+  color: var(--ink-2);
+}
+
+.recent {
+  margin-top: var(--space-8);
+}

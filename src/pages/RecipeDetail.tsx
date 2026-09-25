@@ -1,4 +1,15 @@
-import { ArrowLeft, ArrowRight, BookOpen, Clock, Dices, Printer, StickyNote, Thermometer, Users } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  ChefHat,
+  Clock,
+  Dices,
+  Printer,
+  StickyNote,
+  Thermometer,
+  Users,
+} from "lucide-react";
 import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { Link, useLocation, useParams, useViewTransitionState } from "react-router";
 import { CategoryIcon } from "../components/CategoryIcon";
@@ -23,6 +34,7 @@ import { NotFound } from "./NotFound";
 import styles from "./RecipeDetail.module.css";
 
 const CardLightbox = lazy(() => import("../components/recipe/CardLightbox"));
+const CookMode = lazy(() => import("../components/recipe/CookMode"));
 
 const PHOTO_NOUN: Record<SourceKind, string> = {
   notebook: "notebook page",
@@ -43,6 +55,7 @@ function RecipeView({ recipe }: { recipe: Recipe }) {
   useDocumentTitle(recipe.title);
   const { record } = useRecentlyViewed();
   const [zoomIndex, setZoomIndex] = useState<number | null>(null);
+  const [cooking, setCooking] = useState(false);
   const arriving = useViewTransitionState(`/recipes/${recipe.slug}`);
   const category = getCategory(recipe.category);
 
@@ -95,6 +108,10 @@ function RecipeView({ recipe }: { recipe: Recipe }) {
           <Facts recipe={recipe} />
 
           <div className={styles.actions} data-print="hide">
+            <button type="button" className="btn btn-primary" onClick={() => setCooking(true)}>
+              <ChefHat aria-hidden="true" />
+              Cook mode
+            </button>
             <ReactionButtons slug={recipe.slug} />
             <SaveButton slug={recipe.slug} title={recipe.title} variant="button" />
             <ShareButton path={`recipes/${recipe.slug}`} title={recipe.title} text={`${recipe.title}, from ${site.title}`} />
@@ -138,6 +155,12 @@ function RecipeView({ recipe }: { recipe: Recipe }) {
 
         <Related recipe={recipe} />
       </div>
+
+      {cooking && (
+        <Suspense fallback={null}>
+          <CookMode recipe={recipe} onClose={() => setCooking(false)} />
+        </Suspense>
+      )}
 
       {zoomIndex !== null && (
         <Suspense fallback={null}>

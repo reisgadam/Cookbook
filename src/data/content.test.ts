@@ -4,12 +4,11 @@ import { readdirSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import manifest from "../generated/photos.json";
 import { isCategorySlug } from "./categories";
+import { NON_RECIPE_PHOTOS } from "./keepsakes";
 import { notebookRecipes, recipes } from "./recipes";
 import { isTagSlug, SOURCES } from "./taxonomy";
 
 const PHOTO_DIR = "content/photos";
-/** Photos shown outside recipe pages: her notebook's index page and a note about her favorite tea. */
-const NON_RECIPE_PHOTOS = ["IMG_5693.JPG", "IMG_5839.JPG"];
 
 const recipeFiles = readdirSync("content/recipes").filter((f) => f.endsWith(".md"));
 const photoFiles = readdirSync(PHOTO_DIR).filter((f) => /\.(jpe?g|png)$/i.test(f));

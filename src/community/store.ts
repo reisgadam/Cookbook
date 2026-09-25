@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
+import { useOnline } from "../hooks/useOnline";
 import { communityEnabled, LIMITS, type ReactionKind } from "./config";
 import type { Comment } from "./firebase";
 
@@ -36,13 +37,35 @@ export function loadCommunity(): Promise<{ api: Api; uid: string }> {
     api.watchCounts((counts) => update({ counts }), fail);
     api.watchMyReactions(user.uid, (keys) => update({ mine: new Set(keys) }), () => {});
     update({ status: "ready", uid: user.uid });
+    retries = 0;
     return { api, uid: user.uid };
   })().catch((error) => {
     loading = undefined;
     update({ status: "error" });
+    retryLater();
     throw error;
   });
   return loading;
+}
+
+let retries = 0;
+
+/** Usually the connection dropped while starting up, so try again once it's back. */
+function retryLater() {
+  const retry = () => void loadCommunity().catch(() => {});
+  if (!navigator.onLine) window.addEventListener("online", retry, { once: true });
+  else if (retries < 3) setTimeout(retry, 5000 * 2 ** retries++);
+}
+
+/** Calls back once Firebase has started. Returns a function that cancels. */
+function whenReady(callback: () => void): () => void {
+  const listener = () => {
+    if (state.status !== "ready") return;
+    listeners.delete(listener);
+    callback();
+  };
+  listeners.add(listener);
+  return () => void listeners.delete(listener);
 }
 
 function whenIdle(callback: () => void) {
@@ -93,29 +116,38 @@ export function useThread(threadId: string) {
   const [comments, setComments] = useState<Comment[]>([]);
   const [status, setStatus] = useState<ThreadStatus>(communityEnabled ? "loading" : "off");
   const { uid } = useCommunity();
+  // While offline, keep showing the notes already loaded and reconnect later.
+  const online = useOnline();
 
   useEffect(() => {
-    if (!communityEnabled) return;
+    if (!communityEnabled || !online) return;
     let stop: (() => void) | undefined;
     let cancelled = false;
-    loadCommunity()
-      .then(({ api }) => {
-        if (cancelled) return;
-        stop = api.watchThread(
-          threadId,
-          (list) => {
-            setComments(list);
-            setStatus("ready");
-          },
-          () => setStatus("error"),
-        );
-      })
-      .catch(() => setStatus("error"));
+    const start = () =>
+      loadCommunity()
+        .then(({ api }) => {
+          if (cancelled) return;
+          stop = api.watchThread(
+            threadId,
+            (list) => {
+              setComments(list);
+              setStatus("ready");
+            },
+            () => setStatus("error"),
+          );
+        })
+        .catch(() => {
+          if (cancelled) return;
+          setStatus("error");
+          // Firebase tries to start again by itself (see retryLater); follow it.
+          stop = whenReady(start);
+        });
+    start();
     return () => {
       cancelled = true;
       stop?.();
     };
-  }, [threadId]);
+  }, [threadId, online]);
 
   const post = useCallback(
     async (name: string, body: string) => {

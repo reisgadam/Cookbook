@@ -112,6 +112,8 @@
 }
 
 .bottom {
+  /* The last row even when a card has no yield or time line above it. */
+  grid-row: 4;
   display: flex;
   align-items: center;
   gap: var(--space-2);

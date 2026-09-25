@@ -1,0 +1,154 @@
+.page {
+  padding-top: var(--space-6);
+}
+
+.header {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-3);
+  max-width: 48rem;
+}
+
+.lede {
+  font-size: var(--step-1);
+  color: var(--ink-2);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  align-items: start;
+  gap: var(--space-8);
+  margin-top: var(--space-7);
+}
+
+.indexPhoto {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-5));
+  margin: 0;
+}
+
+.photoButton {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 8px solid #fffdf8;
+  border-radius: 4px;
+  background: #fffdf8;
+  box-shadow: var(--shadow-lg);
+  cursor: zoom-in;
+  transform: rotate(-1.2deg);
+  transition: transform var(--slow) var(--ease);
+}
+
+.photoButton:hover {
+  transform: rotate(0) scale(1.01);
+}
+
+.photoButton img {
+  width: 100%;
+  height: auto;
+}
+
+.indexPhoto figcaption {
+  margin-top: var(--space-3);
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--accent-ink);
+}
+
+.contents h2 {
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1.5px solid var(--margin-red);
+}
+
+.list {
+  padding: 0;
+  list-style: none;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 2.25rem auto 1fr auto;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: 0.35rem var(--space-2);
+  border-radius: var(--radius-sm);
+  scroll-margin-top: calc(var(--header-height) + var(--space-5));
+  transition: background-color var(--slow) var(--ease);
+}
+
+.entry:target {
+  background: var(--note);
+  animation: flash 2.4s var(--ease);
+}
+
+@keyframes flash {
+  0%,
+  30% {
+    box-shadow: 0 0 0 3px var(--accent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--accent-ink);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.title {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.title:hover {
+  color: var(--accent-ink);
+  text-decoration: underline;
+}
+
+/* A dotted leader, like a printed table of contents. */
+.leader {
+  align-self: end;
+  margin-bottom: 0.45rem;
+  border-bottom: 2px dotted var(--line-strong);
+}
+
+.view {
+  display: grid;
+  place-items: center;
+  align-self: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+}
+
+.view:hover {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+.view svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
+  }
+
+  .indexPhoto {
+    position: static;
+  }
+}

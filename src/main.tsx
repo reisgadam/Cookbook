@@ -9,10 +9,16 @@ import "./styles/print.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router/dom";
+import { installPhotoFallback } from "./lib/photoFallback";
+import { registerServiceWorker } from "./lib/serviceWorker";
 import { router } from "./router";
+
+installPhotoFallback();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>,
 );
+
+registerServiceWorker(router);

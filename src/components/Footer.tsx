@@ -4,7 +4,7 @@ import { site } from "../site.config";
 import { BrandMark } from "./BrandMark";
 import styles from "./Footer.module.css";
 
-export function Footer() {
+export function Footer({ onShowShortcuts }: { onShowShortcuts: () => void }) {
   return (
     <footer role="contentinfo" className={styles.footer} data-print="hide">
       <div className={styles.lace} aria-hidden="true" />
@@ -22,10 +22,15 @@ export function Footer() {
           <Link to="/about">About {site.name}</Link>
           <Link to="/favorites">My Recipe Box</Link>
         </nav>
-        <p className={styles.small}>
-          {totals.recipes} recipes, transcribed from her spiral notebook, recipe cards and clippings. Each one links back
-          to a photo of the original.
-        </p>
+        <div className={styles.small}>
+          <p>
+            {totals.recipes} recipes, transcribed from her spiral notebook, recipe cards and clippings. Each one links
+            back to a photo of the original.
+          </p>
+          <button type="button" className={styles.shortcuts} onClick={onShowShortcuts}>
+            Keyboard shortcuts
+          </button>
+        </div>
       </div>
     </footer>
   );

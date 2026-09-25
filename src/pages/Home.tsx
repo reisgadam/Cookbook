@@ -6,6 +6,7 @@ import { RecipeGrid, RecipeTile } from "../components/RecipeTile";
 import { SurpriseButton } from "../components/SurpriseButton";
 import { useCommunity } from "../community/store";
 import { CATEGORIES, getCategory } from "../data/categories";
+import { NOTEBOOK_INDEX_PHOTO } from "../data/keepsakes";
 import { familyPhoto, photoInfo, photoSrcSet, photoUrl } from "../data/photos";
 import { byTitle, getRecipeBySlug, notebookRecipes, recipes } from "../data/recipes";
 import { categoryCounts, popularTags, totals } from "../data/stats";
@@ -264,7 +265,7 @@ function TodayCard({ recipe }: { recipe: Recipe }) {
 function NotebookTeaser() {
   const first = notebookRecipes[0];
   const last = notebookRecipes[notebookRecipes.length - 1];
-  const index = "IMG_5693.JPG";
+  const index = NOTEBOOK_INDEX_PHOTO;
   const info = photoInfo(index);
   if (!first || !last) return null;
 

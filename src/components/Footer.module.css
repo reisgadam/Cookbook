@@ -81,10 +81,42 @@
 
 .small {
   grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-6);
   padding-top: var(--space-5);
   border-top: 1px solid var(--line-strong);
   font-size: var(--step--1);
   color: var(--muted);
+}
+
+.small p {
+  max-width: 44rem;
+}
+
+.shortcuts {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.shortcuts:hover {
+  color: var(--accent-ink);
+}
+
+/* Phones and tablets without a keyboard don't need it. */
+@media (hover: none) and (pointer: coarse) {
+  .shortcuts {
+    display: none;
+  }
 }
 
 @media (max-width: 720px) {

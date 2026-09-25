@@ -2,6 +2,7 @@ import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import type { Plugin, ResolvedConfig } from "vite";
 import { CATEGORIES } from "../src/data/categories";
+import { NOTEBOOK_INDEX_PHOTO } from "../src/data/keepsakes";
 import { ogImagePath } from "../src/data/photoPaths";
 import { buildRecipe, slugFromPath } from "../src/data/recipeModel";
 import { site } from "../src/site.config";
@@ -119,7 +120,7 @@ export function sitePages(recipes: Recipe[]): PageMeta[] {
       path: "notebook/",
       title: `${site.name}'s Notebook`,
       description: `Her spiral recipe notebook, page by page: ${notebookCount} recipes and her handwritten index.`,
-      image: ogImagePath("IMG_5693.JPG"),
+      image: ogImagePath(NOTEBOOK_INDEX_PHOTO),
       imageAlt: `The handwritten index of ${site.name}'s recipe notebook`,
     },
     {
