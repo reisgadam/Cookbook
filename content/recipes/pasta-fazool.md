@@ -1,6 +1,6 @@
 ---
-title: "Pasta & Beans"
-slug: pasta-and-beans
+title: "Pasta Fazool"
+slug: pasta-fazool
 sourceImages: [IMG_5793.JPG]
 ---
 
