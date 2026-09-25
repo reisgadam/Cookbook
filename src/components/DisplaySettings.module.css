@@ -1,0 +1,108 @@
+.settings {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.group {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.legend {
+  padding: 0;
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  padding: 3px;
+  border-radius: var(--radius);
+  background: var(--paper-2);
+}
+
+.segment {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 2.5rem;
+  padding: 0 0.6rem;
+  border-radius: calc(var(--radius) - 3px);
+  font-size: var(--step--1);
+  font-weight: 650;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition:
+    background-color var(--fast) var(--ease),
+    color var(--fast) var(--ease);
+}
+
+.segment svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.segment:hover {
+  color: var(--ink);
+}
+
+.segment:has(input:checked) {
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
+.segment:has(input:focus-visible) {
+  box-shadow: var(--focus-ring);
+}
+
+.stepper {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 3px;
+  border-radius: var(--radius);
+  background: var(--paper-2);
+}
+
+.step {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: calc(var(--radius) - 3px);
+  background: var(--card);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+.step:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.small {
+  font-size: 0.85rem;
+}
+
+.large {
+  font-size: 1.25rem;
+}
+
+.value {
+  text-align: center;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}

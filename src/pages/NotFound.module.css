@@ -1,0 +1,27 @@
+.page {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+  max-width: 44rem;
+  padding-block: var(--space-9) var(--space-6);
+  text-align: center;
+}
+
+.kicker {
+  font-size: 1.8rem;
+  line-height: 1.1;
+  color: var(--accent-ink);
+}
+
+.text {
+  color: var(--ink-2);
+  font-size: var(--step-1);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}

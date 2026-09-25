@@ -2,12 +2,38 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/Cookbook/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Mom's Recipes</title>
+    <!--seo-->
+    <meta name="theme-color" content="#fbf6ee" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png" />
+    <script>
+      // Apply the saved theme and text size before the first paint so the
+      // page doesn't flash. Mirrors src/hooks/usePreferences.ts.
+      (function () {
+        var root = document.documentElement;
+        try {
+          var read = function (key, fallback) {
+            var value = localStorage.getItem("moms-recipes:" + key);
+            return value === null ? fallback : JSON.parse(value);
+          };
+          var theme = read("theme", "system");
+          var dark =
+            theme === "dark" ||
+            (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+          root.dataset.theme = dark ? "dark" : "light";
+          var scale = read("text-scale", 1);
+          if (scale !== 1) root.style.setProperty("--text-scale", String(scale));
+        } catch (error) {
+          root.dataset.theme = "light";
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>This family cookbook needs JavaScript turned on to show the recipes.</noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

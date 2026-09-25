@@ -1,0 +1,191 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grid > li {
+  display: grid;
+}
+
+/* An index card: a red rule under the heading line and faint blue ruled lines. */
+.tile {
+  --rule: 1.75rem;
+  --head: 2.6rem;
+  position: relative;
+  display: grid;
+  grid-template-rows: var(--head) auto 1fr auto;
+  min-height: 12.5rem;
+  padding: 0 1.1rem 0.6rem;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(var(--margin-red), var(--margin-red)) 0 var(--head) / 100% 1.5px no-repeat,
+    repeating-linear-gradient(
+        to bottom,
+        transparent 0 calc(var(--rule) - 1px),
+        color-mix(in srgb, var(--rule-blue) 42%, transparent) calc(var(--rule) - 1px) var(--rule)
+      )
+      0 calc(var(--head) + 2px) / 100% 100% no-repeat,
+    var(--card);
+  box-shadow:
+    var(--shadow-sm),
+    inset 0 0 0 1px var(--line);
+  transition:
+    transform var(--slow) var(--ease),
+    box-shadow var(--slow) var(--ease);
+}
+
+.tile:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 0 0 1px var(--line-strong);
+}
+
+.tile:focus-within:has(.link:focus-visible) {
+  box-shadow:
+    var(--focus-ring),
+    var(--shadow-md);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  align-self: center;
+  padding-right: 5rem;
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+}
+
+.title {
+  margin-top: 0.7rem;
+  padding-right: 4.75rem;
+  font-size: var(--step-1);
+  font-weight: 620;
+  line-height: 1.22;
+}
+
+.link {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* The whole card is clickable; the save button sits above this layer. */
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: var(--radius);
+}
+
+.link:focus-visible {
+  box-shadow: none;
+}
+
+.link mark {
+  background: linear-gradient(transparent 60%, color-mix(in srgb, var(--accent) 28%, transparent) 60%);
+  color: inherit;
+}
+
+.facts {
+  margin-top: 0.45rem;
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  min-height: var(--tap);
+}
+
+.source {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--step--2);
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.loves {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: var(--step--1);
+  font-weight: 700;
+  color: var(--heart);
+}
+
+.loves svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
+.save {
+  position: relative;
+  z-index: 2;
+  margin-right: -0.55rem;
+}
+
+.save[aria-pressed="true"] {
+  color: var(--accent);
+}
+
+/* A little snapshot of the real card, clipped to the corner. */
+.snapshot {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.85rem;
+  width: 3.9rem;
+  padding: 3px 3px 9px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.12),
+    0 6px 14px rgb(var(--shadow-rgb) / 0.18);
+  transform: rotate(4deg);
+  transition: transform var(--slow) var(--ease);
+  pointer-events: none;
+}
+
+.snapshot.landscape {
+  width: 4.9rem;
+}
+
+.snapshot img {
+  width: 100%;
+  height: auto;
+  border-radius: 1px;
+}
+
+.tile:hover .snapshot {
+  transform: rotate(0deg) scale(1.08);
+}
+
+:global([data-theme="dark"]) .snapshot {
+  background: #efe7dc;
+}

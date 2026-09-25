@@ -1,0 +1,293 @@
+.body {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.section {
+  min-width: 0;
+}
+
+.heading {
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1.5px solid var(--margin-red);
+  font-size: var(--step-3);
+}
+
+.section > p,
+.section > div > p {
+  margin-block: var(--space-3);
+}
+
+.section em {
+  color: var(--ink-2);
+}
+
+.subhead {
+  margin: var(--space-5) 0 var(--space-1);
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+
+.section > .subhead:first-child {
+  margin-top: var(--space-2);
+}
+
+.section ul,
+.section ol {
+  margin: var(--space-2) 0;
+  padding: 0;
+}
+
+.section ul:not(:has(.item)),
+.section ol:not(:has(.item)) {
+  padding-left: 1.4rem;
+}
+
+.section li:not(.item) {
+  margin-block: 0.3rem;
+}
+
+/* ---------- Checkable ingredients and steps ---------- */
+
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: var(--space-3);
+  list-style: none;
+  border-bottom: 1px dashed var(--line-strong);
+}
+
+.itemText {
+  padding: 0.6rem 0;
+  cursor: pointer;
+  transition: color var(--fast) var(--ease);
+}
+
+.itemText p {
+  margin: 0;
+}
+
+.check {
+  appearance: none;
+  flex: none;
+  width: 1.35rem;
+  height: 1.35rem;
+  margin: 0.8rem 0 0;
+  border: 2px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--card);
+  cursor: pointer;
+  transition:
+    background-color var(--fast) var(--ease),
+    border-color var(--fast) var(--ease);
+}
+
+.check:hover {
+  border-color: var(--accent);
+}
+
+.check:checked {
+  border-color: var(--sage);
+  background: var(--sage)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E")
+    center / 80% no-repeat;
+}
+
+.check:focus-visible {
+  border-radius: 6px;
+}
+
+.done .itemText {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--muted) 60%, transparent);
+}
+
+/* Steps: the number itself is the checkbox. */
+.instructions ol {
+  counter-reset: step;
+}
+
+.instructions ol > .item {
+  counter-increment: step;
+  grid-template-columns: 1fr;
+  padding-left: 3.25rem;
+  border-bottom: 0;
+}
+
+.instructions ol > .item .check {
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  width: 2.35rem;
+  height: 2.35rem;
+  margin: 0;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: var(--card);
+}
+
+.number {
+  display: none;
+}
+
+.instructions ol > .item .number {
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  display: grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-ink);
+  pointer-events: none;
+}
+
+.instructions ol > .item .number::before {
+  content: counter(step);
+}
+
+.instructions ol > .item .check:checked {
+  border-color: var(--sage);
+  background-size: 60%;
+}
+
+.instructions ol > .item .check:checked + .number {
+  opacity: 0;
+}
+
+.instructions ol > .item .check:focus-visible {
+  border-radius: 50%;
+}
+
+.instructions ol > .item .itemText {
+  padding: 0.55rem 0 0.9rem;
+}
+
+.instructions ol > .item + .item {
+  border-top: 1px dashed var(--line-strong);
+}
+
+.instructions ol > .item + .item .check,
+.instructions ol > .item + .item .number {
+  top: 0.75rem;
+}
+
+.instructions ol > .item + .item .itemText {
+  padding-top: 0.95rem;
+}
+
+/* ---------- Transcriber's notes ---------- */
+
+.note {
+  margin: var(--space-4) 0;
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--sage);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--sage-soft);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+}
+
+.noteLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0 0.2rem;
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sage-ink);
+}
+
+.noteLabel svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.noteText p {
+  margin: 0;
+}
+
+/* ---------- Tables ---------- */
+
+.tableWrap {
+  margin: var(--space-3) 0;
+  overflow-x: auto;
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.tableWrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--step--1);
+}
+
+.tableWrap th,
+.tableWrap td {
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.tableWrap th {
+  background: var(--paper-2);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tableWrap tr:last-child td {
+  border-bottom: 0;
+}
+
+.reset {
+  margin-top: calc(var(--space-4) * -1);
+}
+
+/* ---------- Cook mode ---------- */
+
+.cooking {
+  font-size: var(--step-1);
+}
+
+.cooking .heading {
+  font-size: var(--step-4);
+}
+
+.cooking .check {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+.cooking .instructions ol > .item {
+  padding-left: 3.9rem;
+}
+
+.cooking .instructions ol > .item .check,
+.cooking .instructions ol > .item .number {
+  width: 2.9rem;
+  height: 2.9rem;
+}
+
+@media print {
+  .check {
+    border-color: #999;
+    background: none;
+  }
+
+  .instructions ol > .item .check {
+    border-color: #999;
+  }
+}

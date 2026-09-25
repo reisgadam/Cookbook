@@ -23,8 +23,8 @@ notes: "Scaled for a 9-inch or 8-inch pie; top with Pie Meringue (see separate r
 | ¼ cup lemon juice | 3 tablespoons |
 | 1 tablespoon grated lemon rind | 1 tablespoon |
 
-1 baked pie shell
-1 batch Pie Meringue
+- 1 baked pie shell
+- 1 batch [Pie Meringue](/recipes/pie-meringue)
 
 ## Instructions
 

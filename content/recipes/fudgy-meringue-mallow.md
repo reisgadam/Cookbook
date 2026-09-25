@@ -24,7 +24,7 @@ sourceImages: [IMG_5726.JPG, IMG_5727.JPG]
 - ½ teaspoon almond extract
 - 2 cups chilled whipping cream
 - 2 cups miniature marshmallows
-- Glossy Chocolate Sauce (see separate recipe), for serving
+- [Glossy Chocolate Sauce](/recipes/glossy-chocolate-sauce) (see separate recipe), for serving
 
 ## Instructions
 

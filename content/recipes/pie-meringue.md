@@ -19,4 +19,4 @@ notes: "Basic meringue topping formula, scaled for a 9-inch or 8-inch pie."
 
 ## Instructions
 
-Beat the egg whites with the cream of tartar until foamy. Gradually beat in the sugar until stiff, glossy peaks form. Beat in the flavoring, if using. Spread over the hot pie filling, sealing to the crust edge, and bake as directed for the pie (see Lemon Meringue Pie for a typical bake: 400°F for 8 to 10 minutes).
+Beat the egg whites with the cream of tartar until foamy. Gradually beat in the sugar until stiff, glossy peaks form. Beat in the flavoring, if using. Spread over the hot pie filling, sealing to the crust edge, and bake as directed for the pie (see [Lemon Meringue Pie](/recipes/lemon-meringue-pie) for a typical bake: 400°F for 8 to 10 minutes).

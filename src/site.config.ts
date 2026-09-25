@@ -20,4 +20,6 @@ export const site = {
   /** The family photo on the home and about pages (in content/photos/family/). */
   heroPhoto: "mom-and-dad.jpg",
   heroPhotoAlt: "Mom and Dad, smiling together",
+  /** Handwritten-style caption under the photo. Leave empty for none. */
+  heroPhotoCaption: "Mom & Dad",
 };

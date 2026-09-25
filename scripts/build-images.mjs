@@ -26,7 +26,7 @@ const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SRC_DIR = path.join(ROOT, "content/photos");
 const FAMILY_DIR = path.join(SRC_DIR, "family");
 const OUT_DIR = path.join(ROOT, "public/photos");
-const CACHE_FILE = path.join(OUT_DIR, ".cache.json");
+const CACHE_FILE = path.join(ROOT, ".cache/build-images.json");
 const MANIFEST_FILE = path.join(ROOT, "src/generated/photos.json");
 
 // Bump when output settings change to force a full rebuild.
@@ -177,6 +177,7 @@ async function main() {
     await mkdir(path.join(OUT_DIR, dir), { recursive: true });
   }
   await mkdir(path.dirname(MANIFEST_FILE), { recursive: true });
+  await mkdir(path.dirname(CACHE_FILE), { recursive: true });
 
   const cache = await readJson(CACHE_FILE, { entries: {} });
   const nextCache = { entries: {} };

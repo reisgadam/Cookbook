@@ -1,0 +1,15 @@
+/* Lightbox tweaks: match the site's type and keep the counter readable. */
+.yarl__root {
+  font-family: var(--font-body);
+}
+
+.yarl__counter {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+}
+
+.yarl__slide_image {
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgb(0 0 0 / 0.45);
+}

@@ -1,0 +1,59 @@
+/* Printing a recipe gives a clean single-column page with just the recipe. */
+
+@media print {
+  :root {
+    --paper: #fff;
+    --card: #fff;
+    --ink: #000;
+    --ink-2: #222;
+    --muted: #444;
+    --text-scale: 0.92;
+    color-scheme: light;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  [data-print="hide"],
+  header[role="banner"],
+  footer[role="contentinfo"],
+  nav,
+  button,
+  .btn,
+  .chip,
+  .icon-btn {
+    display: none !important;
+  }
+
+  [data-print="show"] {
+    display: block !important;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  li,
+  blockquote,
+  figure {
+    break-inside: avoid;
+  }
+
+  .page {
+    max-width: none;
+    padding: 0;
+  }
+
+  @page {
+    margin: 1.6cm 1.8cm;
+  }
+}

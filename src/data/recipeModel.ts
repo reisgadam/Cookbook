@@ -46,6 +46,7 @@ export function splitSections(body: string): RecipeSection[] {
 /** Strips Markdown syntax, leaving readable text on a single line. */
 export function toPlainText(markdown: string): string {
   return markdown
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
     .replace(/^\s*>\s?/gm, "")
     .replace(/^#{1,6}\s+/gm, "")
     .replace(/^\s*[-*+]\s+/gm, "")

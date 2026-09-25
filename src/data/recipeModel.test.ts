@@ -51,6 +51,10 @@ describe("splitSections", () => {
 });
 
 describe("toPlainText", () => {
+  it("keeps link text and drops the address", () => {
+    expect(toPlainText("Top with [Pie Meringue](/recipes/pie-meringue).")).toBe("Top with Pie Meringue.");
+  });
+
   it("strips markdown syntax", () => {
     expect(toPlainText("> **Note:** use *fresh* dill\n\n| a | b |\n| --- | --- |\n| 1 | 2 |")).toBe("Note: use fresh dill a b 1 2");
   });

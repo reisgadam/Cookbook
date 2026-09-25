@@ -1,0 +1,111 @@
+/*
+ * Design tokens. The palette comes from the recipe cards themselves:
+ * cream paper, ink, blue ruled lines, a red margin rule, and the
+ * terracotta accent the site already used.
+ */
+:root {
+  color-scheme: light;
+
+  --paper: #fbf6ee;
+  --paper-2: #f3eadb;
+  --card: #fffdf8;
+  --ink: #2b2118;
+  --ink-2: #4a3d31;
+  --muted: #6b5e52;
+  --line: #e7ddcc;
+  --line-strong: #d3c4ad;
+
+  --accent: #b5502f;
+  --accent-ink: #9a3f22;
+  --accent-soft: #f7e4d9;
+  --on-accent: #fffaf3;
+
+  --sage: #5e7d63;
+  --sage-ink: #466249;
+  --sage-soft: #e2ebe0;
+
+  --heart: #cf3f3a;
+  --rule-blue: #a9c1dc;
+  --margin-red: #dc8f83;
+  --note: #fbf0bf;
+  --note-ink: #463812;
+
+  --focus-ring: 0 0 0 3px var(--paper), 0 0 0 5px var(--accent);
+  --shadow-rgb: 64 44 28;
+  --shadow-sm: 0 1px 2px rgb(var(--shadow-rgb) / 0.07), 0 1px 1px rgb(var(--shadow-rgb) / 0.04);
+  --shadow-md: 0 2px 5px rgb(var(--shadow-rgb) / 0.07), 0 10px 24px rgb(var(--shadow-rgb) / 0.09);
+  --shadow-lg: 0 6px 12px rgb(var(--shadow-rgb) / 0.08), 0 24px 48px rgb(var(--shadow-rgb) / 0.16);
+
+  --font-display: "Fraunces Variable", "Iowan Old Style", Georgia, serif;
+  --font-body: "Source Sans 3 Variable", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-hand: "Caveat", "Bradley Hand", "Segoe Print", cursive;
+
+  /* Set from the reader's A− / A / A+ choice. */
+  --text-scale: 1;
+  --step--2: calc(0.8rem * var(--text-scale));
+  --step--1: calc(0.9rem * var(--text-scale));
+  --step-0: calc(1.125rem * var(--text-scale));
+  --step-1: calc(1.3rem * var(--text-scale));
+  --step-2: calc(1.55rem * var(--text-scale));
+  --step-3: calc(clamp(1.75rem, 1.45rem + 1.2vw, 2.15rem) * var(--text-scale));
+  --step-4: calc(clamp(2.1rem, 1.6rem + 2.2vw, 2.9rem) * var(--text-scale));
+  --step-5: calc(clamp(2.6rem, 1.8rem + 3.6vw, 4.2rem) * var(--text-scale));
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --page-width: 76rem;
+  --text-width: 42rem;
+  --gutter: clamp(1rem, 4vw, 2.25rem);
+  --header-height: 4.25rem;
+  --tap: 2.75rem;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --fast: 150ms;
+  --slow: 280ms;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper: #1b1613;
+  --paper-2: #241d18;
+  --card: #2a221c;
+  --ink: #f4ebe1;
+  --ink-2: #ddd0c2;
+  --muted: #b6a797;
+  --line: #3a3029;
+  --line-strong: #4d4037;
+
+  --accent: #e27b55;
+  --accent-ink: #f09572;
+  --accent-soft: #3b2519;
+  --on-accent: #1b1613;
+
+  --sage: #8db392;
+  --sage-ink: #a6c9aa;
+  --sage-soft: #24322a;
+
+  --heart: #f0706a;
+  --rule-blue: #34465a;
+  --margin-red: #6f3d34;
+  --note: #3a3320;
+  --note-ink: #f1e6bf;
+
+  --shadow-rgb: 0 0 0;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.35);
+  --shadow-md: 0 2px 6px rgb(0 0 0 / 0.35), 0 10px 24px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 6px 14px rgb(0 0 0 / 0.4), 0 24px 48px rgb(0 0 0 / 0.45);
+}

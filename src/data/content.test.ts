@@ -46,6 +46,15 @@ describe("recipe content", () => {
     expect(new Set(recipes.map((r) => r.title.toLowerCase())).size).toBe(recipes.length);
   });
 
+  it("only links to recipes that exist", () => {
+    const slugs = new Set(recipes.map((r) => r.slug));
+    for (const recipe of recipes) {
+      for (const [, target] of recipe.body.matchAll(/\]\(\/recipes\/([^)#?/]+)\)/g)) {
+        expect(slugs.has(target), `${recipe.slug} links to missing recipe "${target}"`).toBe(true);
+      }
+    }
+  });
+
   it("numbers the notebook pages 1 to N with no gaps", () => {
     expect(notebookRecipes.map((r) => r.notebookPage)).toEqual(notebookRecipes.map((_, i) => i + 1));
   });
