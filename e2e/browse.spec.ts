@@ -1,4 +1,10 @@
 import { expect, test } from "@playwright/test";
+import { readdirSync } from "node:fs";
+
+// Counted from the files, so adding a recipe doesn't break the test.
+const recipeCount = readdirSync(new URL("../content/recipes/", import.meta.url)).filter((file) =>
+  file.endsWith(".md"),
+).length;
 
 test.describe("finding a recipe", () => {
   test("the home page introduces the cookbook", async ({ page }) => {
@@ -32,7 +38,7 @@ test.describe("finding a recipe", () => {
 
   test("categories and tags narrow the list and stay in the address", async ({ page }) => {
     await page.goto("recipes/");
-    await expect(page.getByText("105 recipes", { exact: true })).toBeVisible();
+    await expect(page.getByText(`${recipeCount} recipes`, { exact: true })).toBeVisible();
 
     await page
       .getByRole("navigation", { name: "Categories" })
