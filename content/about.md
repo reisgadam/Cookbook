@@ -9,8 +9,8 @@ draft: true
   HOW TO USE THIS FILE
 
   This is the story on the About page. While `draft: true` is set above, the
-  site doesn't show it; the page shows only the photo, her notebook, and the
-  guestbook where people share memories.
+  site doesn't show it; the page shows only the photo and the guestbook where
+  people share memories.
 
   To publish it:
     1. Replace the text below with your own words.

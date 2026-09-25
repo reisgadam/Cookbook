@@ -192,8 +192,9 @@ Fix it, commit again, and the site publishes as soon as the checks pass.
 
 - **The About page story** is [`content/about.md`](../content/about.md). The
   instructions are inside it.
-- **Keepsakes** (photos that aren't recipes, like her tea note) are listed in
-  [`src/data/keepsakes.ts`](../src/data/keepsakes.ts).
+- **Photos that aren't part of a recipe** (like her notebook's index page) are
+  listed in [`src/data/keepsakes.ts`](../src/data/keepsakes.ts), so the photo
+  checks know they're meant to be there.
 - **The site's name and tagline** are in
   [`src/site.config.ts`](../src/site.config.ts). Setting `indexable: true`
   there lets search engines list the site. It's off, so only people with the

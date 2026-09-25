@@ -1,14 +1,13 @@
-import { ArrowRight, BookOpen } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router";
 import aboutFile from "../../content/about.md?raw";
 import { Comments } from "../components/community/Comments";
 import { GUESTBOOK } from "../community/config";
-import { KEEPSAKES, NOTEBOOK_INDEX_PHOTO } from "../data/keepsakes";
 import { parseFrontmatter } from "../data/parseFrontmatter";
-import { LEAD_PHOTO_SIZES, NOTEBOOK_TEASER_SIZES } from "../data/photoPaths";
-import { familyPhoto, photoInfo, photoSrcSet, photoUrl } from "../data/photos";
-import { notebookRecipes, recipes } from "../data/recipes";
+import { LEAD_PHOTO_SIZES } from "../data/photoPaths";
+import { familyPhoto } from "../data/photos";
+import { recipes } from "../data/recipes";
 import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import { site } from "../site.config";
 import styles from "./About.module.css";
@@ -73,55 +72,6 @@ export function About() {
         </article>
       )}
 
-      <section className={styles.notebook} aria-labelledby="about-notebook">
-        <NotebookPreview />
-        <div className={styles.notebookText}>
-          <p className="eyebrow">In her own hand</p>
-          <h2 id="about-notebook">Her spiral notebook</h2>
-          <p>
-            {notebookRecipes.length} recipes written out one page at a time, from {notebookRecipes[0]?.title}{" "}
-            to {notebookRecipes[notebookRecipes.length - 1]?.title}, with her own index at the front.
-          </p>
-          <Link to="/notebook" className="btn btn-primary">
-            <BookOpen aria-hidden="true" />
-            Open her notebook
-          </Link>
-        </div>
-      </section>
-
-      {KEEPSAKES.length > 0 && (
-        <section className={styles.keepsakes} aria-labelledby="keepsakes-heading">
-          <h2 id="keepsakes-heading">Little notes from her kitchen</h2>
-          {KEEPSAKES.map((keepsake) => {
-            const info = photoInfo(keepsake.file);
-            return (
-              <figure key={keepsake.file} className={styles.keepsake}>
-                {info && (
-                  <img
-                    src={photoUrl(keepsake.file, "md")}
-                    srcSet={photoSrcSet(keepsake.file)}
-                    sizes="(max-width: 760px) 80vw, 20rem"
-                    width={info.w}
-                    height={info.h}
-                    alt={`Her handwritten note about ${keepsake.title}`}
-                    loading="lazy"
-                    style={{ backgroundColor: info.color }}
-                  />
-                )}
-                <figcaption>
-                  <p className={styles.keepsakeCaption}>{keepsake.caption}</p>
-                  <blockquote className={`hand ${styles.transcript}`}>
-                    {keepsake.lines.map((line) => (
-                      <span key={line}>{line}</span>
-                    ))}
-                  </blockquote>
-                </figcaption>
-              </figure>
-            );
-          })}
-        </section>
-      )}
-
       <Comments
         threadId={GUESTBOOK}
         heading={`Memories of ${site.name}`}
@@ -135,24 +85,5 @@ export function About() {
         </Link>
       </p>
     </div>
-  );
-}
-
-function NotebookPreview() {
-  const info = photoInfo(NOTEBOOK_INDEX_PHOTO);
-  if (!info) return null;
-  return (
-    <Link to="/notebook" className={styles.notebookPhoto} tabIndex={-1} aria-hidden="true">
-      <img
-        src={photoUrl(NOTEBOOK_INDEX_PHOTO, "md")}
-        srcSet={photoSrcSet(NOTEBOOK_INDEX_PHOTO)}
-        sizes={NOTEBOOK_TEASER_SIZES}
-        width={info.w}
-        height={info.h}
-        alt=""
-        loading="lazy"
-        style={{ backgroundColor: info.color }}
-      />
-    </Link>
   );
 }

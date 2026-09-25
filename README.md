@@ -43,7 +43,7 @@ content/recipes/        One Markdown file per recipe
 content/photos/         Original photos, and photos.json (which way up each one goes)
 content/about.md        The About page story
 src/                    The website (React + TypeScript)
-  data/                 Loads the recipes; categories, tags, keepsakes
+  data/                 Loads the recipes; categories, tags, photos that aren't recipes
   pages/, components/   Pages and the pieces they're built from
   community/            Hearts and notes (Firebase), loaded only when set up
   generated/photos.json Photo sizes and colours, written by npm run images
